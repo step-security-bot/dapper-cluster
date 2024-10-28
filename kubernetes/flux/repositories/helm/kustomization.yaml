@@ -1,0 +1,21 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./bjw-s.yaml
+  - ./infisical.yaml
+  - ./cilium.yaml
+  - ./coredns.yaml
+  - ./jetstack.yaml
+  - ./metrics-server.yaml
+  - ./fairwinds.yaml
+  - ./openebs.yaml
+  - ./postfinance.yaml
+  - ./prometheus-community.yaml
+  - ./grafana.yaml
+  - ./spegel.yaml
+  - ./stakater.yaml
+  - ./external-dns.yaml
+  - ./external-secrets.yaml
+  - ./ingress-nginx.yaml
+  - ./k8s-gateway.yaml

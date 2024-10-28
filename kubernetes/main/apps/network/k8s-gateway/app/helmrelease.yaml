@@ -22,12 +22,13 @@ spec:
       retries: 3
   values:
     fullnameOverride: k8s-gateway
-    domain: "${SECRET_DOMAIN}"
+    domain: ${SECRET_DOMAIN} ${SECRET_DOMAIN_MEDIA}
     ttl: 1
     service:
       type: LoadBalancer
       port: 53
       annotations:
-        lbipam.cilium.io/ips: "10.100.0.21"
+        io.cilium/lb-ipam-ips: "10.100.0.21"
       externalTrafficPolicy: Cluster
+      #% endif %#
     watchedResources: ["Ingress", "Service"]
