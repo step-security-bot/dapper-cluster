@@ -45,7 +45,7 @@ spec:
                 valueFrom:
                   secretKeyRef:
                     name: radarr-secret
-                    key: api_key
+                    key: radarr_api_key
               TZ: "${TIME_ZONE}"
             probes:
               liveness: &probes
@@ -68,7 +68,7 @@ spec:
               requests:
                 cpu: 100m
               limits:
-                memory: 2Gi
+                memory: 1Gi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
