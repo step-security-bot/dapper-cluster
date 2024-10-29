@@ -8,7 +8,7 @@ spec:
   resources:
     requests:
       storage: 5Gi
-  storageClassName: openebs-hostpath
+  storageClassName: zfs-backed-data
 
 ---
 apiVersion: v1
@@ -20,4 +20,4 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: openebs-hostpath
+  storageClassName: zfs-backed-pvs

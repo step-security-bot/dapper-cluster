@@ -1,0 +1,62 @@
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: used-nfs
+  labels:
+    kustomize.toolkit.fluxcd.io/substitute: "disabled"
+provisioner: nfs.csi.k8s.io
+parameters:
+  server: openmediavault-used.manor
+  share: /Used
+allowVolumeExpansion: true
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
+mountOptions:
+  - nfsvers=4.1
+  - nconnect=8
+  - hard
+  - noatime
+  - nodiratime
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: zfs-backed-pvs
+  labels:
+    kustomize.toolkit.fluxcd.io/substitute: "disabled"
+provisioner: nfs.csi.k8s.io
+parameters:
+  server: circe.manor
+  share: /ssd
+  subdir: k8s
+allowVolumeExpansion: true
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
+mountOptions:
+  - nfsvers=4.1
+  - nconnect=8
+  - hard
+  - noatime
+  - nodiratime
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: zfs-backed-data
+  labels:
+    kustomize.toolkit.fluxcd.io/substitute: "disabled"
+provisioner: nfs.csi.k8s.io
+parameters:
+  server: circe.manor
+  share: /ssd
+  subdir: data
+allowVolumeExpansion: true
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
+mountOptions:
+  - nfsvers=4.1
+  - nconnect=8
+  - hard
+  - noatime
+  - nodiratime
