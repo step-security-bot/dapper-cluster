@@ -51,6 +51,9 @@ spec:
     - patch: |
         - op: add
           path: /spec/template/spec/containers/0/args/-
+          value: --concurrent=20
+        - op: add
+          path: /spec/template/spec/containers/0/args/-
           value: --requeue-dependency=5s
       target:
         kind: Deployment
@@ -75,9 +78,6 @@ spec:
     # Enable in-memory kustomize builds
     # Ref: https://fluxcd.io/flux/installation/configuration/vertical-scaling/#enable-in-memory-kustomize-builds
     - patch: |
-        - op: add
-        path: /spec/template/spec/containers/0/args/-
-        value: --concurrent=20
         - op: replace
           path: /spec/template/spec/volumes/0
           value:

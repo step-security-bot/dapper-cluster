@@ -27,6 +27,9 @@ spec:
       plex:
         annotations:
           reloader.stakater.com/auto: "true"
+        pod:
+          nodeSelector:
+            nvidia.feature.node.kubernetes.io/gpu: "true"
         containers:
           app:
             image:
@@ -36,6 +39,8 @@ spec:
               TZ: ${TIME_ZONE}
               PLEX_ADVERTISE_URL: https://plex.${SECRET_DOMAIN_MEDIA}:443,http://10.100.0.24:32400
               PLEX_NO_AUTH_NETWORKS: 192.168.1.0/24
+              NVIDIA_DRIVER_CAPABILITIES: compute,utility,video
+              NVIDIA_VISIBLE_DEVICES: all
             probes:
               liveness: &probes
                 enabled: true
@@ -62,8 +67,8 @@ spec:
               requests:
                 cpu: 100m
               limits:
-                gpu.intel.com/i915: 1
-                memory: 16Gi
+                nvidia.com/gpu: 1
+                memory: 32Gi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true
@@ -71,19 +76,40 @@ spec:
         runAsGroup: 150
         fsGroup: 140
         seccompProfile: { type: RuntimeDefault }
-      nodeSelector:
-        intel.feature.node.kubernetes.io/gpu: "true"
     service:
-      app:
+      *app :
         controller: *app
         type: LoadBalancer
         externalTrafficPolicy: Cluster
-        loadBalancerIP: &ip ${UNIFI_VIP_GATEWAY}
+        loadBalancerIP: &ip ${PLEX_VIP_GATEWAY}
         annotations:
+          external-dns.alpha.kubernetes.io/hostname: plex.${SECRET_DOMAIN_MEDIA}
           io.cilium/lb-ipam-ips: *ip
         ports:
           http:
-            port: 32400
+            port: &port 32400
+            primary: true
+          dnla-tcp:
+            port: 32469
+            protocol: TCP
+          dnla-udp:
+            port: 1900
+            protocol: UDP
+          bonjour-udp:
+            port: 5353
+            protocol: UDP
+          gdm-1:
+            port: 32410
+            protocol: UDP
+          gdm-2:
+            port: 32412
+            protocol: UDP
+          gdm-3:
+            port: 32413
+            protocol: UDP
+          gdm-4:
+            port: 32414
+            protocol: UDP
     ingress:
       app:
         annotations:
@@ -91,18 +117,20 @@ spec:
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         className: external
         hosts:
-          - host: "{{ .Release.Name }}.${SECRET_DOMAIN_MEDIA}"
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN_MEDIA}"
             paths:
               - path: /
                 service:
-                  identifier: app
-                  port: http
+                  identifier: *app
+                  port: *port
+        tls:
+          - hosts:
+              - *host
     persistence:
       config:
         existingClaim: plex
         globalMounts:
            - path: /config/Library/Application Support/Plex Media Server
-
       # Separate PVC for cache to avoid backing up cache files
       cache:
         existingClaim: plex-cache
@@ -114,8 +142,10 @@ spec:
           - path: /config/Library/Application Support/Plex Media Server/Logs
       tmp:
         type: emptyDir
+        medium: Memory
       transcode:
         type: emptyDir
+        medium: Memory
       media:
         type: nfs
         server: openmediavault-used.manor

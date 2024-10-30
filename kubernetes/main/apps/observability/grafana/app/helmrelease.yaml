@@ -110,7 +110,7 @@ spec:
           revision: 9
           datasource: Prometheus
         cert-manager:
-          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/cert-manager.json
+          url: https://raw.githubusercontent.com/monitoring-mixins/website/master/assets/cert-manager/dashboards/overview.json
           datasource: Prometheus
         cloudflared:
           # renovate: depName="Cloudflare Tunnels (cloudflared)"
@@ -233,6 +233,13 @@ spec:
           gnetId: 7845
           revision: 4
           datasource: Prometheus
+        idrac:
+          gnetId: 12106
+          revision: 4
+          datasource: Prometheus
+        nvidia-dcgm:
+          url: https://raw.githubusercontent.com/NVIDIA/dcgm-exporter/main/grafana/dcgm-exporter-dashboard.json
+          datasource: Prometheus
     sidecar:
       dashboards:
         enabled: true
@@ -256,10 +263,18 @@ spec:
     serviceMonitor:
       enabled: true
     ingress:
-      enabled: true
-      annotations:
-        external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-      hosts: ["{{ .Release.Name }}.${SECRET_DOMAIN}"]
+      app:
+        enabled: true
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+        className: internal
+        hosts:
+          - host: "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
     persistence:
       enabled: false
     testFramework:
