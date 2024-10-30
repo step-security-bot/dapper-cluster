@@ -9,5 +9,6 @@ resources:
   - ./radarr/ks.yaml
   - ./radarr-uhd/ks.yaml
   - ./overseer/ks.yaml
+  - ./plex/ks.yaml
   - ./wizarr/ks.yaml
 

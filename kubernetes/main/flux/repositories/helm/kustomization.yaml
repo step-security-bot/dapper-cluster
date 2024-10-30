@@ -11,9 +11,12 @@ resources:
   - ./fairwinds.yaml
   - ./grafana.yaml
   - ./infisical.yaml
+  - ./intel.yaml
   - ./ingress-nginx.yaml
   - ./jetstack.yaml
   - ./k8s-gateway.yaml
+  - ./nvidia.yaml
+  - ./node-feature-discovery.yaml
   - ./metrics-server.yaml
   - ./openebs.yaml
   - ./postfinance.yaml
