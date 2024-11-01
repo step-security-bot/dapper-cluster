@@ -54,7 +54,7 @@ spec:
         type: LoadBalancer
         controller: *app
         annotations:
-          io.cilium/lb-ipam-ips: &ip ${UNIFI_VIP_GATEWAY}
+          lbipam.cilium.io/ips: &ip ${UNIFI_VIP_GATEWAY}
         externalTrafficPolicy: Cluster
         ports:
           http:

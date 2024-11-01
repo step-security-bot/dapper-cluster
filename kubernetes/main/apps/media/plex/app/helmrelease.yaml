@@ -82,7 +82,7 @@ spec:
         type: LoadBalancer
         controller: *app
         annotations:
-          io.cilium/lb-ipam-ips: &ip ${PLEX_VIP_GATEWAY}
+          lbipam.cilium.io/ips: &ip ${PLEX_VIP_GATEWAY}
         externalTrafficPolicy: Cluster
         ports:
           http:
