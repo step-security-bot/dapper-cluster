@@ -34,6 +34,8 @@ spec:
               tag: 4.1.1@sha256:52df19ffa3d4f59e9abc865032bc51c3afd077a88d5a6d50ba4a81d0e8582d9e
             env:
               TZ: ${TIME_ZONE}
+              APP_URL: https://invite.${SECRET_DOMAIN_MEDIA}
+
             resources:
               requests:
                 cpu: 15m
@@ -52,7 +54,7 @@ spec:
           external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN_MEDIA}"
         className: internal
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN_MEDIA}"
+          - host: &host "invite.${SECRET_DOMAIN_MEDIA}"
             paths:
               - path: /
                 service:
