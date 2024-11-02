@@ -43,11 +43,16 @@ spec:
                   secretKeyRef:
                     name: sonarr-secret
                     key: SONARR__AUTH__APIKEY
-              HOMEPAGE_VAR_SABNZBD_TOKEN:
+              HOMEPAGE_VAR_4K_RADARR_TOKEN:
                 valueFrom:
                   secretKeyRef:
-                    name: sabnzbd-secret
-                    key: SABNZBD__API_KEY
+                    name: radarr-secret
+                    key: 4K_RADARR__AUTH__APIKEY
+              HOMEPAGE_VAR_4K_SONARR_TOKEN:
+                valueFrom:
+                  secretKeyRef:
+                    name: sonarr-secret
+                    key: 4K_SONARR__AUTH__APIKEY
             envFrom:
               - secretRef:
                   name: homepage-secret
@@ -72,20 +77,20 @@ spec:
       app:
         className: internal
         hosts:
-          - host: &host "dashboard.${SECRET_DOMAIN_MEDIA}"
+          - host: &host "dashboard.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
                   identifier: app
                   port: http
         tls:
-          - hosts:
+          - secretName: ${SECRET_DOMAIN/./-}-production-tls
+            hosts:
               - *host
-            secretName: ${SECRET_DOMAIN_MEDIA/./-}-production-tls
     persistence:
       config:
         type: configMap
-        name: homepage-config
+        name: *config
         globalMounts:
           - subPath: docker.yaml
             path: /app/config/docker.yaml
@@ -102,10 +107,6 @@ spec:
           - subPath: widgets.yaml
             path: /app/config/widgets.yaml
             readOnly: true
-      bookmarks:
-        type: secret
-        name: homepage-secret
-        globalMounts:
           - subPath: bookmarks.yaml
             path: /app/config/bookmarks.yaml
             readOnly: true
