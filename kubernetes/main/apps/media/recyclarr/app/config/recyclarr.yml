@@ -38,7 +38,7 @@ sonarr:
           - name: WEB-1080p
   sonarr-uhd:
     base_url: http://sonarr-uhd.media.svc.cluster.local
-    api_key: !env_var 4K_SONARR_API_KEY
+    api_key: !env_var SONARR_UHD_API_KEY
     delete_old_custom_formats: true
     replace_existing_custom_formats: true
     include:
@@ -142,7 +142,7 @@ radarr:
           - name: HD Bluray + WEB
   radarr-uhd:
     base_url: http://radarr-uhd.media.svc.cluster.local
-    api_key: !env_var 4K_RADARR_API_KEY
+    api_key: !env_var RADARR_UHD_API_KEY
     delete_old_custom_formats: true
     replace_existing_custom_formats: true
     include:
