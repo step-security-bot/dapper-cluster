@@ -88,7 +88,6 @@ spec:
       app:
         annotations:
           external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN_MEDIA}"
-          external-dns.alpha.kubernetes.io/hostname: "internal.${SECRET_DOMAIN_MEDIA}"
         className: internal
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN_MEDIA}"

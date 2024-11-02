@@ -39,7 +39,7 @@ spec:
       GF_LOG_MODE: console
       GF_NEWS_NEWS_FEED_ENABLED: false
       GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: natel-discrete-panel,pr0ps-trackmap-panel,panodata-map-panel
-      GF_SECURITY_COOKIE_SAMESITE: grafana
+      GF_SECURITY_COOKIE_SAMESITE: *app
       GF_SERVER_ROOT_URL: "https://grafana.${SECRET_DOMAIN}"
     grafana.ini:
       analytics:
@@ -273,23 +273,25 @@ spec:
       - vonage-status-panel
     serviceMonitor:
       enabled: true
+      metricRelabelings:
+        - action: labeldrop
+          regex: (pod)
 
     ingress:
-      app:
-        enabled: true
-        annotations:
-          gethomepage.dev/enabled: "true"
-          gethomepage.dev/name: Grafana
-          gethomepage.dev/icon: si-grafana
-          gethomepage.dev/group: Monitoring
-          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-        className: internal
-        hosts: &host "grafana.${SECRET_DOMAIN}"
-        tls:
-          - hosts:
-              - *host
-            secretName: ${SECRET_DOMAIN/./-}-production-tls
-
+      enabled: true
+      ingressClassName: internal
+      annotations:
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/name: Grafana
+        gethomepage.dev/icon: si-grafana
+        gethomepage.dev/group: Monitoring
+        external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+      hosts:
+        - &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+      tls:
+        - secretName: ${SECRET_DOMAIN/./-}-production-tls
+          hosts:
+            - *host
     persistence:
       enabled: false
     testFramework:
