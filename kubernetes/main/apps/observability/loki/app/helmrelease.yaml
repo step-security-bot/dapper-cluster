@@ -15,14 +15,27 @@ spec:
         kind: HelmRepository
         name: grafana
         namespace: flux-system
-      interval: 30m
+  install:
+    crds: Skip
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    crds: Skip
+    remediation:
+      strategy: rollback
+      retries: 3
+  dependsOn:
+    - name: openebs
+      namespace: openebs-system
   values:
     deploymentMode: SingleBinary
-
     loki:
+      auth_enabled: false
       analytics:
         reporting_enabled: false
-      auth_enabled: false
+      server:
+        log_level: info
       commonConfig:
         replication_factor: 1
       compactor:
@@ -31,46 +44,43 @@ spec:
         retention_enabled: true
       ingester:
         chunk_encoding: snappy
-      limits_config:
-        retention_period: 14d
+      storage:
+        type: filesystem
       schemaConfig:
         configs:
-          - from: "2024-04-01"
+          - from: "2024-04-01" # quote
             store: tsdb
             object_store: filesystem
             schema: v13
             index:
               prefix: loki_index_
               period: 24h
-      server:
-        log_level: info
-      storage:
-        type: filesystem
-
-    backend:
-      replicas: 0
-    chunksCache:
-      enabled: false
-    gateway:
-      replicas: 0
-    lokiCanary:
-      enabled: false
-    read:
-      replicas: 0
-    resultsCache:
-      enabled: false
-    sidecar:
-      image:
-        repository: ghcr.io/kiwigrid/k8s-sidecar
-      rules:
-        searchNamespace: ALL
+      limits_config:
+        retention_period: 14d
     singleBinary:
       replicas: 1
       persistence:
         enabled: true
         storageClass: openebs-hostpath
         size: 30Gi
-    test:
-      enabled: false
+    gateway:
+      replicas: 0
+    backend:
+      replicas: 0
+    read:
+      replicas: 0
     write:
       replicas: 0
+    chunksCache:
+      enabled: false
+    resultsCache:
+      enabled: false
+    lokiCanary:
+      enabled: false
+    test:
+      enabled: false
+    sidecar:
+      image:
+        repository: ghcr.io/kiwigrid/k8s-sidecar
+      rules:
+        searchNamespace: ALL
