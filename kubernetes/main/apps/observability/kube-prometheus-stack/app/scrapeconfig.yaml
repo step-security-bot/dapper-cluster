@@ -8,7 +8,6 @@ spec:
   staticConfigs:
     - targets:
         - expanse.internal:9100
-        - pikvm.internal:9100
         # - voyager.internal:9100
   metricsPath: /metrics
   relabelings:
@@ -16,20 +15,7 @@ spec:
       targetLabel: job
       replacement: *name
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
-apiVersion: monitoring.coreos.com/v1alpha1
-kind: ScrapeConfig
-metadata:
-  name: &name pikvm
-spec:
-  staticConfigs:
-    - targets:
-        - pikvm.internal
-  metricsPath: /api/export/prometheus/metrics
-  relabelings:
-    - action: replace
-      targetLabel: job
-      replacement: *name
+
 ---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/monitoring.coreos.com/scrapeconfig_v1alpha1.json
 apiVersion: monitoring.coreos.com/v1alpha1
@@ -39,7 +25,7 @@ metadata:
 spec:
   staticConfigs:
     - targets:
-        - zigbee-controller.internal
+        - zigbee-controller.manor
   metricsPath: /metrics
   relabelings:
     - action: replace

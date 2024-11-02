@@ -42,9 +42,12 @@ spec:
               RADARR__LOG__LEVEL: info
               RADARR__SERVER__PORT: &port 80
               RADARR__UPDATE__BRANCH: develop
+              PUSHOVER_APP_URL: &host "radarr.${SECRET_DOMAIN_MEDIA}"
+              PUSHOVER_DEBUG: "false"
+              PUSHOVER_PRIORITY: "0"
             envFrom:
               - secretRef:
-                name: radarr-secret
+                  name: radarr-secret
             probes:
               liveness: &probes
                 enabled: true
@@ -88,7 +91,7 @@ spec:
           external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN_MEDIA}"
         className: internal
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN_MEDIA}"
+          - host: *host
             paths:
               - path: /
                 service:

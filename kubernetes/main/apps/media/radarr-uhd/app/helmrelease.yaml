@@ -41,8 +41,8 @@ spec:
               RADARR__LOG__DBENABLED: "False"
               RADARR__LOG__LEVEL: info
               RADARR__SERVER__PORT: &port 80
-              PUSHOVER_APP_URL: &host "4kradarr.${SECRET_DOMAIN_MEDIA}"
               RADARR__UPDATE__BRANCH: develop
+              PUSHOVER_APP_URL: &host "4kradarr.${SECRET_DOMAIN_MEDIA}"
               PUSHOVER_DEBUG: "false"
               PUSHOVER_PRIORITY: "0"
             envFrom:
