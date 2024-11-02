@@ -25,7 +25,6 @@ data:
   kubernetes.yaml: |
     ---
     mode: cluster
-
   services.yaml: |
     ---
     - Media:
@@ -160,7 +159,6 @@ data:
             icon: si-github
             href: https://github.com/bjw-s/helm-charts/tree/main/charts/library/common#values
             description: app-template Helm Chart Values
-
   settings.yaml: |
     ---
     title: My Personal Home Dashboard
@@ -181,7 +179,6 @@ data:
       searchDescription: true
       hideInternetSearch: true
       hideVisitURL: true
-
   widgets.yaml: |
     ---
     - search:

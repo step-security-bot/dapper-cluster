@@ -30,29 +30,9 @@ spec:
           app:
             image:
               repository: ghcr.io/gethomepage/homepage
-              tag: v0.9.11
+              tag: v0.9.11@sha256:d41dca72f3a68d2c675eb232a448104af200096f05e2610ffbfdb16bc7f71410
             env:
               TZ: ${TIMEZONE}
-              HOMEPAGE_VAR_RADARR_TOKEN:
-                valueFrom:
-                  secretKeyRef:
-                    name: radarr-secret
-                    key: RADARR__AUTH__APIKEY
-              HOMEPAGE_VAR_SONARR_TOKEN:
-                valueFrom:
-                  secretKeyRef:
-                    name: sonarr-secret
-                    key: SONARR__AUTH__APIKEY
-              HOMEPAGE_VAR_4K_RADARR_TOKEN:
-                valueFrom:
-                  secretKeyRef:
-                    name: radarr-secret
-                    key: 4K_RADARR__AUTH__APIKEY
-              HOMEPAGE_VAR_4K_SONARR_TOKEN:
-                valueFrom:
-                  secretKeyRef:
-                    name: sonarr-secret
-                    key: 4K_SONARR__AUTH__APIKEY
             envFrom:
               - secretRef:
                   name: homepage-secret
@@ -75,6 +55,7 @@ spec:
             port: 3000
     ingress:
       app:
+        enabled: true
         className: internal
         hosts:
           - host: &host "dashboard.${SECRET_DOMAIN}"
@@ -88,9 +69,9 @@ spec:
             hosts:
               - *host
     persistence:
-      config:
+      homepage-config:
         type: configMap
-        name: *config
+        name: homepage-config
         globalMounts:
           - subPath: docker.yaml
             path: /app/config/docker.yaml
@@ -110,6 +91,10 @@ spec:
           - subPath: bookmarks.yaml
             path: /app/config/bookmarks.yaml
             readOnly: true
+      logs:
+        type: emptyDir
+        globalMounts:
+          - path: /app/config/logs
     serviceAccount:
       create: true
       name: homepage
