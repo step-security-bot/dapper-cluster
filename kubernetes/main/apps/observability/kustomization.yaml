@@ -5,6 +5,7 @@ resources:
   - ./namespace.yaml
   - ./goldilocks/ks.yaml
   - ./grafana/ks.yaml
+  - ./vpa/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./prometheus-operator-crds/ks.yaml
   - ./exporters/dcgm-exporter/ks.yaml

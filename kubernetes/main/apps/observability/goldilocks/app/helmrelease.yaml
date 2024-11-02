@@ -33,30 +33,29 @@ spec:
       repository: us-docker.pkg.dev/fairwinds-ops/oss/goldilocks
       tag: v4.13.2@sha256:db993aa5c6944a6e7b534e28c0e1a4fd31bfdf7fb747e8a5fb1177805fcb7b77
       pullPolicy: Always
+    vpa:
+      enabled: true
     dashboard:
-      replicaCount: 1
+      enabled: true
       ingress:
-        app:
-          enabled: true
-          annotations:
-            gethomepage.dev/enabled: "true"
-            gethomepage.dev/name: "Goldilocks"
-            gethomepage.dev/group: "Observability"
-            gethomepage.dev/icon: "https://raw.githubusercontent.com/FairwindsOps/goldilocks/master/pkg/dashboard/assets/images/favicon.ico"
-            gethomepage.dev/description: "Kubernetes Resource Recommendations"
-            external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-          className: internal
-          hosts:
-            - host: &host "goldilocks.${SECRET_DOMAIN}"
-              paths:
-                - path: /
-                  service:
-                    identifier: app
-                    port: http
-          tls:
-            - hosts:
-                - *host
-              secretName: ${SECRET_DOMAIN/./-}-production-tls
+        enabled: true
+        ingressClassName: internal
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: "Goldilocks"
+          gethomepage.dev/group: "Observability"
+          gethomepage.dev/icon: "https://raw.githubusercontent.com/FairwindsOps/goldilocks/master/pkg/dashboard/assets/images/favicon.ico"
+          gethomepage.dev/description: "Kubernetes Resource Recommendations"
+          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+        hosts:
+          - host: &host "goldilocks.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                type: ImplementationSpecific
+        tls:
+          - secretName: ${SECRET_DOMAIN/./-}-production-tls
+            hosts:
+              - *host
       resources:
         requests:
           memory: 105M
