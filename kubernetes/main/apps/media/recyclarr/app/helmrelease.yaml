@@ -29,7 +29,7 @@ spec:
           reloader.stakater.com/auto: "true"
         cronjob:
           schedule: "@daily"
-          timeZone: &timeZone ${TIMEZONE}
+          timeZone: "${TIME_ZONE}"
           successfulJobsHistory: 1
           failedJobsHistory: 1
         containers:
@@ -38,7 +38,7 @@ spec:
               repository: ghcr.io/recyclarr/recyclarr
               tag: 7.3.0@sha256:2aaa0205a93171b93a159e4665004ccee1a5aacd60359fb8d7683db0ae7e774b
             env:
-              TZ: *timeZone
+              TZ: "${TIME_ZONE}"
             envFrom:
               - secretRef:
                   name: recyclarr-secret
@@ -66,3 +66,8 @@ spec:
           - path: /config/recyclarr.yml
             subPath: recyclarr.yml
             readOnly: true
+      logs:
+        type: emptyDir
+        globalMounts:
+          - path: /config/logs
+

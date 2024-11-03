@@ -24,7 +24,7 @@ spec:
       retries: 3
   dependsOn:
     - name: minio
-      namespace: default
+      namespace: storage
     - name: openebs
       namespace: openebs-system
   values:
