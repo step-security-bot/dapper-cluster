@@ -32,35 +32,37 @@ spec:
         action: replace
       - regex: cluster
         action: labeldrop
-  # backup:
-  #   retentionPolicy: 30d
-  #   barmanObjectStore: &barmanObjectStore
-  #     endpointURL: http://minio.storage.svc.cluster.local:9000
-  #     s3Credentials:
-  #       accessKeyId:
-  #         name: cloudnative-pg-minio-secret
-  #         key: accessKeyId
-  #       secretAccessKey:
-  #         name: cloudnative-pg-minio-secret
-  #         key: secretAccessKey
-  #     destinationPath: s3://cloudnative-pg/
-  #     data:
-  #       compression: bzip2
-  #     wal:
-  #       compression: bzip2
-  #       maxParallel: 8
-  #     serverName: &currentCluster postgres-16-001
-  #     # Note: serverName version needs to be incremented
-  #     # when recovering from an existing cnpg cluster
-  #     # serverName: &currentCluster postgres16-v6
-  # # Note: previousCluster needs to be set to the name of the previous
-  # # cluster when recovering from an existing cnpg cluster
-  # bootstrap:
-  #   recovery:
-  #     source: &previousCluster postgres16-000
-  # # Note: externalClusters is needed when recovering from an existing cnpg cluster
-  # externalClusters:
-  #   - name: *previousCluster
-  #     barmanObjectStore:
-  #       <<: *barmanObjectStore
-  #       serverName: *previousCluster
+  backup:
+     retentionPolicy: 30d
+     barmanObjectStore: &barmanObjectStore
+       destinationPath: s3://cloudnative-pg/
+       endpointURL: http://minio.storage.svc.cluster.local:9000
+       s3Credentials:
+         accessKeyId:
+           name: cloudnative-pg-minio-secret
+           key: accessKeyId
+         secretAccessKey:
+           name: cloudnative-pg-minio-secret
+           key: secretAccessKey
+       data:
+         compression: bzip2
+       wal:
+         compression: bzip2
+         maxParallel: 8
+       serverName: &currentCluster postgres16-v2
+       # Note: serverName version needs to be incremented
+       # when recovering from an existing cnpg cluster
+       # serverName: &currentCluster postgres16-v6
+   # Note: previousCluster needs to be set to the name of the previous
+   # cluster when recovering from an existing cnpg cluster
+  # NOTE: previousCluster needs to be set to the name of the previous
+  # cluster when recovering from an existing cnpg cluster
+  bootstrap:
+    recovery:
+      source: &previousCluster postgres-16-v1
+  # NOTE: externalClusters is needed when recovering from an existing cnpg cluster
+  externalClusters:
+    - name: *previousCluster
+      barmanObjectStore:
+        <<: *barmanObjectStore
+        serverName: *previousCluster
