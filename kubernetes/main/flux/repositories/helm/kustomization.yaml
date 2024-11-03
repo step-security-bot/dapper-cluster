@@ -2,6 +2,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - ./backube.yaml
   - ./bjw-s.yaml
   - ./cilium.yaml
   - ./coredns.yaml
@@ -17,6 +18,8 @@ resources:
   - ./jetstack.yaml
   - ./k8s-gateway.yaml
   - ./nvidia.yaml
+  - ./piraeus.yaml
+  - ./kyverno.yaml
   - ./dcgm-exporter.yaml
   - ./node-feature-discovery.yaml
   - ./metrics-server.yaml

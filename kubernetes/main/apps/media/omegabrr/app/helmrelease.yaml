@@ -1,8 +1,9 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: recyclarr
+  name: omegabrr
 spec:
   interval: 30m
   chart:
@@ -23,26 +24,16 @@ spec:
       retries: 3
   values:
     controllers:
-      recyclarr:
-        type: cronjob
+      omegabrr:
         annotations:
           reloader.stakater.com/auto: "true"
-        cronjob:
-          schedule: "@daily"
-          timeZone: &timeZone ${TIMEZONE}
-          successfulJobsHistory: 1
-          failedJobsHistory: 1
         containers:
           app:
             image:
-              repository: ghcr.io/recyclarr/recyclarr
-              tag: 7.3.0@sha256:2aaa0205a93171b93a159e4665004ccee1a5aacd60359fb8d7683db0ae7e774b
+              repository: ghcr.io/autobrr/omegabrr
+              tag: v1.14.0@sha256:6f65c7967609746662815933ecc8168c8c25a3b82d909f49833fcce2b47ee052
             env:
-              TZ: *timeZone
-            envFrom:
-              - secretRef:
-                  name: recyclarr-secret
-            args: ["sync"]
+              TZ: ${TIMEZONE}
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
@@ -51,18 +42,24 @@ spec:
               requests:
                 cpu: 10m
               limits:
-                memory: 128Mi
+                memory: 256Mi
     defaultPodOptions:
       securityContext:
+        runAsNonRoot: true
         runAsUser: 65534
         runAsGroup: 65534
-        fsGroup: 65534
-        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: omegabrr
+        ports:
+          http:
+            port: 80
     persistence:
       config-file:
-        type: configMap
-        name: recyclarr-configmap
+        type: secret
+        name: omegabrr-secret
         globalMounts:
-          - path: /config/recyclarr.yml
-            subPath: recyclarr.yml
+          - path: /config/config.yaml
+            subPath: config.yaml
             readOnly: true
