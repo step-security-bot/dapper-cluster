@@ -19,7 +19,7 @@ spec:
   resources:
     requests:
       storage: 100Gi
-  storageClassName: zfs-backed-pvs
+  storageClassName: zfs-backed-data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -30,4 +30,4 @@ spec:
   resources:
     requests:
       storage: 100Gi
-  storageClassName: zfs-backed-pvs
+  storageClassName: zfs-backed-data
