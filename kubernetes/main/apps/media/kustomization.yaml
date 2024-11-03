@@ -8,7 +8,9 @@ resources:
   - ./sonarr-uhd/ks.yaml
   - ./radarr/ks.yaml
   - ./radarr-uhd/ks.yaml
+  - ./nzbget/ks.yaml
   - ./overseer/ks.yaml
+  - ./prowlarr/ks.yaml
   - ./plex/ks.yaml
   - ./wizarr/ks.yaml
 
