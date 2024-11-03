@@ -6,13 +6,13 @@ metadata:
   name: &app bazarr
   namespace: flux-system
 spec:
-  targetNamespace: default
+  targetNamespace: media
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-secrets-stores
-  path: ./kubernetes/main/apps/default/bazarr/app
+  path: ./kubernetes/main/apps/media/bazarr/app
   prune: true
   sourceRef:
     kind: GitRepository
