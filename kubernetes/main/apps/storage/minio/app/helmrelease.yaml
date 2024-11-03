@@ -121,6 +121,6 @@ spec:
       config:
         type: nfs
         server: circe.manor
-        path: /ssd/k8s/minio
+        path: /ssd/minio
         globalMounts:
           - path: /data
