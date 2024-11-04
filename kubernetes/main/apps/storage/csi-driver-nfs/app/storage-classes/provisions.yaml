@@ -11,7 +11,7 @@ parameters:
   share: /Used/k8s
   subdir: "${pvc.metadata.namespace}/${pvc.metadata.name}"
 allowVolumeExpansion: true
-reclaimPolicy: Retain
+reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=4.1
@@ -32,7 +32,7 @@ parameters:
   share: /ssd/k8s
   subdir: "${pvc.metadata.namespace}/${pvc.metadata.name}"
 allowVolumeExpansion: true
-reclaimPolicy: Retain
+reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=4.1
@@ -53,7 +53,7 @@ parameters:
   share: /ssd/data
   subdir: "${pvc.metadata.namespace}/${pvc.metadata.name}"
 allowVolumeExpansion: true
-reclaimPolicy: Retain
+reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=4.1
@@ -74,7 +74,7 @@ parameters:
   share: /ssd/backups
   subdir: "${pvc.metadata.namespace}/${pvc.metadata.name}"
 allowVolumeExpansion: true
-reclaimPolicy: Retain
+reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=4.1

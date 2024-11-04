@@ -2,29 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: plex
-spec:
-  accessModes: ["ReadWriteOnce"]
-  resources:
-    requests:
-      storage: 50Gi
-  storageClassName: openebs-hostpath
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
   name: plex-cache
-spec:
-  accessModes: ["ReadWriteOnce"]
-  resources:
-    requests:
-      storage: 100Gi
-  storageClassName: zfs-backed-data
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: plex-media
 spec:
   accessModes: ["ReadWriteOnce"]
   resources:

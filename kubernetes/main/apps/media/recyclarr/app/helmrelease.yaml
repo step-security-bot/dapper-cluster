@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: recyclarr
+  name: &app recyclarr
 spec:
   interval: 30m
   chart:
@@ -59,6 +59,8 @@ spec:
         fsGroup: 65534
         fsGroupChangePolicy: OnRootMismatch
     persistence:
+      config:
+        existingClaim: *app
       config-file:
         type: configMap
         name: recyclarr-configmap
