@@ -80,7 +80,7 @@ spec:
 
     persistence:
       data:
-        existingClaim: actual-data
+        existingClaim: actual
         advancedMounts:
           actual:
             app:

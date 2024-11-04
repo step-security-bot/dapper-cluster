@@ -3,16 +3,18 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app bazarr
+  name: &app rtlamr2mqtt
   namespace: flux-system
 spec:
-  targetNamespace: media
+  targetNamespace: home
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
+    - name: emqx-cluster
     - name: external-secrets-stores
-  path: ./kubernetes/main/apps/media/bazarr/app
+    - name: node-feature-discovery-rules
+  path: ./kubernetes/main/apps/home/rtlamr2mqtt/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -20,7 +22,3 @@ spec:
   wait: false
   interval: 30m
   timeout: 5m
-  postBuild:
-    substitute:
-      APP: *app
-      VOLSYNC_CAPACITY: 5Gi
