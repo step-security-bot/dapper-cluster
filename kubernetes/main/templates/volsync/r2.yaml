@@ -13,7 +13,7 @@ spec:
     template:
       engineVersion: v2
       data:
-        RESTIC_REPOSITORY: "{{ .CLOUDFLARE_S2_URL }}/repository/${APP}"
+        RESTIC_REPOSITORY: "{{ .CLOUDFLARE_S2_URL }}/${APP}"
         RESTIC_PASSWORD: "{{ .RESTIC_PASSWORD }}"
         AWS_ACCESS_KEY_ID: "{{ .CLOUDFLARE_OBJECT_STORAGE_KEY_ID }}"
         AWS_SECRET_ACCESS_KEY: "{{ .CLOUDFLARE_OBJECT_STORAGE_SECRET_ACCESS_KEY }}"
@@ -42,7 +42,7 @@ spec:
     repository: "${APP}-volsync-r2-secret"
     volumeSnapshotClassName: "${VOLSYNC_SNAPSHOTCLASS:-csi-nfs-snapclass}"
     cacheCapacity: "${VOLSYNC_CACHE_CAPACITY:-10Gi}"
-    cacheStorageClassName: "${VOLSYNC_CACHE_SNAPSHOTCLASS:-openebs-hostpath}"
+    cacheStorageClassName: "${VOLSYNC_CACHE_SNAPSHOTCLASS:-zfs-backed-pvs}"
     cacheAccessModes: ["${VOLSYNC_CACHE_ACCESSMODES:-ReadWriteOnce}"]
     storageClassName: "${VOLSYNC_STORAGECLASS:-zfs-backed-pvs}"
     accessModes: ["${VOLSYNC_ACCESSMODES:-ReadWriteOnce}"]

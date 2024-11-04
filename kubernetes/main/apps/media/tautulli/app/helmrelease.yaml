@@ -64,8 +64,8 @@ spec:
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
-        runAsGroup: 140
-        fsGroup: 150
+        runAsGroup: 150
+        fsGroup: 140
         fsGroupChangePolicy: OnRootMismatch
         seccompProfile: { type: RuntimeDefault }
     service:
@@ -91,7 +91,7 @@ spec:
               - *host
             secretName: ${SECRET_DOMAIN_MEDIA/./-}-production-tls
     persistence:
-      config:
+      config: #fight me
         existingClaim: tautulli
       cache:
         existingClaim: tautulli-cache

@@ -47,6 +47,7 @@ spec:
                     nfs:
                       server: openmediavault-used.manor
                       share: /Used/k8s
+                      path: /Used/k8s/volsync
     - name: mutate-volsync-dst-movers
       match:
         any:
@@ -72,3 +73,4 @@ spec:
                     nfs:
                       server: openmediavault-used.manor
                       share: /Used/k8s
+                      path: /Used/k8s/volsync

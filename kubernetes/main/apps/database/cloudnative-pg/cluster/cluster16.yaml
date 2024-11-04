@@ -49,7 +49,7 @@ spec:
        wal:
          compression: bzip2
          maxParallel: 8
-       serverName: &currentCluster postgres16-v2
+       serverName: &currentCluster postgres16-v1
        # Note: serverName version needs to be incremented
        # when recovering from an existing cnpg cluster
        # serverName: &currentCluster postgres16-v6
@@ -58,11 +58,17 @@ spec:
   # NOTE: previousCluster needs to be set to the name of the previous
   # cluster when recovering from an existing cnpg cluster
   bootstrap:
-    recovery:
-      source: &previousCluster postgres-16-v1
+    initdb:
+      database: app
+      owner: app
+      secret:
+        name: cloudnative-pg-secret
+  #bootstrap:
+  #  recovery:
+  #    source: &previousCluster postgres-16-v1
   # NOTE: externalClusters is needed when recovering from an existing cnpg cluster
-  externalClusters:
-    - name: *previousCluster
-      barmanObjectStore:
-        <<: *barmanObjectStore
-        serverName: *previousCluster
+  #externalClusters:
+  #  - name: *previousCluster
+  #    barmanObjectStore:
+  #      <<: *barmanObjectStore
+  #      serverName: *previousCluster

@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   #- ./bazarr/ks.yaml
-  #- ./tautulli/ks.yaml
+  - ./tautulli/ks.yaml
   - ./recyclarr/ks.yaml
   - ./sonarr/ks.yaml
   - ./sonarr-uhd/ks.yaml
