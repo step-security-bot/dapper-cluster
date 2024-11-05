@@ -16,7 +16,6 @@ spec:
         namespace: flux-system
   dependsOn:
     - name: csi-driver-nfs
-      namespace: storage
   install:
     crds: CreateReplace
     remediation:

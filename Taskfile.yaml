@@ -24,6 +24,7 @@ includes:
   kubernetes: .taskfiles/kubernetes
   talos: .taskfiles/talos
   workstation: .taskfiles/workstation
+  volsync: .taskfiles/volsync
   user:
     taskfile: .taskfiles/User
     optional: true
