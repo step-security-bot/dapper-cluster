@@ -14,6 +14,7 @@ spec:
         kind: HelmRepository
         name: csi-driver-nfs
         namespace: flux-system
+
   maxHistory: 3
   install:
     createNamespace: true
@@ -26,7 +27,32 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    controller:
-      replicas: 2
     feature:
       enableFSGroupPolicy: true
+    controller:
+      replicas: 2
+      resources:
+        csiProvisioner:
+          limits:
+            memory: 1000Mi
+          requests:
+            cpu: 10m
+            memory: 30M
+        csiSnapshotter:
+          limits:
+            memory: 1000Mi
+          requests:
+            cpu: 10m
+            memory: 30M
+        livenessProbe:
+          limits:
+            memory: 500M
+          requests:
+            cpu: 10m
+            memory: 30M
+        nfs:
+          limits:
+            memory: 8000M
+          requests:
+            cpu: 10m
+            memory: 160M
