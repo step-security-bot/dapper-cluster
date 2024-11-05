@@ -6,7 +6,7 @@ metadata:
   name: &app rtlamr2mqtt
   namespace: flux-system
 spec:
-  targetNamespace: home
+  targetNamespace: home-automation
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
@@ -14,7 +14,7 @@ spec:
     - name: emqx-cluster
     - name: external-secrets-stores
     - name: node-feature-discovery-rules
-  path: ./kubernetes/main/apps/home/rtlamr2mqtt/app
+  path: ./kubernetes/main/apps/home-automation/rtlamr2mqtt/app
   prune: true
   sourceRef:
     kind: GitRepository

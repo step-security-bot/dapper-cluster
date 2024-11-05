@@ -3,17 +3,16 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app zigbee2mqtt
+  name: &app home-assistant
   namespace: flux-system
 spec:
-  targetNamespace: home
+  targetNamespace: home-automation
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: emqx-cluster
     - name: external-secrets-stores
-  path: ./kubernetes/main/apps/home/zigbee2mqtt/app
+  path: ./kubernetes/main/apps/home-automation/home-assistant/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -24,4 +23,4 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CAPACITY: 1Gi
+      VOLSYNC_CAPACITY: 5Gi
