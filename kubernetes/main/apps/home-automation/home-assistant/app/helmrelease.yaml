@@ -110,7 +110,7 @@ spec:
           external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
         className: internal
         hosts:
-          - host: &code_host hass-code.internal.${SECRET_DOMAIN}
+          - host: &code_host hass-code.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
