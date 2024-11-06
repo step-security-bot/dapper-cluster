@@ -5,4 +5,3 @@ metadata:
   name: csi-nfs-snapclass
 driver: nfs.csi.k8s.io
 deletionPolicy: Delete
-

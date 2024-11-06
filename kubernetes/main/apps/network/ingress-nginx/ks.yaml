@@ -18,7 +18,8 @@ spec:
     name: home-kubernetes
   wait: true
   interval: 30m
-  timeout: 5m
+  retryInterval: 1m
+  timeout: 10m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -39,6 +40,7 @@ spec:
     name: home-kubernetes
   wait: false
   interval: 30m
+  retryInterval: 1m
   timeout: 5m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
@@ -60,4 +62,5 @@ spec:
     name: home-kubernetes
   wait: false
   interval: 30m
+  retryInterval: 1m
   timeout: 5m
