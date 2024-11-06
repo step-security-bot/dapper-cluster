@@ -37,6 +37,7 @@ spec:
               tag: 2024.10.4@sha256:d788b59a4ee584f7cbeee7cff896e922faa8f0673c83187045e77e0fc77c8457
             env:
               TZ: ${TIME_ZONE}
+              UV_SYSTEM_PYTHON: true
               HASS_HTTP_TRUSTED_PROXY_1: 10.100.0.0/24
               HASS_HTTP_TRUSTED_PROXY_2: 10.69.0.0/16
 
@@ -49,8 +50,10 @@ spec:
               capabilities: { drop: ["ALL"] }
             resources:
               requests:
-                cpu: 10m
+                cpu: 11m
+                memory: 800M
               limits:
+                cpu: 46m
                 memory: 2Gi
           code-server:
             image:
@@ -70,11 +73,6 @@ spec:
                   secretKeyRef:
                     name: home-assistant-secret
                     key: VSCODE_TOKEN
-            resources:
-              requests:
-                cpu: 10m
-              limits:
-                memory: 512Mi
     defaultPodOptions:
       securityContext:
         runAsNonRoot: true

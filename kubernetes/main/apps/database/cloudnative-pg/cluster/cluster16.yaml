@@ -28,7 +28,7 @@ spec:
     # see https://github.com/cloudnative-pg/cloudnative-pg/issues/2501
     podMonitorMetricRelabelings:
       - sourceLabels: ["cluster"]
-        targetLabel: cnpg_cluster
+        targetLabel: cnpg_cluster # build again
         action: replace
       - regex: cluster
         action: labeldrop
