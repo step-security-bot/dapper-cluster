@@ -109,3 +109,9 @@ spec:
         existingClaim: sonarr
       tmp:
         type: emptyDir
+      media:
+        type: nfs
+        server: openmediavault-used.manor
+        path: /Used
+        globalMounts:
+          - path: /media

@@ -110,3 +110,9 @@ spec:
         existingClaim: radarr
       tmp:
         type: emptyDir
+      media:
+        type: nfs
+        server: openmediavault-used.manor
+        path: /Used
+        globalMounts:
+          - path: /media
