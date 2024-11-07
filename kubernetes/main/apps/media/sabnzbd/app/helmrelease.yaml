@@ -72,7 +72,7 @@ spec:
               capabilities: { drop: ["ALL"] }
             resources:
               requests:
-                cpu: 100m
+                cpu: 8000m
               limits:
                 memory: 64Gi
     defaultPodOptions:
@@ -123,6 +123,8 @@ spec:
       tmp:
         medium: Memory
         type: emptyDir
+        globalMounts:
+          - path: /tmp
       scripts:
         type: configMap
         name: sabnzbd-scripts

@@ -73,7 +73,7 @@ spec:
               capabilities: { drop: ["ALL"] }
             resources:
               requests:
-                cpu: 100m
+                cpu: 500m
                 memory: 12Gi
                 nvidia.com/gpu: 1
               limits:

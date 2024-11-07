@@ -101,7 +101,7 @@ spec:
         retentionSize: 70GB
         resources:
           requests:
-            cpu: 100m
+            cpu: 500m
           limits:
             memory: 1500Mi
         storageSpec:
