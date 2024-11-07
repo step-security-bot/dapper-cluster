@@ -10,5 +10,6 @@ resources:
   - ./kube-prometheus-stack/ks.yaml
   - ./prometheus-operator-crds/ks.yaml
   - ./exporters/dcgm-exporter/ks.yaml
+  - ./blackbox-exporter/ks.yaml
   - ./loki/ks.yaml
 

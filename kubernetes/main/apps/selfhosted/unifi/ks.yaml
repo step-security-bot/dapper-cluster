@@ -6,6 +6,9 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: selfhosted
+  dependsOn:
+    - name: volsync
+    - name: external-secrets-stores
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app

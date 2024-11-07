@@ -6,13 +6,13 @@ metadata:
   name: &app smtp-relay
   namespace: flux-system
 spec:
-  targetNamespace: selfhosted
+  targetNamespace: network
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: external-secrets-stores
-  path: ./kubernetes/main/apps/selfhosted/smtp-relay/app
+  path: ./kubernetes/main/apps/network/smtp-relay/app
   prune: true
   sourceRef:
     kind: GitRepository

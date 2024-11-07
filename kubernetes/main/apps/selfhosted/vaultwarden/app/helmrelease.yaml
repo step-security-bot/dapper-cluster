@@ -1,8 +1,10 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: &app vaultwarden
+
 spec:
   interval: 30m
   chart:
@@ -13,14 +15,13 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
-  maxHistory: 2
   install:
+    createNamespace: true
     remediation:
       retries: 3
   upgrade:
     cleanupOnFail: true
     remediation:
-      strategy: rollback
       retries: 3
   dependsOn:
     - name: volsync
@@ -30,31 +31,45 @@ spec:
       vaultwarden:
         annotations:
           reloader.stakater.com/auto: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16.4
+            envFrom:
+              - secretRef: &postgres_secret
+                    name: &secret vaultwarden-postgres-secret
         containers:
           app:
             image:
-              repository: ghcr.io/dani-garcia/vaultwarden
+              repository: vaultwarden/server
               tag: 1.32.3@sha256:7de8fd442afc26e4932a0b2521e2eec82db9f17667eef7b46fd9c2fa2e639de2
+
             env:
               TZ: ${TIME_ZONE}
-              DATA_FOLDER: "/data"
+              DATA_FOLDER: "config"
+              ICON_CACHE_FOLDER: "config/icon_cache"
+              ATTACHMENTS_FOLDER: "config/attachments"
               DOMAIN: https://vault.${SECRET_DOMAIN}
               SIGNUPS_ALLOWED: false
               SHOW_PASSWORD_HINT: false
               SMTP_FROM: vaultwarden@${SECRET_DOMAIN}
               SMTP_FROM_NAME: Vaultwarden
-              SMTP_HOST: smtp-relay.networking.svc.cluster.local
+              SMTP_HOST: smtp-relay.network.svc.cluster.local
               SMTP_SECURITY: "off"
-              SMTP_PORT: 2525
+              SMTP_PORT: 25
+              SMTP_SSL: "true"
+              SMTP_EXPLICIT_TLS: "true"
+              WEBSOCKET_ADDRESS: 0.0.0.0
+              WEBSOCKET_ENABLED: true
+              WEBSOCKET_PORT: 3012
             envFrom:
               - secretRef:
                   name: vaultwarden-secret
-              - secretRef:
-                  name: vaultwarden-db-secret
             resources:
               requests:
-                cpu: 10m
-                memory: 64Mi
+                cpu: 50m
+                memory: 100Mi
               limits:
                 memory: 256Mi
             securityContext:
@@ -67,24 +82,37 @@ spec:
             runAsGroup: 150
             fsGroup: 140
             fsGroupChangePolicy: OnRootMismatch
+
     service:
       app:
-        controller: vaultwarden
+        controller: *app
         ports:
           http:
-            port: 80
+            port: &port 80
+          websocket:
+            enabled: true
+            port: &websocket-port 3012
+
     ingress:
       app:
         className: internal
         annotations:
           external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
         hosts:
-          - host: &host "vault.${SECRET_DOMAIN}"
+          - host: &host vault.${SECRET_DOMAIN}
             paths:
               - path: /
                 service:
                   identifier: app
-                  port: http
+                  port: *port
+              - path: /notifications/hub/negotiate
+                service:
+                  identifier: app
+                  port: *port
+              - path: /notifications/hub
+                service:
+                  identifier: app
+                  port: *websocket-port
         tls:
           - hosts:
               - *host
@@ -92,7 +120,9 @@ spec:
       admin:
         className: internal
         annotations:
-          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+          external-dns.alpha.kubernetes.io/target: internal.${DOMAIN}
+          # disabled for 40x because it is used for the authentication
+          nginx.ingress.kubernetes.io/whitelist-source-range: 10.100.0.0/24, 10.69.0.0/16, 192.168.1.0/24
         hosts:
           - host: *host
             paths:
@@ -100,12 +130,8 @@ spec:
                 service:
                   identifier: app
                   port: http
-        tls:
-          - hosts:
-              - *host
-            secretName: "${SECRET_DOMAIN/./-}-production-tls"
     persistence:
-      data:
+      config:
         existingClaim: vaultwarden
         globalMounts:
-          - path: /data
+          - path: /config
