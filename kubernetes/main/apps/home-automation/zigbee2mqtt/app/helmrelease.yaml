@@ -95,7 +95,6 @@ spec:
                 cpu: 10m
                 memory: 150M
               limits:
-                cpu: 50m
                 memory: 500M
           code-server:
             image:
