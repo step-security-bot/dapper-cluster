@@ -1,0 +1,34 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: old-vault-proxy
+  namespace: network
+spec:
+  type: ExternalName
+  externalName: docker-temp.manor
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &app old-vault-proxy
+  annotations:
+    external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN_MEDIA}
+spec:
+  ingressClassName: internal
+  tls:
+    - hosts:
+        - &host "vault.${SECRET_DOMAIN_MEDIA}"
+      secretName: ${SECRET_DOMAIN_MEDIA/./-}-production-tls
+  rules:
+    - host: *host
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: *app
+                port:
+                  number: 9010

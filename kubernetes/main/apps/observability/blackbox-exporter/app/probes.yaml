@@ -11,7 +11,7 @@ spec:
   targets:
     staticConfig:
       static:
-        - openmediavault.manor
+        - openmediavault-used.manor
         - athena.manor
         - firewall.manor
         - zigbee-controller.manor
