@@ -8,6 +8,7 @@ resources:
   - ./cloudnative-pg.yaml
   - ./coredns.yaml
   - ./csi-driver-nfs.yaml
+  - ./dragonfly.yaml
   - ./external-dns.yaml
   - ./external-secrets.yaml
   - ./emqx.yaml

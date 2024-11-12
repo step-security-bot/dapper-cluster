@@ -5,12 +5,12 @@ metadata:
   name: &app vaultwarden
   namespace: flux-system
 spec:
-  targetNamespace: selfhosted
+  targetNamespace: security
   dependsOn:
     - name: volsync
     - name: cloudnative-pg
     - name: external-secrets-stores
-  path: ./kubernetes/main/apps/selfhosted/vaultwarden/app
+  path: ./kubernetes/main/apps/security/vaultwarden/app
   prune: true
   sourceRef:
     kind: GitRepository
