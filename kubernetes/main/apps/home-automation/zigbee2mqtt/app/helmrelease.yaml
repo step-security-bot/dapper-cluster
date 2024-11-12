@@ -23,6 +23,8 @@ spec:
       strategy: rollback
       retries: 3
   dependsOn:
+    - name: emqx
+      namespace: database
     - name: volsync
       namespace: volsync-system
   values:
