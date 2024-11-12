@@ -37,7 +37,7 @@ spec:
      barmanObjectStore: &barmanObjectStore
        # when recovering from an existing cnpg cluster
        # Note: serverName version needs to be incremented
-       serverName: &currentCluster postgres16-v2
+       serverName: &currentCluster postgres16-v3
        destinationPath: s3://cloudnative-pg/
        endpointURL: http://minio.storage.svc.cluster.local:9000
        s3Credentials:
@@ -62,7 +62,7 @@ spec:
   #      name: cloudnative-pg-secret
   bootstrap:
     recovery:
-      source: &previousCluster postgres16-v1
+      source: &previousCluster postgres16-v2
 
   # NOTE: externalClusters is needed when recovering from an existing cnpg cluster
   externalClusters:
