@@ -9,4 +9,5 @@ resources:
   - ./home-reverse-proxy/ks.yaml
   - ./smtp-relay/ks.yaml
   - ./ingress-nginx/ks.yaml
+  - ./cloudflare-ddns/ks.yaml
   - ./k8s-gateway/ks.yaml
