@@ -9,6 +9,7 @@ spec:
   dependsOn:
     - name: volsync
     - name: cloudnative-pg
+    - name: dragonfly-cluster
     - name: external-secrets-stores
   path: ./kubernetes/main/apps/security/authentik/app
   prune: true
