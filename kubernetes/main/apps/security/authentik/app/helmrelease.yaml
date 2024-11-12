@@ -1,0 +1,75 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.zinn.ca/helm.toolkit.fluxcd.io/helmrelease_v2.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: authentik
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: authentik
+      version: 2024.10.1
+      sourceRef:
+        kind: HelmRepository
+        name: authentik
+        namespace: flux-system
+      interval: 5m
+  values:
+    global:
+      podAnnotations:
+        secret.reloader.stakater.com/reload: &secret authentik-secret
+      deploymentStrategy:
+        type: RollingUpdate
+      envFrom:
+        - secretRef:
+            name: *secret
+        - secretRef:
+            name: &secret-postgres authentik-postgres-secret
+    authentik:
+      email:
+        host: smtp-relay.network.svc.cluster.local
+        from: authentik@${SECRET_DOMAIN}
+        port: 25
+        use_tls: false
+      redis:
+        host: dragonfly.database.svc.cluster.local
+        port: 6379
+        db: 3
+    server:
+      initContainers:
+        - name: init-db
+          image: ghcr.io/onedr0p/postgres-init:16.4@sha256:e41c745b54485341e00efbd27556f0717623a119f0d5107e5ff831aa1322c76f
+          envFrom:
+            - secretRef:
+                name: *secret-postgres
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: internal
+        annotations:
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+        hosts:
+          - &host sso.${SECRET_DOMAIN}
+        tls:
+          - hosts:
+              - *host
+            secretName: ${SECRET_DOMAIN/./-}-production-tls
+    worker:
+      replicas: 1
+      resources:
+        requests:
+          cpu: 5m
+          memory: 200Mi
+        limits:
+          memory: 600Mi
+    postgresql:
+      enabled: false
+    redis:
+      enabled: false
+    prometheus:
+      rules:
+        enabled: true
