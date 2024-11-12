@@ -26,11 +26,6 @@ spec:
             name: *secret
         - secretRef:
             name: &secret-postgres authentik-postgres-secret
-
-      volumeMounts:
-        media:
-          existingClaim: authentik
-
     authentik:
       email:
         host: smtp-relay.network.svc.cluster.local
