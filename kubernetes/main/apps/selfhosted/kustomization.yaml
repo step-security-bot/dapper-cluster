@@ -5,5 +5,7 @@ resources:
   - ./namespace.yaml
   - ./actual/ks.yaml
   - ./unifi/ks.yaml
+  - ./open-webui/ks.yaml
+  - ./ollama/ks.yaml
 
 

@@ -35,6 +35,7 @@ spec:
               tag: 24.11.0
             env:
               ACTUAL_PORT: &httpPort 5006
+              ACTUAL_LOGIN_METHOD: "header"
             probes:
               liveness:
                 enabled: true

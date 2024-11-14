@@ -22,6 +22,8 @@ resources:
   - ./jetstack.yaml
   - ./k8s-gateway.yaml
   - ./nvidia.yaml
+  - ./open-webui.yaml
+  - ./ollama.yaml
   - ./traefik.yaml
   - ./piraeus.yaml
   - ./kyverno.yaml

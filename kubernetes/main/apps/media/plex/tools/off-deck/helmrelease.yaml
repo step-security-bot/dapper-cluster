@@ -30,7 +30,7 @@ spec:
       plex-off-deck:
         type: cronjob
         cronjob:
-          schedule: "@hourly"
+          schedule: "@daily"
           timeZone: &timeZone ${TIME_ZONE}
           successfulJobsHistory: 1
           failedJobsHistory: 1
