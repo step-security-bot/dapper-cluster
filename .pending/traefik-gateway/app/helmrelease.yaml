@@ -1,0 +1,110 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: network
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: traefik
+      version: 33.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+        namespace: flux-system
+      interval: 5m
+  driftDetection:
+    mode: enabled
+  install:
+    crds: CreateReplace
+    remediation:
+      retries: 3
+    replace: true
+  rollback:
+    cleanupOnFail: true
+    force: true
+    recreate: true
+  upgrade:
+    cleanupOnFail: true
+    crds: CreateReplace
+    remediation:
+      remediateLastFailure: true
+      retries: 3
+      strategy: rollback
+  values:
+    deployment:
+      enabled: true
+      replicas: 3
+    service:
+      enabled: true
+      type: LoadBalancer
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: "external.${SECRET_DOMAIN_DIVING}, external.${SECRET_DOMAIN_WIFE}"
+        lbipam.cilium.io/ips: ${EXTERNAL_TRAEFIK_VIP_GATEWAY}
+    tlsStore:
+      default:
+        defaultCertificate:
+          secretName: "${SECRET_DOMAIN_DIVING/./-}-production-tls"
+    tlsOptions:
+      default:
+        minVersion: VersionTLS12
+        maxVersion: VersionTLS13
+        sniStrict: true
+
+    # Gateway specific
+    experimental:
+      plugins: {}
+      kubernetesGateway:
+        enabled: true
+    rbac:
+      enabled: true
+    providers:
+      kubernetesCRD:
+        enabled: true
+        allowExternalNameServices: true
+        allowCrossNamespace: true
+      kubernetesGateway:
+        enabled: true
+        experimentalChannel: true
+
+    gateway:
+      enabled: true
+      name: "traefik-gateway"
+      namespace: "network"
+      annotations: {}
+      infrastructure: {}
+      listeners:
+        web:
+          port: 8000
+          protocol: HTTP
+          namespacePolicy: All
+        websecure:
+          port: 8443
+          protocol: TLS
+          namespacePolicy: All
+          mode: Passthrough
+
+    gatewayClass:
+      enabled: true
+      name: "traefik"
+      labels: {}
+
+    additionalArguments:
+      - "--providers.kubernetescrd.allowexternalnameservices=true"
+
+    ports:
+      web:
+        redirectTo:
+          port: websecure
+      websecure:
+        exposedPort: 443
+        tls:
+          enabled: true
+          options: "default"
+    logs:
+      general:
+        level: "INFO"
+      access:
+        enabled: true

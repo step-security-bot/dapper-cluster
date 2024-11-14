@@ -22,6 +22,7 @@ resources:
   - ./jetstack.yaml
   - ./k8s-gateway.yaml
   - ./nvidia.yaml
+  - ./traefik.yaml
   - ./piraeus.yaml
   - ./kyverno.yaml
   - ./dcgm-exporter.yaml
