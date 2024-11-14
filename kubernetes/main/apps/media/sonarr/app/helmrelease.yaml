@@ -92,6 +92,8 @@ spec:
       app:
         annotations:
           external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN_MEDIA}"
+          authentik.home.arpa/enabled: "true"
+          nginx.ingress.kubernetes.io/auth-signin: "https://sonarr.${SECRET_DOMAIN_MEDIA}/outpost.goauthentik.io/start?rd=$scheme://$http_host$escaped_request_uri"
         className: internal
         hosts:
           - host: *host
