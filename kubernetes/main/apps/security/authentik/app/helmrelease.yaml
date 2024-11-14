@@ -69,9 +69,9 @@ spec:
         hosts:
           - &host sso.${SECRET_DOMAIN}
         tls:
-          - hosts:
+          - secretName: ${SECRET_DOMAIN/./-}-production-tls
+            hosts:
               - *host
-            secretName: ${SECRET_DOMAIN/./-}-production-tls
     worker:
       replicas: 1
       resources:
