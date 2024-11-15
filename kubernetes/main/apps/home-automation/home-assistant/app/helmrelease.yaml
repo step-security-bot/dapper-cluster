@@ -92,11 +92,9 @@ spec:
       app:
         annotations:
           external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
-          authentik.home.arpa/enabled: "true"
-          nginx.ingress.kubernetes.io/auth-signin: "https://hass.${SECRET_DOMAIN}/outpost.goauthentik.io/start?rd=$scheme://$http_host$escaped_request_uri"
         className: internal
         hosts:
-          - host: &host hass.${SECRET_DOMAIN}
+          - host: &host hass.${SECRET_DOMAIN} # test
             paths:
               - path: /
                 service:
