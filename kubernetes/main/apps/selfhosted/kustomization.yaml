@@ -8,5 +8,6 @@ resources:
   - ./open-webui/ks.yaml
   - ./n8n/ks.yaml
   - ./ollama/ks.yaml
+  - ./paperless-ngx/ks.yaml
 
 
