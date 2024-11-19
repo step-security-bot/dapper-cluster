@@ -9,6 +9,7 @@ resources:
   - ./n8n/ks.yaml
   - ./ollama/ks.yaml
   - ./paperless-ngx/ks.yaml
+  - ./searxng/ks.yaml
   - ./obsidian-couchdb/ks.yaml
 
 
