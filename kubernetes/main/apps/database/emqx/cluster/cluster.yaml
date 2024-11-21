@@ -48,7 +48,6 @@ spec:
   listenersServiceTemplate:
     metadata:
       annotations:
-        external-dns.alpha.kubernetes.io/hostname: emqx
         lbipam.cilium.io/ips: ${EMQX_VIP_GATEWAY}
     spec:
       type: LoadBalancer
