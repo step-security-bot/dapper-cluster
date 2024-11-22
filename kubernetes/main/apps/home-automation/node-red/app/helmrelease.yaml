@@ -38,7 +38,7 @@ spec:
               repository: docker.io/nodered/node-red
               tag: 4.0.5@sha256:7b635f720d9d1aba676925a93fcf20811bbb62b476752b896177faccb28e5ee9
             env:
-              TZ: "${TIMEZONE}"
+              TZ: "${TIME_ZONE}"
               NODE_RED_ENABLE_PROJECTS: "true"
               NODE_RED_ENABLE_SAFE_MODE: "false"
               NODE_RED__INSTANCE_NAME: NodeRed

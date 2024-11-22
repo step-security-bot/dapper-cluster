@@ -34,7 +34,7 @@ spec:
               repository: docker.io/n8nio/n8n
               tag: 1.68.0
             env:
-              GENERIC_TIMEZONE: ${TIMEZONE}
+              GENERIC_TIMEZONE: ${TIME_ZONE}
               N8N_PORT: &port 80
               N8N_HOST: &host "n8n.${SECRET_DOMAIN}"
               WEBHOOK_URL: "https://n8n.${SECRET_DOMAIN}"
