@@ -96,9 +96,7 @@ spec:
         enabled: true
         className: internal
         annotations:
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-          authentik.home.arpa/enabled: "true"
-          nginx.ingress.kubernetes.io/auth-signin: "https://unifi.${SECRET_DOMAIN}/outpost.goauthentik.io/start?rd=$scheme://$http_host$escaped_request_uri"
+          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
           hajimari.io/icon: simple-icons:ubiquiti
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
