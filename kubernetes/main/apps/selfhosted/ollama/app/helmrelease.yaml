@@ -28,7 +28,7 @@ spec:
         enabled: true
         type: 'nvidia'
       models:
-        pull: [llama3.3]
+        pull: [llama3.1:8b]
     extraEnv:
       - name: NVIDIA_VISIBLE_DEVICES
         value: all
