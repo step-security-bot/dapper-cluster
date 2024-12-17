@@ -43,6 +43,7 @@ spec:
         use_tls: false
       redis:
         host: dragonfly.database.svc.cluster.local
+        db: 1
         port: 6379
     server:
       securityContext:
