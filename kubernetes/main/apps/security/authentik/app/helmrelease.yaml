@@ -69,14 +69,12 @@ spec:
           external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
         hosts:
           - &host sso.${SECRET_DOMAIN}
-        paths:
-          - /
         tls:
           - secretName: ${SECRET_DOMAIN/./-}-production-tls
             hosts:
               - *host
     worker:
-      replicas: 0
+      replicas: 1
       resources:
         requests:
           cpu: 5m
