@@ -1,0 +1,15 @@
+---
+instance:
+  cluster:
+    networkPolicy: false
+  components:
+    - source-controller
+    - kustomize-controller
+    - helm-controller
+    - notification-controller
+  sync:
+    kind: GitRepository
+    url: "ssh://git@github.com/DapperDivers/dapper-cluster.git"
+    ref: "refs/heads/new-template"
+    path: kubernetes/flux/cluster
+    pullSecret: github-deploy-key
