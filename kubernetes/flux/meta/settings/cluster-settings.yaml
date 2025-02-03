@@ -1,8 +1,29 @@
 ---
-# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.18.1-standalone-strict/configmap-v1.json
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: cluster-settings
   namespace: flux-system
-data: {}
+data:
+  TIME_ZONE: America/Chicago
+  CLUSTER_NAME: "home-kubernetes"
+
+  #VIP_Gateways
+  ESP_HOME_VIP_GATEWAY: "10.100.0.19"
+  INTERNAL_VIP_GATEWAY: "10.100.0.20"
+  KUBE_VIP_GATEWAY: "10.100.0.21"
+  EXTERNAL_VIP_GATEWAY: "10.100.0.22"
+  UNIFI_VIP_GATEWAY: "10.100.0.23"
+  PLEX_VIP_GATEWAY: "10.100.0.24"
+  POSTGRESS_VIP_GATEWAY: "10.100.0.25"
+  EMQX_VIP_GATEWAY: "10.100.0.26"
+  SMTP_VIP_GATEWAY: "10.100.0.27"
+  EXTERNAL_TRAEFIK_VIP_GATEWAY: "10.100.0.28"
+  INTERNAL_TRAEFIK_VIP_GATEWAY: "10.100.0.29"
+
+  TEST_VAR: "testing a redeploy"
+
+  # Networks
+  NETWORK_K8S_POD_CIDR: "10.69.0.0/16"
+  NETWORK_SVC_CIDR: "10.96.0.0/16"
+
