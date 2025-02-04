@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/helmrelease-helm-v2.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -23,12 +22,12 @@ spec:
       retries: 3
   values:
     fullnameOverride: k8s-gateway
-    domain: "${SECRET_DOMAIN}"
+    domain: "${SECRET_DOMAIN} ${SECRET_DOMAIN_MEDIA} ${SECRET_DOMAIN_PERSONAL} ${SECRET_DOMAIN_DIVING} ${SECRET_DOMAIN_WIFE}"
     ttl: 1
     service:
       type: LoadBalancer
       port: 53
       annotations:
-        lbipam.cilium.io/ips: "10.100.0.21"
+        lbipam.cilium.io/ips: "${KUBE_VIP_GATEWAY}"
       externalTrafficPolicy: Cluster
     watchedResources: ["Ingress", "Service"]

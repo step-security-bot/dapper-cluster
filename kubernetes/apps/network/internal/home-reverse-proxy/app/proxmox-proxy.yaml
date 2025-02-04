@@ -1,0 +1,72 @@
+## Circe
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: circe-proxy
+  namespace: network
+spec:
+  type: ExternalName
+  externalName: circe.manor
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &app circe-proxy
+  annotations:
+    external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  ingressClassName: internal
+  tls:
+    - hosts:
+        - &host "circe.${SECRET_DOMAIN}"
+      secretName: ${SECRET_DOMAIN/./-}-production-tls
+  rules:
+    - host: *host
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: *app
+                port:
+                  number: 8006
+## Athena
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: athena-proxy
+  namespace: network
+spec:
+  type: ExternalName
+  externalName: athena.manor
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: &app athena-proxy
+  annotations:
+    external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  ingressClassName: internal
+  tls:
+    - hosts:
+        - &host "athena.${SECRET_DOMAIN}"
+      secretName: ${SECRET_DOMAIN/./-}-production-tls
+  rules:
+    - host: *host
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: *app
+                port:
+                  number: 8006

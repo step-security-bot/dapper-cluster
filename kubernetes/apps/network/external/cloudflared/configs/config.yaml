@@ -1,14 +1,31 @@
 ---
 originRequest:
-  originServerName: "external.${SECRET_DOMAIN}"
+  noTLSVerify: true
 
 ingress:
   - hostname: "${SECRET_DOMAIN}"
-    service: https://external-ingress-nginx-controller.network.svc.cluster.local:443
-    originRequest:
-      noTLSVerify: true
+    service: https://ingress-nginx-external-controller.network.svc.cluster.local:443
   - hostname: "*.${SECRET_DOMAIN}"
-    service: https://external-ingress-nginx-controller.network.svc.cluster.local:443
-    originRequest:
-      noTLSVerify: true
+    service: https://ingress-nginx-external-controller.network.svc.cluster.local:443
+
+  - hostname: "${SECRET_DOMAIN_MEDIA}"
+    service: https://ingress-nginx-external-controller.network.svc.cluster.local:443
+  - hostname: "*.${SECRET_DOMAIN_MEDIA}"
+    service: https://ingress-nginx-external-controller.network.svc.cluster.local:443
+
+  - hostname: "${SECRET_DOMAIN_PERSONAL}"
+    service: https://ingress-nginx-external-controller.network.svc.cluster.local:443
+  - hostname: "*.${SECRET_DOMAIN_PERSONAL}"
+    service: https://ingress-nginx-external-controller.network.svc.cluster.local:443
+
+  - hostname: "${SECRET_DOMAIN_DIVING}"
+    service: https://ingress-nginx-external-controller.network.svc.cluster.local:443
+  - hostname: "*.${SECRET_DOMAIN_DIVING}"
+    service: https://ingress-nginx-external-controller.network.svc.cluster.local:443
+
+  - hostname: "${SECRET_DOMAIN_WIFE}"
+    service: https://ingress-nginx-external-controller.network.svc.cluster.local:443
+  - hostname: "*.${SECRET_DOMAIN_WIFE}"
+    service: https://ingress-nginx-external-controller.network.svc.cluster.local:443
+
   - service: http_status:404

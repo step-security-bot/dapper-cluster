@@ -1,0 +1,63 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app goldilocks
+spec:
+  interval: 15m
+  chart:
+    spec:
+      interval: 15m
+      chart: goldilocks
+      version: 9.0.1
+      sourceRef:
+        kind: HelmRepository
+        name: fairwinds
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  driftDetection:
+    mode: enabled
+  values:
+    controller:
+      resources:
+        requests:
+          memory: 105M
+        limits:
+          memory: 105M
+    image:
+      repository: us-docker.pkg.dev/fairwinds-ops/oss/goldilocks
+      tag: v4.13.3@sha256:e9a15845474a2c1d496d14c671bebfb8acb7104539cb54a972c1f09b9d278d47
+      pullPolicy: Always
+    vpa:
+      enabled: true
+    dashboard:
+      enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: internal
+        annotations:
+          gethomepage.dev/enabled: "true"
+          gethomepage.dev/name: "Goldilocks"
+          gethomepage.dev/group: "Observability"
+          gethomepage.dev/icon: "https://raw.githubusercontent.com/FairwindsOps/goldilocks/master/pkg/dashboard/assets/images/favicon.ico"
+          gethomepage.dev/description: "Kubernetes Resource Recommendations"
+          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+        hosts:
+          - host: &host "goldilocks.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                type: ImplementationSpecific
+        tls:
+          - secretName: ${SECRET_DOMAIN/./-}-production-tls
+            hosts:
+              - *host
+      resources:
+        requests:
+          memory: 105M
+        limits:
+          memory: 105M
