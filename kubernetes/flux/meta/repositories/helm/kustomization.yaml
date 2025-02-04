@@ -31,7 +31,7 @@ resources:
   - ./nvidia.yaml
   - ./ollama.yaml
   - ./open-webui.yaml
-  - ./obenebs.yaml
+  - ./openebs.yaml
   - ./piraeus.yaml
   - ./postfinance.yaml
   - ./prometheus-community.yaml
