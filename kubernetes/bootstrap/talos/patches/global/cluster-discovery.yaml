@@ -1,0 +1,10 @@
+cluster:
+  discovery:
+    registries:
+      kubernetes:
+        disabled: true
+      service:
+        disabled: false
+  apiServer:
+    extraArgs:
+      feature-gates: AuthorizeNodeWithSelectors=false

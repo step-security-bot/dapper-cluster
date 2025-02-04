@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://kubernetesjsonschema.dev/v1.18.1-standalone-strict/configmap-v1.json
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -20,8 +21,3 @@ data:
   SMTP_VIP_GATEWAY: "10.100.0.27"
   EXTERNAL_TRAEFIK_VIP_GATEWAY: "10.100.0.28"
   INTERNAL_TRAEFIK_VIP_GATEWAY: "10.100.0.29"
-
-  # Networks
-  NETWORK_K8S_POD_CIDR: "10.69.0.0/16"
-  NETWORK_SVC_CIDR: "10.96.0.0/16"
-
