@@ -1,0 +1,139 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app vaultwarden
+
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.6.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  dependsOn:
+    - name: volsync
+      namespace: volsync-system
+  values:
+    controllers:
+      vaultwarden:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/onedr0p/postgres-init
+              tag: 16.6
+            envFrom:
+              - secretRef: &postgres_secret
+                    name: &secret vaultwarden-postgres-secret
+        containers:
+          app:
+            image:
+              repository: vaultwarden/server
+              tag: 1.33.0@sha256:e81ca01351ecf40083366202b163e7a31abca04d96e2194e9e1f78a57052f65c
+
+            env:
+              TZ: ${TIME_ZONE}
+              DATA_FOLDER: "config"
+              ICON_CACHE_FOLDER: "config/icon_cache"
+              ATTACHMENTS_FOLDER: "config/attachments"
+              DOMAIN: https://vault.${SECRET_DOMAIN}
+              SIGNUPS_ALLOWED: false
+              SHOW_PASSWORD_HINT: false
+              SMTP_FROM: vaultwarden@${SECRET_DOMAIN}
+              SMTP_FROM_NAME: Vaultwarden
+              SMTP_HOST: smtp-relay.network.svc.cluster.local
+              SMTP_SECURITY: "off"
+              SMTP_PORT: 25
+              SMTP_SSL: "true"
+              SMTP_EXPLICIT_TLS: "true"
+              WEBSOCKET_ADDRESS: 0.0.0.0
+              WEBSOCKET_ENABLED: true
+              WEBSOCKET_PORT: 3012
+            envFrom:
+              - secretRef:
+                  name: vaultwarden-secret
+            resources:
+              requests:
+                cpu: 50m
+                memory: 100Mi
+              limits:
+                memory: 256Mi
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+        pod:
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 150
+            fsGroup: 140
+            fsGroupChangePolicy: OnRootMismatch
+
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: &port 80
+          websocket:
+            enabled: true
+            port: &websocket-port 3012
+
+    ingress:
+      app:
+        className: internal
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+        hosts:
+          - host: &host vault.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: *port
+              - path: /notifications/hub/negotiate
+                service:
+                  identifier: app
+                  port: *port
+              - path: /notifications/hub
+                service:
+                  identifier: app
+                  port: *websocket-port
+        tls: &tls
+          - hosts:
+              - *host
+            secretName: "${SECRET_DOMAIN/./-}-production-tls"
+      # admin:
+      #   className: internal
+      #   annotations:
+      #     external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+      #     authentik.home.arpa/enabled: "true"
+      #     nginx.ingress.kubernetes.io/auth-signin: "https://vault.${SECRET_DOMAIN}/outpost.goauthentik.io/start?rd=$scheme://$http_host$escaped_request_uri"
+      #     nginx.ingress.kubernetes.io/whitelist-source-range: 10.100.0.0/24, 10.69.0.0/16, 192.168.1.0/24
+      #   hosts:
+      #     - host: *host
+      #       paths:
+      #         - path: /admin
+      #           service:
+      #             identifier: app
+      #             port: http
+      #  tls: *tls
+    persistence:
+      config:
+        existingClaim: vaultwarden
+        globalMounts:
+          - path: /config

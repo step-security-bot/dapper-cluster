@@ -1,0 +1,90 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: authentik
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: authentik
+      version: 2024.12.3
+      sourceRef:
+        kind: HelmRepository
+        name: authentik
+        namespace: flux-system
+      interval: 5m
+  values:
+    global:
+      podAnnotations:
+        secret.reloader.stakater.com/reload: &secret authentik-secret
+      deploymentStrategy:
+        type: RollingUpdate
+      envFrom:
+        - secretRef:
+            name: *secret
+        - secretRef:
+            name: &secret-postgres authentik-postgres-secret
+      volumes:
+        - name: authentik-media
+          persistentVolumeClaim:
+            claimName: authentik-media
+    geoip:
+      enabled: true
+      existingSecret:
+        secretName: geoip-secret
+        accountId: maxmindAccountId
+        licenseKey: maxmindLicenseKey
+    authentik:
+      email:
+        host: smtp-relay.network.svc.cluster.local
+        from: authentik@${SECRET_DOMAIN}
+        port: 25
+        use_tls: false
+      redis:
+        host: dragonfly.database.svc.cluster.local
+        db: 1
+        port: 6379
+    server:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 150
+      volumeMounts:
+        - mountPath: /media
+          name: authentik-media
+      initContainers:
+        - name: init-db
+          image: ghcr.io/onedr0p/postgres-init:16.6@sha256:a37bbb04a0ea3f15b505c6f97637e7ae89bc66541ae23b8d3848024087980e76
+          envFrom:
+            - secretRef:
+                name: *secret-postgres
+      metrics:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+      ingress:
+        enabled: true
+        ingressClassName: internal
+        annotations:
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+        hosts:
+          - &host sso.${SECRET_DOMAIN}
+        tls:
+          - secretName: ${SECRET_DOMAIN/./-}-production-tls
+            hosts:
+              - *host
+    worker:
+      replicas: 1
+      resources:
+        requests:
+          cpu: 5m
+          memory: 200Mi
+        limits:
+          memory: 600Mi
+    postgresql:
+      enabled: false
+    redis:
+      enabled: false
+    prometheus:
+      rules:
+        enabled: true
