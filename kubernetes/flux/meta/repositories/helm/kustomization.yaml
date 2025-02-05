@@ -12,6 +12,7 @@ resources:
   - ./coredns.yaml
   - ./csi-driver-nfs.yaml
   - ./dragonfly.yaml
+  - ./dcgm-exporter.yaml
   - ./emberstack.yaml
   - ./emqx.yaml
   - ./external-dns.yaml
