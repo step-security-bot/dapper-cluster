@@ -8,11 +8,8 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  components:
-    - ../../../../flux/components/volsync
   targetNamespace: security
   dependsOn:
-    - name: volsync
     - name: cloudnative-pg
     - name: dragonfly-cluster
     - name: external-secrets-stores
