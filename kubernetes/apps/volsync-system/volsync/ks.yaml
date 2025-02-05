@@ -12,7 +12,6 @@ spec:
       app.kubernetes.io/name: *app
   dependsOn:
     - name: snapshot-controller
-    - name: kyverno-policies
   path: ./kubernetes/apps/volsync-system/volsync/app
   prune: true
   sourceRef:
