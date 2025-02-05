@@ -12,10 +12,9 @@ instance:
     - notification-controller
   sync:
     kind: GitRepository
-    url: "ssh://git@github.com/DapperDivers/dapper-cluster.git"
+    url: "https://git@github.com/DapperDivers/dapper-cluster"
     ref: "refs/heads/new-template"
     path: kubernetes/flux/cluster
-    pullSecret: github-deploy-key
   commonMetadata:
     labels:
       app.kubernetes.io/name: flux
