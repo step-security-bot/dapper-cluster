@@ -3,8 +3,16 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - ./blackbox-exporter/ks.yaml
+  - ./exporters/dcgm-exporter/ks.yaml
+  - ./grafana/ks.yaml
   - ./goldilocks/ks.yaml
+  - ./promtail/ks.yaml
   - ./prometheus-operator-crds/ks.yaml
+  - ./kube-prometheus-stack/ks.yaml
+  - ./loki/ks.yaml
+  - ./vpa/ks.yaml
+
 components:
   - ../../flux/components/namespace
 patches:
