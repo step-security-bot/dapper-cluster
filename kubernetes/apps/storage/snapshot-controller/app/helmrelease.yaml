@@ -15,7 +15,8 @@ spec:
         name: piraeus
         namespace: flux-system
   dependsOn:
-    - name: openebs-system/openebs
+    - name: openebs
+      namespace: openebs-system
     - name: csi-driver-nfs
   install:
     crds: CreateReplace
