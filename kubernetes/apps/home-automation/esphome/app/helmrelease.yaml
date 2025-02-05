@@ -1,0 +1,97 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app esphome
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.6.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    controllers:
+      esphome:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/esphome/esphome
+              tag: 2024.12.4@sha256:9874fb1af9aac33595881c9ae3b6caa3a6424a09589f3f35368da54abfde7fa6
+            env:
+              TZ: "${TIME_ZONE}"
+              ESPHOME_DASHBOARD_USE_PING: true
+              PLATFORMIO_CORE_DIR: /cache/platformio
+              PLATFORMIO_GLOBALLIB_DIR: /cache/platformio/lib
+              PLATFORMIO_SETTING_ENABLE_TELEMETRY: No
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: [ "ALL" ], add: ["NET_RAW"] }
+            resources:
+              requests:
+                cpu: 10m
+                memory: 128Mi
+              limits:
+                memory: 2Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 150
+        fsGroup: 140
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        type: LoadBalancer
+        controller: *app
+        annotations:
+          lbipam.cilium.io/ips: &ip ${ESP_HOME_VIP_GATEWAY}
+        externalTrafficPolicy: Cluster
+        ports:
+          http:
+            port: 6052
+    ingress:
+      app:
+        className: internal
+        annotations:
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+        hosts:
+          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: ${SECRET_DOMAIN/./-}-production-tls
+    persistence:
+      config:
+        existingClaim: *app
+        globalMounts:
+          - path: /config
+      esphome-cache:
+        type: emptyDir
+        globalMounts:
+          - path: /config/.esphome
+          - path: /cache
+            subPath: cache
