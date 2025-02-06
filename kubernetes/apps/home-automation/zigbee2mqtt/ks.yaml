@@ -6,7 +6,7 @@ metadata:
   name: &app zigbee2mqtt
   namespace: flux-system
 spec:
-  targetNamespace: home-automation
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
