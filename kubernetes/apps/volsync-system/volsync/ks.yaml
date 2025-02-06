@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   dependsOn:
-    - name: snapshot-controller
+    - name: csi-driver-nfs
       namespace: storage
   path: ./kubernetes/apps/volsync-system/volsync/app
   prune: true
