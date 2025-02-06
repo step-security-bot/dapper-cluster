@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   #- ./production.yaml
   - ./staging.yaml
+  - ./push-secrets.yaml
