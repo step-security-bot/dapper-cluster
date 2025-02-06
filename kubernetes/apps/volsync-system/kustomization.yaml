@@ -9,5 +9,5 @@ components:
   - ../../flux/components/sops
   - ../../flux/components/substitutions
 resources:
-  - ./snapshot-controller/ks.yaml
+  #- ./snapshot-controller/ks.yaml
   - ./volsync/ks.yaml
