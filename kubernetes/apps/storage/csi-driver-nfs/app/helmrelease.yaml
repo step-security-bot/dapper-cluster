@@ -64,7 +64,7 @@ spec:
       priorityClassName: system-cluster-critical
       deletionPolicy: Delete
       controller:
-        replicas: 1
+        replicas: 2
       resources:
         limits:
           memory: 300Mi
