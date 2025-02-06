@@ -8,6 +8,7 @@ components:
   - ../../flux/components/namespace
   - ../../flux/components/sops
   - ../../flux/components/substitutions
+  - ../../../../flux/components/volsync
 resources:
   - ./vaultwarden/ks.yaml
   - ./authentik/ks.yaml
