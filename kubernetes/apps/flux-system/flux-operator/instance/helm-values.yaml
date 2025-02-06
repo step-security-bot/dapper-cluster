@@ -1,8 +1,5 @@
 ---
 instance:
-  distribution:
-    # renovate: datasource=github-releases depName=fluxcd/flux2
-    version: 2.4.0
   cluster:
     networkPolicy: false
   components:
@@ -12,7 +9,7 @@ instance:
     - notification-controller
   sync:
     kind: GitRepository
-    url: "https://git@github.com/DapperDivers/dapper-cluster"
+    url: "https://github.com/DapperDivers/dapper-cluster.git"
     ref: "refs/heads/new-template"
     path: kubernetes/flux/cluster
   commonMetadata:
