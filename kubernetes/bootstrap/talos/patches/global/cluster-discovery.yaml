@@ -5,8 +5,4 @@ cluster:
         disabled: true
       service:
         disabled: false
-  apiServer:
-    extraArgs:
-      enable-aggregator-routing: true
-      feature-gates: MutatingAdmissionPolicy=true
-      runtime-config: admissionregistration.k8s.io/v1alpha1=true
+
