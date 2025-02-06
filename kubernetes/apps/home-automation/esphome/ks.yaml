@@ -15,7 +15,7 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
-  path: "./kubernetes//apps/home-automation/esphome/app"
+  path: "./kubernetes/apps/home-automation/esphome/app"
   prune: true
   sourceRef:
     kind: GitRepository
