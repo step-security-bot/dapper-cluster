@@ -26,8 +26,8 @@ kind: Kustomization
 metadata:
   name: &app flux-instance
   namespace: &namespace flux-system
-targetNamespace: *namespace
 spec:
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
