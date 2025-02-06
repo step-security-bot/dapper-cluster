@@ -18,6 +18,7 @@ spec:
     - name: openebs
       namespace: openebs-system
     - name: csi-driver-nfs
+      namespace: storage
   install:
     crds: CreateReplace
     remediation:
