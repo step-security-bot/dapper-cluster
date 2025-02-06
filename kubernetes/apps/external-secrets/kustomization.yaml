@@ -10,3 +10,4 @@ components:
   - ../../flux/components/substitutions
 resources:
   - ./external-secrets/ks.yaml
+  - ./infisical-secrets/ks.yaml
