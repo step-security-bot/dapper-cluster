@@ -13,7 +13,7 @@ spec:
   interval: 30m
   retryInterval: 1m
   timeout: 5m
-  path: "./kubernetes/apps/home-automation/node-red/app"
+  path: ./kubernetes/apps/home-automation/node-red/app
   prune: true
   sourceRef:
     kind: GitRepository
