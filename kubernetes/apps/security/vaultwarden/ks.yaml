@@ -14,7 +14,7 @@ spec:
   dependsOn:
     - name: volsync
       namespace: volsync-system
-    - name: cloudnative-pg
+    - name: cloudnative-pg-cluster
       namespace: database
     - name: external-secrets-stores
       namespace: external-secrets
