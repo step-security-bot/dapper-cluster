@@ -19,6 +19,7 @@ mountOptions:
   - hard
   - noatime
   - nodiratime
+  - nolock
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -39,6 +40,7 @@ mountOptions:
   - nconnect=8
   - hard
   - noatime
+  - nolock
   - nodiratime
 ---
 apiVersion: storage.k8s.io/v1
@@ -61,6 +63,7 @@ mountOptions:
   - hard
   - noatime
   - nodiratime
+  - nolock
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -82,6 +85,7 @@ mountOptions:
   - hard
   - noatime
   - nodiratime
+  - nolock
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -103,3 +107,4 @@ mountOptions:
   - hard
   - noatime
   - nodiratime
+  - nolock
