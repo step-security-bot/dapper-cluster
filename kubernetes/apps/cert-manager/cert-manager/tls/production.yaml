@@ -2,9 +2,9 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "${SECRET_DOMAIN/./-}-production"
+  name: "${SECRET_DOMAIN/./-}"
 spec:
-  secretName: "${SECRET_DOMAIN/./-}-production-tls"
+  secretName: "${SECRET_DOMAIN/./-}-tls"
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
@@ -23,9 +23,9 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "${SECRET_DOMAIN_MEDIA/./-}-production"
+  name: "${SECRET_DOMAIN_MEDIA/./-}"
 spec:
-  secretName: "${SECRET_DOMAIN_MEDIA/./-}-production-tls"
+  secretName: "${SECRET_DOMAIN_MEDIA/./-}-tls"
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
@@ -45,9 +45,9 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "${SECRET_DOMAIN_PERSONAL/./-}-production"
+  name: "${SECRET_DOMAIN_PERSONAL/./-}"
 spec:
-  secretName: "${SECRET_DOMAIN_PERSONAL/./-}-production-tls"
+  secretName: "${SECRET_DOMAIN_PERSONAL/./-}-tls"
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
@@ -60,9 +60,9 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "${SECRET_DOMAIN_DIVING/./-}-production"
+  name: "${SECRET_DOMAIN_DIVING/./-}"
 spec:
-  secretName: "${SECRET_DOMAIN_DIVING/./-}-production-tls"
+  secretName: "${SECRET_DOMAIN_DIVING/./-}-tls"
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
@@ -75,9 +75,9 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "${SECRET_DOMAIN_WIFE/./-}-production"
+  name: "${SECRET_DOMAIN_WIFE/./-}"
 spec:
-  secretName: "${SECRET_DOMAIN_WIFE/./-}-production-tls"
+  secretName: "${SECRET_DOMAIN_WIFE/./-}-tls"
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
