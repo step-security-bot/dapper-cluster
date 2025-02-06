@@ -23,7 +23,7 @@ spec:
       strategy: rollback
       retries: 3
   dependsOn:
-    - name: snapshot-controller
+    - name: csi-driver-nfs
       namespace: storage
   values:
     manageCRDs: true
