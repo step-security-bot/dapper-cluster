@@ -31,7 +31,7 @@ metadata:
   name: &app emqx-cluster
   namespace: &namespace database
 spec:
-  targetNamespace: *database
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
