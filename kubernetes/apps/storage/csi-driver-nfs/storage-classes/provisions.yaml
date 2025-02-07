@@ -16,7 +16,7 @@ volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
   - nolock
-  - nconnect=16
+  - nconnect=8
   - hard
   - noatime
   - nodiratime
@@ -38,7 +38,7 @@ volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
   - nolock
-  - nconnect=16
+  - nconnect=8
   - hard
   - noatime
   - nodiratime
@@ -60,7 +60,7 @@ volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
   - nolock
-  - nconnect=16
+  - nconnect=8
   - hard
   - noatime
   - nodiratime
@@ -82,7 +82,7 @@ volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
   - nolock
-  - nconnect=16
+  - nconnect=8
   - hard
   - noatime
   - nodiratime
@@ -104,7 +104,7 @@ volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
   - nolock
-  - nconnect=16
+  - nconnect=8
   - hard
   - noatime
   - nodiratime
