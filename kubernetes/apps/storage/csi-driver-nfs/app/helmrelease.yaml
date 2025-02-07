@@ -31,8 +31,10 @@ spec:
   values:
     feature:
       enableFSGroupPolicy: true
+    
     controller:
       replicas: 1
+      strategyType: Recreate
       resources:
         csiProvisioner:
           limits:
@@ -64,6 +66,7 @@ spec:
           requests:
             cpu: 500m
             memory: 160M
+    
     externalSnapshotter:
       enabled: true
       name: snapshot-controller
@@ -80,3 +83,8 @@ spec:
       # Create volume snapshot CRDs.
       customResourceDefinitions:
         enabled: true   #if set true, VolumeSnapshot, VolumeSnapshotContent and VolumeSnapshotClass CRDs will be created. Set it false, If they already exist in cluster.
+
+    volumeSnapshotClass:
+      create: true
+      name: csi-nfs-snapclass
+      deletionPolicy: Delete
