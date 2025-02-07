@@ -60,20 +60,3 @@ spec:
           requests:
             cpu: 500m
             memory: 160M
-
-    externalSnapshotter:
-      enabled: true
-      name: snapshot-controller
-      priorityClassName: system-cluster-critical
-      deletionPolicy: Delete
-      controller:
-        replicas: 1
-      resources:
-        limits:
-          memory: 300Mi
-        requests:
-          cpu: 10m
-          memory: 20Mi
-      # Create volume snapshot CRDs.
-      customResourceDefinitions:
-        enabled: true   #if set true, VolumeSnapshot, VolumeSnapshotContent and VolumeSnapshotClass CRDs will be created. Set it false, If they already exist in cluster.
