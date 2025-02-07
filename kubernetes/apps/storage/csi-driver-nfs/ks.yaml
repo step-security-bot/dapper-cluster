@@ -31,7 +31,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/storage/csi-driver-nfs/app
+  path: ./kubernetes/apps/storage/csi-driver-nfs/storage-classes
   dependsOn:
     - name: csi-driver-nfs
       namespace: storage
