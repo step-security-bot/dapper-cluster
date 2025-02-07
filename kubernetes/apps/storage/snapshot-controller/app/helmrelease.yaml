@@ -35,3 +35,9 @@ spec:
         create: true
     webhook:
       enabled: false
+    volumeSnapshotClasses:
+      - name: csi-nfs-snapclass
+        annotations:
+          snapshot.storage.kubernetes.io/is-default-class: "true"
+        driver: nfs.csi.k8s.io
+        deletionPolicy: Delete
