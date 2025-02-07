@@ -58,6 +58,9 @@ spec:
           requests:
             cpu: 500m
             memory: 160M
+      securityContext:
+        allowPrivilegeEscalation: true
+        capabilities: { drop: [ "ALL" ]}
     externalSnapshotter:
       enabled: true
       name: snapshot-controller
