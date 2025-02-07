@@ -54,7 +54,7 @@ spec:
   dependsOn:
     - name: cert-manager-issuers
       namespace: cert-manager
-    - name: infisical-secrets-operator
+    - name: infisical-secrets
       namespace: external-secrets
   interval: 30m
   path: ./kubernetes/apps/cert-manager/cert-manager/tls
