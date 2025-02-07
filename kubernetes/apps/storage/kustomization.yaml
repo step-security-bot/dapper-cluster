@@ -10,5 +10,4 @@ components:
   - ../../flux/components/substitutions
 resources:
   - ./csi-driver-nfs/ks.yaml
-  - ./snapshot-controller/ks.yaml
   - ./minio/ks.yaml
