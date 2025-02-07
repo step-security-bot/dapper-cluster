@@ -60,14 +60,6 @@ spec:
           requests:
             cpu: 500m
             memory: 160M
-      securityContext:
-        capabilities:
-          drop:
-          - ALL
-        readOnlyRootFilesystem: true
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 150
 
     externalSnapshotter:
       enabled: true
@@ -82,15 +74,7 @@ spec:
         requests:
           cpu: 10m
           memory: 20Mi
-      securityContext:
-        capabilities:
-          drop:
-          - ALL
-        readOnlyRootFilesystem: true
-        runAsNonRoot: true
-        runAsUser: 1000
-        runAsGroup: 150
-      # Create volume snapshot CRDs.
+     # Create volume snapshot CRDs.
       customResourceDefinitions:
         enabled: true   #if set true, VolumeSnapshot, VolumeSnapshotContent and VolumeSnapshotClass CRDs will be created. Set it false, If they already exist in cluster.
 
