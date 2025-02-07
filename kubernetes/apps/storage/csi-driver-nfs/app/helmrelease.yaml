@@ -48,12 +48,6 @@ spec:
           requests:
             cpu: 50m
             memory: 30M
-        csiResizer:
-          limits:
-            memory: 1000Mi
-          requests:
-            cpu: 50m
-            memory: 30M
         livenessProbe:
           limits:
             memory: 500M
@@ -81,8 +75,8 @@ spec:
           cpu: 10m
           memory: 20Mi
       # Create volume snapshot CRDs.
-    customResourceDefinitions:
-      enabled: true   #if set true, VolumeSnapshot, VolumeSnapshotContent and VolumeSnapshotClass CRDs will be created. Set it false, If they already exist in cluster.
+      customResourceDefinitions:
+        enabled: true   #if set true, VolumeSnapshot, VolumeSnapshotContent and VolumeSnapshotClass CRDs will be created. Set it false, If they already exist in cluster.
 
     volumeSnapshotClass:
       create: true
