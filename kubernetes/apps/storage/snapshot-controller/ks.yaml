@@ -8,7 +8,7 @@ metadata:
 spec:
   targetNamespace: *namespace
   dependsOn:
-    - name: csi-driver-nfs
+    - name: csi-driver-nfs-classes
       namespace: storage
   commonMetadata:
     labels:
