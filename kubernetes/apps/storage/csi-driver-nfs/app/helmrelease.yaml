@@ -46,6 +46,12 @@ spec:
           requests:
             cpu: 50m
             memory: 30M
+        csiResizer:
+          limits:
+            memory: 1000Mi
+          requests:
+            cpu: 50m
+            memory: 30M
         livenessProbe:
           limits:
             memory: 500M
@@ -58,9 +64,6 @@ spec:
           requests:
             cpu: 500m
             memory: 160M
-      securityContext:
-        allowPrivilegeEscalation: true
-        capabilities: { drop: [ "ALL" ]}
     externalSnapshotter:
       enabled: true
       name: snapshot-controller
