@@ -40,12 +40,6 @@ spec:
           requests:
             cpu: 50m
             memory: 30M
-        csiSnapshotter:
-          limits:
-            memory: 1000Mi
-          requests:
-            cpu: 50m
-            memory: 30M
         livenessProbe:
           limits:
             memory: 500M
@@ -78,4 +72,4 @@ spec:
     volumeSnapshotClass:
       create: true
       name: csi-nfs-snapclass
-      deletionPolicy: Delete
+        deletionPolicy: Delete
