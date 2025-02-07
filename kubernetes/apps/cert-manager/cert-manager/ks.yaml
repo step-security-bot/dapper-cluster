@@ -30,6 +30,9 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  dependsOn:
+    - name: infisical-secrets
+      namespace: external-secrets
   interval: 30m
   path: ./kubernetes/apps/cert-manager/cert-manager/issuers
   prune: true
