@@ -32,3 +32,8 @@ spec:
         create: true
     webhook:
       enabled: false
+    ## volumeSnapshotClass resource example:
+    volumeSnapshotClass:
+      create: true
+      name: csi-nfs-snapclass
+      deletionPolicy: Delete
