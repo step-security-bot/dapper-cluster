@@ -60,8 +60,9 @@ spec:
           requests:
             cpu: 500m
             memory: 160M
+
     externalSnapshotter:
-      enabled: false
+      enabled: true
       name: snapshot-controller
       priorityClassName: system-cluster-critical
       deletionPolicy: Delete

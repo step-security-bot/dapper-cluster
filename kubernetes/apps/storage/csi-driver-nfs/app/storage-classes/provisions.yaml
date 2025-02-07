@@ -15,11 +15,11 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=4.1
+  - nolock
   - nconnect=8
   - hard
   - noatime
   - nodiratime
-  - nolock
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -37,11 +37,11 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=4.1
+  - nolock
   - nconnect=8
   - hard
   - noatime
   - nodiratime
-  - nolock
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -59,11 +59,11 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=4.1
+  - nolock
   - nconnect=8
   - hard
   - noatime
   - nodiratime
-  - nolock
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -81,11 +81,11 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=4.1
+  - nolock
   - nconnect=8
   - hard
   - noatime
   - nodiratime
-  - nolock
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -103,8 +103,8 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=4.1
+  - nolock
   - nconnect=8
   - hard
   - noatime
   - nodiratime
-  - nolock
