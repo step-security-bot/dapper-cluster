@@ -32,7 +32,7 @@ spec:
     feature:
       enableFSGroupPolicy: true
     controller:
-      replicas: 2
+      replicas: 1
       resources:
         csiProvisioner:
           limits:
