@@ -78,8 +78,3 @@ spec:
       customResourceDefinitions:
         enabled: false   #if set true, VolumeSnapshot, VolumeSnapshotContent and VolumeSnapshotClass CRDs will be created. Set it false, If they already exist in cluster.
 
-    ## volumeSnapshotClass resource example:
-    volumeSnapshotClass:
-      create: true
-      name: csi-nfs-snapclass
-      deletionPolicy: Delete
