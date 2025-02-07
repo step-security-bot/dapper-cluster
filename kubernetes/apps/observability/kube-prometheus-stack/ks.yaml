@@ -13,6 +13,8 @@ spec:
   dependsOn:
     - name: external-secrets-stores
       namespace: external-secrets
+    - name: csi-driver-nfs
+      namespace: storage
   interval: 30m
   path: ./kubernetes/apps/observability/kube-prometheus-stack/crds
   prune: false # never should be deleted
