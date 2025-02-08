@@ -14,9 +14,9 @@ allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
-  - nfsvers=4
+  - nfsvers=3
   - nconnect=8
-  - hard
+  - soft
   - noatime
   - nodiratime
 ---
@@ -37,9 +37,9 @@ allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
-  - nfsvers=4
+  - nfsvers=3
   - nconnect=8
-  - hard
+  - soft
   - noatime
   - nodiratime
 ---
@@ -58,9 +58,9 @@ allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
-  - nfsvers=4
+  - nfsvers=3
   - nconnect=8
-  - hard
+  - soft
   - noatime
   - nodiratime
 ---
@@ -79,9 +79,9 @@ allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
-  - nfsvers=4
+  - nfsvers=3
   - nconnect=8
-  - hard
+  - soft
   - noatime
   - nodiratime
 ---
@@ -100,8 +100,8 @@ allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
-  - nfsvers=4
+  - nfsvers=3
   - nconnect=8
-  - hard
+  - soft
   - noatime
   - nodiratime
