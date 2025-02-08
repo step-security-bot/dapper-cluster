@@ -4,12 +4,12 @@ kind: PersistentVolumeClaim
 metadata:
   name: "${APP}"
 spec:
+  storageClassName: "${VOLSYNC_STORAGECLASS:-zfs-backed-pvs}"
   accessModes: ["${VOLSYNC_ACCESSMODES:-ReadWriteOnce}"]
   dataSourceRef:
     kind: ReplicationDestination
     apiGroup: volsync.backube
-    name: "${APP}-dst"
+    name: "volsync-${APP}-dst-dest"
   resources:
     requests:
       storage: "${VOLSYNC_CAPACITY:-5Gi}"
-  storageClassName: "${VOLSYNC_STORAGECLASS:-zfs-backed-pvs}"
