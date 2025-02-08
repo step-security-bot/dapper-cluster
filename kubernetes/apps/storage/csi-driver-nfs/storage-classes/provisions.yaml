@@ -9,7 +9,7 @@ provisioner: nfs.csi.k8s.io
 parameters:
   server: openmediavault-used.manor
   share: /export/Used
-  subDir: k8s
+  subDir: /
 allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
