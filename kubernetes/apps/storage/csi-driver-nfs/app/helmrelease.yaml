@@ -33,7 +33,8 @@ spec:
       enableFSGroupPolicy: true
 
     controller:
-      replicas: 1
+      runOnControlPlane: true
+      replicas: 2
       strategyType: Recreate
       resources:
         csiProvisioner:
