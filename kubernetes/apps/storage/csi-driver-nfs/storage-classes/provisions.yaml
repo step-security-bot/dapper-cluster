@@ -16,7 +16,11 @@ allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
-  - nfsvers=4.1
+  - nfsvers=3
+  - nconnect=16
+  - nolock
+  - noatime
+  - nodiratime
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -37,7 +41,11 @@ allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
-  - nfsvers=4.1
+  - nfsvers=3
+  - nconnect=16
+  - nolock
+  - noatime
+  - nodiratime
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -56,7 +64,11 @@ allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
-  - nfsvers=4.1
+  - nfsvers=3
+  - nconnect=16
+  - nolock
+  - noatime
+  - nodiratime
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -75,7 +87,11 @@ allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
-  - nfsvers=4.1
+  - nfsvers=3
+  - nconnect=16
+  - nolock
+  - noatime
+  - nodiratime
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -92,4 +108,8 @@ allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
-  - nfsvers=4.1
+  - nfsvers=3
+  - nconnect=16
+  - nolock
+  - noatime
+  - nodiratime
