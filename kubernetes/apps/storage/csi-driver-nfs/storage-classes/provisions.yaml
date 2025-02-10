@@ -55,7 +55,6 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
-  - nconnect=16
   - nolock
   - noatime
 ---
