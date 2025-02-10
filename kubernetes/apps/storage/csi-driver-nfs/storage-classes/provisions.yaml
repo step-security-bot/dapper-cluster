@@ -87,7 +87,7 @@ parameters:
   csi.storage.k8s.io/provisioner-secret-name: "mount-options"
   csi.storage.k8s.io/provisioner-secret-namespace: "storage"
 allowVolumeExpansion: true
-reclaimPolicy: Delete
+reclaimPolicy: Retain
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
@@ -109,7 +109,7 @@ parameters:
   share: /ssd/backups
   subDir: "${pvc.metadata.namespace}/${pvc.metadata.name}"
 allowVolumeExpansion: true
-reclaimPolicy: Delete
+reclaimPolicy: Retain
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
