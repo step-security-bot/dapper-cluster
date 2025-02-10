@@ -8,7 +8,7 @@ metadata:
 provisioner: nfs.csi.k8s.io
 parameters:
   server: openmediavault-used.manor
-  share: /export/Used
+  share: /Used
   subDir: /k8s/${pvc.metadata.namespace}/${pvc.metadata.name}
   csi.storage.k8s.io/provisioner-secret-name: "mount-options"
   csi.storage.k8s.io/provisioner-secret-namespace: "storage"
@@ -16,7 +16,7 @@ allowVolumeExpansion: true
 reclaimPolicy: Retain
 volumeBindingMode: Immediate
 mountOptions:
-  - nfsvers=3
+  - nfsvers=4.1
   - hard
   - nconnect=16
   - nolock
@@ -34,7 +34,7 @@ metadata:
 provisioner: nfs.csi.k8s.io
 parameters:
   server: circe.manor
-  share: /ssd/k8s
+  share: /k8s
   subDir: ${pvc.metadata.namespace}/${pvc.metadata.name}
   csi.storage.k8s.io/provisioner-secret-name: "mount-options"
   csi.storage.k8s.io/provisioner-secret-namespace: "storage"
@@ -42,7 +42,7 @@ allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
-  - nfsvers=3
+  - nfsvers=4.1
   - hard
   - nconnect=16
   - nolock
@@ -58,7 +58,7 @@ metadata:
 provisioner: nfs.csi.k8s.io
 parameters:
   server: circe.manor
-  share: /ssd/k8s
+  share: /k8s
   subDir: "cache/${pvc.metadata.namespace}/${pvc.metadata.name}"
   csi.storage.k8s.io/provisioner-secret-name: "mount-options"
   csi.storage.k8s.io/provisioner-secret-namespace: "storage"
@@ -66,7 +66,7 @@ allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
-  - nfsvers=3
+  - nfsvers=4.1
   - hard
   - nconnect=16
   - nolock
@@ -82,7 +82,7 @@ metadata:
 provisioner: nfs.csi.k8s.io
 parameters:
   server: circe.manor
-  share: /ssd/data
+  share: /data
   subDir: "${pvc.metadata.namespace}/${pvc.metadata.name}"
   csi.storage.k8s.io/provisioner-secret-name: "mount-options"
   csi.storage.k8s.io/provisioner-secret-namespace: "storage"
@@ -90,7 +90,7 @@ allowVolumeExpansion: true
 reclaimPolicy: Retain
 volumeBindingMode: Immediate
 mountOptions:
-  - nfsvers=3
+  - nfsvers=4.1
   - hard
   - nconnect=16
   - nolock
@@ -106,13 +106,13 @@ metadata:
 provisioner: nfs.csi.k8s.io
 parameters:
   server: circe.manor
-  share: /ssd/backups
+  share: /backups
   subDir: "${pvc.metadata.namespace}/${pvc.metadata.name}"
 allowVolumeExpansion: true
 reclaimPolicy: Retain
 volumeBindingMode: Immediate
 mountOptions:
-  - nfsvers=3
+  - nfsvers=4.1
   - hard
   - nconnect=16
   - nolock
