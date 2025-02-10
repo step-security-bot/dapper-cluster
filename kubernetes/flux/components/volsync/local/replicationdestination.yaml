@@ -4,8 +4,6 @@ apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
   name: "${APP}-dst"
-  annotations:
-    volume.beta.kubernetes.io/mount-options: "nfsvers=3,nconnect=8,nolock,soft,noatime,nodiratime"
 spec:
   trigger:
     manual: restore-once

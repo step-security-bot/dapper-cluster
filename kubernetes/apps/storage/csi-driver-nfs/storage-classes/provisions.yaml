@@ -15,8 +15,7 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
-  - nconnect=8
-  - soft
+  - nconnect=16
   - nolock
   - noatime
   - nodiratime
@@ -39,7 +38,7 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
-  - nconnect=8
+  - nconnect=16
   - nolock
   - soft
   - noatime
@@ -61,7 +60,7 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
-  - nconnect=8
+  - nconnect=16
   - nolock
   - soft
   - noatime
@@ -83,7 +82,7 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
-  - nconnect=8
+  - nconnect=16
   - nolock
   - soft
   - noatime
@@ -105,7 +104,7 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
-  - nconnect=8
+  - nconnect=16
   - nolock
   - soft
   - noatime
