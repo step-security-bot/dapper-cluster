@@ -9,7 +9,7 @@ provisioner: nfs.csi.k8s.io
 parameters:
   server: openmediavault-used.manor
   share: /export/Used
-  subDir: /k8s
+  subDir: /k8s/${pvc.metadata.namespace}/${pvc.metadata.name}
   csi.storage.k8s.io/provisioner-secret-name: "mount-options"
   csi.storage.k8s.io/provisioner-secret-namespace: "storage"
 allowVolumeExpansion: true
@@ -35,7 +35,7 @@ provisioner: nfs.csi.k8s.io
 parameters:
   server: circe.manor
   share: /ssd/k8s
-  subDir: /
+  subDir: ${pvc.metadata.namespace}/${pvc.metadata.name}
   csi.storage.k8s.io/provisioner-secret-name: "mount-options"
   csi.storage.k8s.io/provisioner-secret-namespace: "storage"
 allowVolumeExpansion: true

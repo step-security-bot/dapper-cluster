@@ -49,7 +49,7 @@ spec:
                 name: "repository",
                 nfs: Object.spec.template.spec.volumes.nfs{
                   server: "openmediavault-used.manor",
-                  path: "/export/Used/k8s/volsync",
+                  path: "/export/Used/volsync",
                 }
               }
             }
