@@ -8,18 +8,15 @@ metadata:
 provisioner: nfs.csi.k8s.io
 parameters:
   server: openmediavault-used.manor
-  share: /Used
-  subDir: /k8s/${pvc.metadata.namespace}/${pvc.metadata.name}
-  csi.storage.k8s.io/provisioner-secret-name: "mount-options"
-  csi.storage.k8s.io/provisioner-secret-namespace: "storage"
+  share: /Used/k8s
+  subDir: "${pvc.metadata.namespace}/${pvc.metadata.name}"
 allowVolumeExpansion: true
-reclaimPolicy: Retain
+reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=4.1
-  - hard
   - nconnect=16
-  - nolock
+  - hard
   - noatime
   - nodiratime
 ---
@@ -29,23 +26,18 @@ metadata:
   name: zfs-backed-pvs
   labels:
     kustomize.toolkit.fluxcd.io/substitute: "disabled"
-  annotations:
-    storageclass.kubernetes.io/is-default-class: "true"
 provisioner: nfs.csi.k8s.io
 parameters:
   server: circe.manor
   share: /ssd/k8s
-  subDir: ${pvc.metadata.namespace}/${pvc.metadata.name}
-  csi.storage.k8s.io/provisioner-secret-name: "mount-options"
-  csi.storage.k8s.io/provisioner-secret-namespace: "storage"
+  subDir: "${pvc.metadata.namespace}/${pvc.metadata.name}"
 allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=4.1
-  - hard
   - nconnect=16
-  - nolock
+  - hard
   - noatime
   - nodiratime
 ---
@@ -60,16 +52,13 @@ parameters:
   server: circe.manor
   share: /ssd/k8s
   subDir: "cache/${pvc.metadata.namespace}/${pvc.metadata.name}"
-  csi.storage.k8s.io/provisioner-secret-name: "mount-options"
-  csi.storage.k8s.io/provisioner-secret-namespace: "storage"
 allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=4.1
-  - hard
   - nconnect=16
-  - nolock
+  - hard
   - noatime
   - nodiratime
 ---
@@ -84,16 +73,13 @@ parameters:
   server: circe.manor
   share: /ssd/data
   subDir: "${pvc.metadata.namespace}/${pvc.metadata.name}"
-  csi.storage.k8s.io/provisioner-secret-name: "mount-options"
-  csi.storage.k8s.io/provisioner-secret-namespace: "storage"
 allowVolumeExpansion: true
-reclaimPolicy: Retain
+reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=4.1
-  - hard
   - nconnect=16
-  - nolock
+  - hard
   - noatime
   - nodiratime
 ---
@@ -109,12 +95,11 @@ parameters:
   share: /ssd/backups
   subDir: "${pvc.metadata.namespace}/${pvc.metadata.name}"
 allowVolumeExpansion: true
-reclaimPolicy: Retain
+reclaimPolicy: Delete
 volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=4.1
-  - hard
   - nconnect=16
-  - nolock
+  - hard
   - noatime
   - nodiratime
