@@ -50,7 +50,7 @@ spec:
                 nfs: Object.spec.template.spec.volumes.nfs{
                   server: "openmediavault-used.manor",
                   path: "/export/Used/k8s/volsync",
-                  mountOptions: "nfsvers=3,nconnect=16,nolock,noatime,nodiratime"
+                  mountOptions: "nfsvers=3,nolock,noatime"
                 }
               }
             }
