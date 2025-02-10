@@ -9,7 +9,7 @@ provisioner: nfs.csi.k8s.io
 parameters:
   server: openmediavault-used.manor
   share: /Used/k8s
-  subDir: "${pvc.metadata.namespace}/${pvc.metadata.name}"
+  subDir: "config/${pvc.metadata.namespace}/${pvc.metadata.name}"
 allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
@@ -27,7 +27,7 @@ provisioner: nfs.csi.k8s.io
 parameters:
   server: circe.manor
   share: /ssd/k8s
-  subDir: "${pvc.metadata.namespace}/${pvc.metadata.name}"
+  subDir: "config/${pvc.metadata.namespace}/${pvc.metadata.name}"
 allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
