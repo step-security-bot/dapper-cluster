@@ -4,4 +4,3 @@ kind: Kustomization
 resources:
   - ./provisions.yaml
   - ./snapshotclass.yaml
-  - ./secret.yaml
