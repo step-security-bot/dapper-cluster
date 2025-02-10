@@ -16,7 +16,6 @@ volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
   - nolock
-  - noatime
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -37,7 +36,6 @@ volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
   - nolock
-  - noatime
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -56,7 +54,6 @@ volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
   - nolock
-  - noatime
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -75,7 +72,6 @@ volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
   - nolock
-  - noatime
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -94,4 +90,3 @@ volumeBindingMode: Immediate
 mountOptions:
   - nfsvers=3
   - nolock
-  - noatime
