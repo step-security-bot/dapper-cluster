@@ -34,7 +34,7 @@ metadata:
 provisioner: nfs.csi.k8s.io
 parameters:
   server: circe.manor
-  share: /k8s
+  share: /ssd/k8s
   subDir: ${pvc.metadata.namespace}/${pvc.metadata.name}
   csi.storage.k8s.io/provisioner-secret-name: "mount-options"
   csi.storage.k8s.io/provisioner-secret-namespace: "storage"
@@ -58,7 +58,7 @@ metadata:
 provisioner: nfs.csi.k8s.io
 parameters:
   server: circe.manor
-  share: /k8s
+  share: /ssd/k8s
   subDir: "cache/${pvc.metadata.namespace}/${pvc.metadata.name}"
   csi.storage.k8s.io/provisioner-secret-name: "mount-options"
   csi.storage.k8s.io/provisioner-secret-namespace: "storage"
@@ -82,7 +82,7 @@ metadata:
 provisioner: nfs.csi.k8s.io
 parameters:
   server: circe.manor
-  share: /data
+  share: /ssd/data
   subDir: "${pvc.metadata.namespace}/${pvc.metadata.name}"
   csi.storage.k8s.io/provisioner-secret-name: "mount-options"
   csi.storage.k8s.io/provisioner-secret-namespace: "storage"
@@ -106,7 +106,7 @@ metadata:
 provisioner: nfs.csi.k8s.io
 parameters:
   server: circe.manor
-  share: /backups
+  share: /ssd/backups
   subDir: "${pvc.metadata.namespace}/${pvc.metadata.name}"
 allowVolumeExpansion: true
 reclaimPolicy: Retain
