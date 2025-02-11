@@ -35,7 +35,7 @@ spec:
   path: ./kubernetes/apps/openebs-system/openebs/pools
   dependsOn:
     - name: openebs
-      namespace: openebs-storage
+      namespace: openebs-system
   prune: true
   sourceRef:
     kind: GitRepository
