@@ -4,7 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: "${APP}"
 spec:
-  storageClassName: "${VOLSYNC_STORAGECLASS:-zfs-backed-pvs}"
+  storageClassName: "${VOLSYNC_STORAGECLASS:-openebs-hostpath}"
   accessModes: ["${VOLSYNC_ACCESSMODES:-ReadWriteOnce}"]
   dataSourceRef:
     kind: ReplicationDestination

@@ -52,7 +52,7 @@ spec:
         storage:
           volumeClaimTemplate:
             spec:
-              storageClassName: zfs-backed-pvs
+              storageClassName: openebs-hostpath
               resources:
                 requests:
                   storage: 1Gi
@@ -107,10 +107,10 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: zfs-backed-pvs
+              storageClassName: openebs-hostpath
               resources:
                 requests:
-                  storage: 75Gi
+                  storage: 20Gi
     prometheus-node-exporter:
       fullnameOverride: node-exporter
       prometheus:
