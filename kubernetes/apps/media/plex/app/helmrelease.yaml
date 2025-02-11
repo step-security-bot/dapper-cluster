@@ -28,7 +28,7 @@ spec:
     - name: nvidia-device-plugin
       namespace: kube-system
     - name: volsync
-      namespace: volsync-system
+      namespace: storage
   values:
     controllers:
       plex:
