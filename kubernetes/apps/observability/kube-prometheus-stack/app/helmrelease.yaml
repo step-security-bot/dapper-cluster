@@ -29,7 +29,7 @@ spec:
     - name: kube-prometheus-stack-crds
       namespace: observability
     - name: openebs
-      namespace: storage
+      namespace: openebs-system
   values:
     crds:
       enabled: false
