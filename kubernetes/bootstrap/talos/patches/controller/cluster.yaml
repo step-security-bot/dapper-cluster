@@ -13,7 +13,7 @@ cluster:
           kind: PodSecurityConfiguration
           exemptions:
             namespaces:
-              - openebs
+              - openebs-system
   controllerManager:
     extraArgs:
       bind-address: 0.0.0.0

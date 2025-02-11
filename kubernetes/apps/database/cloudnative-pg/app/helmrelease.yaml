@@ -26,7 +26,7 @@ spec:
     - name: minio
       namespace: storage
     - name: openebs
-      namespace: openebs-system
+      namespace: storage
   values:
     crds:
       create: true
