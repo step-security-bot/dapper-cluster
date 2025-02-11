@@ -6,4 +6,4 @@ resources:
   #- ./production.yaml
   #- ./push-secrets-production.yaml
   - ./push-secrets-staging.yaml
-  - ./external-secrets-staging.yaml
+  #- ./external-secrets-staging.yaml
