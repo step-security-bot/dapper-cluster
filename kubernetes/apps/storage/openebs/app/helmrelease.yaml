@@ -48,15 +48,15 @@ spec:
         name: openebs-hostpath
         isDefaultClass: true
         basePath: /var/openebs/local
-      mayastor:
-        csi:
-          node:
-            initContainers:
-              enabled: true
-        etcd:
-          # -- Kubernetes Cluster Domain
-          clusterDomain: cluster.local
-        localpv-provisioner:
-          enabled: false
-        crds:
-          enabled: true
+    mayastor:
+      csi:
+        node:
+          initContainers:
+            enabled: true
+      etcd:
+        # -- Kubernetes Cluster Domain
+        clusterDomain: cluster.local
+      localpv-provisioner:
+        enabled: false
+      crds:
+        enabled: true
