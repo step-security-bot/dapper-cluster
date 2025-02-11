@@ -22,17 +22,6 @@ spec:
     remediation:
       retries: 3
   values:
-    mayastor:
-      csi:
-        node:
-          initContainers:
-            enabled: false
-      etcd:
-        clusterDomain: cluster.local
-      storageClass:
-        default: true
-      crds:
-        enabled: false
     engines:
       local:
         lvm:
@@ -42,3 +31,21 @@ spec:
       replicated:
         mayastor:
           enabled: true
+    openebs-crds:
+      csi:
+        volumeSnapshots:
+          enabled: true
+          keep: true
+    mayastor:
+      csi:
+        node:
+          initContainers:
+            enabled: false
+      etcd:
+        clusterDomain: cluster.local
+      storageClass:
+        default: true
+      localpv-provisioner:
+        enabled: true
+      crds:
+        enabled: false
