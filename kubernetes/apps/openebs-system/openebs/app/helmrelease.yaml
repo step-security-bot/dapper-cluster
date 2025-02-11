@@ -31,11 +31,6 @@ spec:
       replicated:
         mayastor:
           enabled: true
-    openebs-crds:
-      csi:
-        volumeSnapshots:
-          enabled: true
-          keep: false
     mayastor:
       csi:
         node:
