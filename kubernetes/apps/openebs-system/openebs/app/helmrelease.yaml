@@ -36,18 +36,6 @@ spec:
         volumeSnapshots:
           enabled: true
           keep: true
-    localpv-provisioner:
-      localpv:
-        image:
-          registry: quay.io/
-      helperPod:
-        image:
-          registry: quay.io/
-      hostpathClass:
-        enabled: true
-        name: openebs-hostpath
-        isDefaultClass: true
-        basePath: /var/local/openebs
     mayastor:
       csi:
         node:
@@ -57,6 +45,6 @@ spec:
         # -- Kubernetes Cluster Domain
         clusterDomain: cluster.local
       localpv-provisioner:
-        enabled: false
+        enabled: true
       crds:
         enabled: false
