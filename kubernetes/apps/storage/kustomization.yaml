@@ -8,5 +8,8 @@ components:
   - ../../flux/components/namespace
   - ../../flux/components/sops
   - ../../flux/components/substitutions
-#resources:
-#  - ./minio/ks.yaml
+resources:
+  - ./openebs/ks.yaml
+  - ./volsync/ks.yaml
+  - ./csi-driver-nfs/ks.yaml
+  - ./minio/ks.yaml
