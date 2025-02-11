@@ -31,6 +31,8 @@ spec:
       replicated:
         mayastor:
           enabled: true
+    localpv-provisioner:
+      enabled: false
     mayastor:
       csi:
         node:
