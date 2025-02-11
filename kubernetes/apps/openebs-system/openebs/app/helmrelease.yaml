@@ -35,7 +35,7 @@ spec:
       csi:
         volumeSnapshots:
           enabled: true
-          keep: true
+          keep: false
     mayastor:
       csi:
         node:
