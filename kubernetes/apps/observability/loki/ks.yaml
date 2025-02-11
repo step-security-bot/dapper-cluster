@@ -22,4 +22,4 @@ spec:
   wait: false
   dependsOn:
     - name: openebs
-      namespace: storage
+      namespace: openebs-system

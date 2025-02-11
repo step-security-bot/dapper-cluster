@@ -16,7 +16,7 @@ spec:
         namespace: flux-system
   dependsOn:
     - name: openebs
-      namespace: storage
+      namespace: openebs-system
   maxHistory: 3
   install:
     createNamespace: true
