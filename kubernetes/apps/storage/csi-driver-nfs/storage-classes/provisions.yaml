@@ -24,6 +24,8 @@ metadata:
   name: zfs-backed-pvs
   labels:
     kustomize.toolkit.fluxcd.io/substitute: "disabled"
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
 provisioner: nfs.csi.k8s.io
 parameters:
   server: circe.manor
