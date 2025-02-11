@@ -3,3 +3,5 @@ machine:
     vm.nr_hugepages: "1024"
   nodeLabels:
     openebs.io/engine: "mayastor"
+  disks:
+    - device: /dev/sda

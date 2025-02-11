@@ -1,4 +1,9 @@
 machine:
+  kernel:
+    modules:
+      - name: nvme_tcp
+      - name: nvme_core
+      - name: nvme_fabrics
   kubelet:
     extraMounts:
       - destination: /var/local
