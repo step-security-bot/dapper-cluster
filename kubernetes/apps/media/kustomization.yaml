@@ -8,15 +8,16 @@ components:
   - ../../flux/components/sops
   - ../../flux/components/substitutions
 resources:
-  - ./bazarr/ks.yaml
-  - ./tautulli/ks.yaml
-  - ./recyclarr/ks.yaml
-  - ./sonarr/ks.yaml
-  - ./sonarr-uhd/ks.yaml
-  - ./radarr/ks.yaml
-  - ./radarr-uhd/ks.yaml
-  - ./sabnzbd/ks.yaml
-  - ./overseerr/ks.yaml
-  - ./prowlarr/ks.yaml
+  - ./autobrr/ks.yaml
+  #- ./bazarr/ks.yaml
+  #- ./tautulli/ks.yaml
+  #- ./recyclarr/ks.yaml
+  #- ./sonarr/ks.yaml
+  #- ./sonarr-uhd/ks.yaml
+  #- ./radarr/ks.yaml
+  #- ./radarr-uhd/ks.yaml
+  #- ./sabnzbd/ks.yaml
+  #- ./overseerr/ks.yaml
+  #- ./prowlarr/ks.yaml
   - ./plex/ks.yaml
-  - ./wizarr/ks.yaml
+  #- ./wizarr/ks.yaml

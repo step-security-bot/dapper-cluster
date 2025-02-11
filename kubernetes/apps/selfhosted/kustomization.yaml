@@ -9,14 +9,13 @@ components:
   - ../../flux/components/sops
   - ../../flux/components/substitutions
 resources:
-  - ./namespace.yaml
   - ./actual/ks.yaml
-  - ./unifi/ks.yaml
-  - ./open-webui/ks.yaml
-  - ./n8n/ks.yaml
-  - ./ollama/ks.yaml
-  - ./paperless-ngx/ks.yaml
-  - ./searxng/ks.yaml
-  - ./obsidian-couchdb/ks.yaml
+  #- ./unifi/ks.yaml
+  #- ./open-webui/ks.yaml
+  #- ./n8n/ks.yaml
+  #- ./ollama/ks.yaml
+  #- ./paperless-ngx/ks.yaml
+  #- ./searxng/ks.yaml
+  #- ./obsidian-couchdb/ks.yaml
 
 
