@@ -45,5 +45,6 @@ spec:
         clusterDomain: cluster.local
       storageClass:
         default: true
+        thin: true
       crds:
         enabled: false
