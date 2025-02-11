@@ -47,4 +47,4 @@ spec:
         default: true
         thin: true
       crds:
-        enabled: false
+        enabled: true
