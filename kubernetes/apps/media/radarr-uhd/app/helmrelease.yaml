@@ -1,0 +1,119 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: radarr-uhd
+
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.6.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  dependsOn:
+    - name: volsync
+      namespace: volsync-system
+  values:
+    controllers:
+      radarr-uhd:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: ghcr.io/onedr0p/radarr-develop
+              tag: 5.18.1.9612@sha256:f19b5e8f22e1b807a563d50ebef0b47aca1a2d61cea63599c2c4ca85425a2320
+            env:
+              TZ: "${TIME_ZONE}"
+              RADARR__APP__INSTANCENAME: 4K Radarr
+              RADARR__APP__THEME: dark
+              RADARR__AUTH__METHOD: External
+              RADARR__AUTH__REQUIRED: DisabledForLocalAddresses
+              RADARR__LOG__DBENABLED: "False"
+              RADARR__LOG__LEVEL: info
+              RADARR__SERVER__PORT: &port 80
+              RADARR__UPDATE__BRANCH: develop
+              PUSHOVER_APP_URL: &host "4kradarr.${SECRET_DOMAIN_MEDIA}"
+              PUSHOVER_DEBUG: "false"
+              PUSHOVER_PRIORITY: "0"
+            envFrom:
+              - secretRef:
+                  name: radarr-uhd-secret
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /ping
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+            resources:
+              requests:
+                cpu: 250m
+              limits:
+                memory: 1Gi
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 150
+        fsGroup: 140
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups: [10000]
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: radarr-uhd
+        ports:
+          http:
+            port: *port
+    ingress:
+      app:
+        annotations:
+          authentik.home.arpa/enabled: "true"
+          nginx.ingress.kubernetes.io/auth-signin: "https://4kradarr.${SECRET_DOMAIN_MEDIA}/outpost.goauthentik.io/start?rd=$scheme://$http_host$escaped_request_uri"
+          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN_MEDIA}"
+        className: internal
+        hosts:
+          - host: *host
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: ${SECRET_DOMAIN_MEDIA/./-}-production-tls
+    persistence:
+      config:
+        existingClaim: radarr-uhd
+      tmp:
+        type: emptyDir
+      media:
+        type: nfs
+        server: openmediavault-used.manor
+        path: /Used
+        globalMounts:
+          - path: /media

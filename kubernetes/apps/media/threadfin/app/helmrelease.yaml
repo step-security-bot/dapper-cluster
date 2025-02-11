@@ -1,0 +1,104 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &name threadfin
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.6.1
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 10m
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 3
+  dependsOn:
+    - name: volsync
+      namespace: volsync-system
+  values:
+    controllers:
+      threadfin:
+        annotations:
+          reloader.stakater.com/auto: "true"
+        containers:
+          app:
+            image:
+              repository: fyb3roptik/threadfin
+              tag: 1.2.26@sha256:22a3ecd260d035c57beb23f58dce4d76ee98c7b478413a8c29054ee979f6c676
+              pullPolicy: IfNotPresent
+
+            env:
+              TZ: ${TIME_ZONE}
+              THREADFIN_BRANCH: main
+              THREADFIN_DEBUG: 0
+              THREADFIN_PORT: &port 34400
+
+            resources:
+              limits:
+                memory: 1024Mi
+              requests:
+                cpu: 20m
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+                spec:
+                  httpGet:
+                    path: /status
+                    port: *port
+                  initialDelaySeconds: 0
+                  periodSeconds: 10
+                  timeoutSeconds: 1
+                  failureThreshold: 3
+              readiness: *probes
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 150
+        fsGroup: 140
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
+    service:
+      app:
+        controller: threadfin
+        ports:
+          http:
+            port: *port
+
+    ingress:
+      app:
+        annotations:
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN_MEDIA}
+        className: internal
+        hosts:
+          - host: &host "threadfin.${SECRET_DOMAIN_MEDIA}"
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - *host
+            secretName: ${SECRET_DOMAIN_MEDIA/./-}-production-tls
+    persistence:
+      config:
+        existingClaim: threadfin
+        globalMounts:
+          - path: /home/threadfin/conf
