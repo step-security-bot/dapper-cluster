@@ -21,6 +21,11 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
+  dependsOn:
+    - name: openebs
+      namespace: openebs-system
+    - name: loki
+      namespace: observability
   values:
     fullnameOverride: promtail
     config:
