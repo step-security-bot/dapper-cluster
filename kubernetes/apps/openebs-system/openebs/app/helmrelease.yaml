@@ -42,8 +42,9 @@ spec:
           initContainers:
             enabled: false
       etcd:
-        # -- Kubernetes Cluster Domain
         clusterDomain: cluster.local
+      storageClass:
+        default: true
       localpv-provisioner:
         enabled: true
       crds:
