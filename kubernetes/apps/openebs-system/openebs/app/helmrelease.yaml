@@ -59,4 +59,4 @@ spec:
       localpv-provisioner:
         enabled: false
       crds:
-        enabled: true
+        enabled: false
