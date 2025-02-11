@@ -32,7 +32,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/openebs-system/openebs/app
+  path: ./kubernetes/apps/openebs-system/openebs/pools
   dependsOn:
     - name: openebs
       namespace: openebs-storage
