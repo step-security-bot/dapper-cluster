@@ -45,6 +45,8 @@ spec:
       app.kubernetes.io/name: *app
   targetNamespace: *namespace
   dependsOn:
+    - name: plex
+      namespace: media
     - name: external-secrets-stores
       namespace: external-secrets
   path: ./kubernetes/apps/media/plex/tools
