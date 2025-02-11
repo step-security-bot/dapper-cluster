@@ -57,6 +57,6 @@ spec:
         # -- Kubernetes Cluster Domain
         clusterDomain: cluster.local
       localpv-provisioner:
-        enabled: false
+        enabled: true
       crds:
         enabled: false
