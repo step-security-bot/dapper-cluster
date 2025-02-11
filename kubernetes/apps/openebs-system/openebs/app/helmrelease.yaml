@@ -22,17 +22,11 @@ spec:
     remediation:
       retries: 3
   values:
-    engines:
-      local:
-        lvm:
-          enabled: false
-        zfs:
-          enabled: false
-      replicated:
-        mayastor:
-          enabled: true
     localpv-provisioner:
-      enabled: false
+      rbac:
+        create: false
+      localpv:
+        enabled: false
     mayastor:
       csi:
         node:
@@ -46,3 +40,12 @@ spec:
         enabled: true
       crds:
         enabled: true
+    engines:
+      local:
+        lvm:
+          enabled: false
+        zfs:
+          enabled: false
+      replicated:
+        mayastor:
+          enabled: true
