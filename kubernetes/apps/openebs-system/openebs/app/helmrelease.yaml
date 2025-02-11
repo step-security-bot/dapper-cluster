@@ -30,12 +30,12 @@ spec:
           enabled: false
       replicated:
         mayastor:
-          enabled: false
+          enabled: true
     openebs-crds:
       csi:
         volumeSnapshots:
-          enabled: false
-          keep: false
+          enabled: true
+          keep: true
     localpv-provisioner:
       localpv:
         image:
@@ -48,3 +48,15 @@ spec:
         name: openebs-hostpath
         isDefaultClass: true
         basePath: /var/openebs/local
+      mayastor:
+        csi:
+          node:
+            initContainers:
+              enabled: true
+        etcd:
+          # -- Kubernetes Cluster Domain
+          clusterDomain: cluster.local
+        localpv-provisioner:
+          enabled: false
+        crds:
+          enabled: false

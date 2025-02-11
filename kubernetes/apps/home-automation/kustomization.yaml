@@ -6,9 +6,9 @@ components:
   - ../../flux/components/namespace
   - ../../flux/components/sops
   - ../../flux/components/substitutions
-resources:
-  - ./home-assistant/ks.yaml
-  - ./node-red/ks.yaml
-  - ./esphome/ks.yaml
-  - ./zigbee2mqtt/ks.yaml
-  - ./zigbee2mqtt-garage/ks.yaml
+#resources:
+#  - ./home-assistant/ks.yaml
+#  - ./node-red/ks.yaml
+#  - ./esphome/ks.yaml
+#  - ./zigbee2mqtt/ks.yaml
+#  - ./zigbee2mqtt-garage/ks.yaml

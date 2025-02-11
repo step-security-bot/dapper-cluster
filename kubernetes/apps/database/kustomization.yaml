@@ -8,7 +8,7 @@ components:
   - ../../flux/components/namespace
   - ../../flux/components/sops
   - ../../flux/components/substitutions
-resources:
-  - ./cloudnative-pg/ks.yaml
-  - ./emqx/ks.yaml
-  - ./dragonfly-redis/ks.yaml
+#resources:
+#  - ./cloudnative-pg/ks.yaml
+#  - ./emqx/ks.yaml
+#  - ./dragonfly-redis/ks.yaml
