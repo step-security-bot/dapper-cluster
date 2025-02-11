@@ -16,7 +16,7 @@ spec:
     - name: emqx-cluster
       namespace: database
     - name: volsync
-      namespace: volsync-system
+      namespace: storage
     - name: external-secrets-stores
       namespace: external-secrets
   path: ./kubernetes/apps/home-automation/zigbee2mqtt-garage/app
