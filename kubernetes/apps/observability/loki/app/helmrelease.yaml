@@ -61,7 +61,7 @@ spec:
       replicas: 1
       persistence:
         enabled: true
-        storageClass: openebs-hostpath
+        storageClass: openebs-single-replica
         size: 30Gi
     gateway:
       replicas: 0
