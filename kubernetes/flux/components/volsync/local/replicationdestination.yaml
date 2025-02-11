@@ -11,10 +11,10 @@ spec:
     repository: "${APP}-volsync-secret"
     copyMethod: Snapshot
     volumeSnapshotClassName: "${VOLSYNC_SNAPSHOTCLASS:-csi-mayastor-snapclass}"
-    cacheStorageClassName: "${VOLSYNC_CACHE_SNAPSHOTCLASS:-openebs-single-replica}"
+    cacheStorageClassName: "${VOLSYNC_CACHE_SNAPSHOTCLASS:-mayastor-single-replica}"
     cacheAccessModes: ["${VOLSYNC_CACHE_ACCESSMODES:-ReadWriteOnce}"]
     cacheCapacity: "${VOLSYNC_CACHE_CAPACITY:-10Gi}"
-    storageClassName: "${VOLSYNC_STORAGECLASS:-openebs-single-replica}"
+    storageClassName: "${VOLSYNC_STORAGECLASS:-mayastor-single-replica}"
     accessModes: ["${VOLSYNC_ACCESSMODES:-ReadWriteOnce}"]
     capacity: "${VOLSYNC_CAPACITY:-5Gi}"
     moverSecurityContext:

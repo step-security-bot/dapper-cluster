@@ -38,8 +38,10 @@ spec:
             enabled: false
       etcd:
         clusterDomain: cluster.local
-      storageClass:
-        default: true
-        thin: true
       crds:
+        # -- Disables the installation of all CRDs if set to false
         enabled: true
+        csi:
+          volumeSnapshots:
+          # -- Install Volume Snapshot CRDs
+          enabled: true

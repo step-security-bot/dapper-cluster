@@ -61,7 +61,7 @@ spec:
       replicas: 1
       persistence:
         enabled: true
-        storageClass: openebs-single-replica
+        storageClass: mayastor-single-replica
         size: 30Gi
     gateway:
       replicas: 0

@@ -10,7 +10,7 @@ spec:
   primaryUpdateStrategy: unsupervised
   storage:
     size: 20Gi
-    storageClass: openebs-single-replica
+    storageClass: mayastor-single-replica
   superuserSecret:
     name: cloudnative-pg-secret
   enableSuperuserAccess: true

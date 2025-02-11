@@ -4,7 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: "${APP}"
 spec:
-  storageClassName: "${VOLSYNC_STORAGECLASS:-openebs-single-replica}"
+  storageClassName: "${VOLSYNC_STORAGECLASS:-mayastor-single-replica}"
   accessModes: ["${VOLSYNC_ACCESSMODES:-ReadWriteOnce}"]
   dataSourceRef:
     kind: ReplicationDestination
