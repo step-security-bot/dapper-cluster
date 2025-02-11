@@ -123,7 +123,7 @@ spec:
     persistence:
       config:
         type: nfs
-        server: circe.manor
-        path: /ssd/minio
+        server: openmediavault-used.manor
+        path: /Used/k8s/minio
         globalMounts:
           - path: /data
