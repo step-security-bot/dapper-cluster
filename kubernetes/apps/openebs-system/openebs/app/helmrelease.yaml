@@ -32,7 +32,7 @@ spec:
       storageClass:
         default: true
       crds:
-        enabled: true
+        enabled: false
     engines:
       local:
         lvm:
