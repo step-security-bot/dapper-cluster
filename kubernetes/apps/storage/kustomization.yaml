@@ -9,6 +9,6 @@ components:
   - ../../flux/components/sops
   - ../../flux/components/substitutions
 resources:
-  - ./volsync/ks.yaml
   - ./csi-driver-nfs/ks.yaml
   #- ./minio/ks.yaml
+  - ./volsync/ks.yaml
