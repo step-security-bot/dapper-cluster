@@ -198,7 +198,6 @@ nodes:
 patches:
   - "@./patches/global/cluster-discovery.yaml"
   - "@./patches/global/machine-files.yaml"
-  - "@./patches/global/machine-gh-actions.yaml"
   - "@./patches/global/machine-kubelet.yaml"
   - "@./patches/global/machine-network.yaml"
   - "@./patches/global/machine-sysctls.yaml"
@@ -210,4 +209,5 @@ controlPlane:
   patches:
     - "@./patches/controller/admission-controller-patch.yaml"
     - "@./patches/controller/cluster.yaml"
+    - "@./patches/controller/machine-gh-actions.yaml"
 

@@ -4,5 +4,5 @@ kubernetes-talos-control-3.yaml
 kubernetes-talos-node-gpu-1.yaml
 kubernetes-talos-node-large-1.yaml
 kubernetes-talos-node-large-2.yaml
-talosconfig
 kubernetes-talos-node-large-3.yaml
+talosconfig

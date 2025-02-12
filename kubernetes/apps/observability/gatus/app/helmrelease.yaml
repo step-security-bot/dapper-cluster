@@ -126,5 +126,5 @@ spec:
         name: gatus-configmap
         globalMounts:
           - path: /config/config.yaml
-            subPath: config.yaml # redeploy
+            subPath: config.yaml
             readOnly: true
