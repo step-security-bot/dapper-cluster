@@ -8,7 +8,7 @@ components:
   - ../../flux/components/sops
   - ../../flux/components/substitutions
 resources:
-  - ./autobrr/ks.yaml
+  #- ./autobrr/ks.yaml
   - ./bazarr/ks.yaml
   - ./tautulli/ks.yaml
   - ./recyclarr/ks.yaml
