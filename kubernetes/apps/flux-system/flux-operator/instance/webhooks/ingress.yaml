@@ -7,8 +7,12 @@ metadata:
     external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
 spec:
   ingressClassName: external
+  tls:
+    - hosts:
+      - &host "flux-webhook.${SECRET_DOMAIN}"
+      secretName: ${SECRET_DOMAIN/./-}-tls
   rules:
-    - host: &host "flux-webhook.${SECRET_DOMAIN}"
+    - host: *host
       http:
         paths:
           - path: /hook/
@@ -18,7 +22,3 @@ spec:
                 name: webhook-receiver
                 port:
                   number: 80
-      tls: &tls
-        - hosts:
-            - *host
-          secretName: "${SECRET_DOMAIN/./-}-tls"
