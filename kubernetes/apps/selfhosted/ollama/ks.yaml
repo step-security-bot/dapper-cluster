@@ -4,16 +4,21 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app ollama
-  namespace: flux-system
+  namespace: &namespace selfhosted
 spec:
-  targetNamespace: selfhosted
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  components:
+    - ../../../../flux/components/volsync
   dependsOn:
     - name: nvidia-device-plugin
+      namespace: kube-system
     - name: volsync
+      namespace: storage
     - name: external-secrets-stores
+      namespace: external-secrets
   path: ./kubernetes/apps/selfhosted/ollama/app
   prune: true
   sourceRef:

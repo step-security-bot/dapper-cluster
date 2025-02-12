@@ -3,13 +3,15 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &appname searxng
-  namespace: flux-system
+  name: &app searxng
+  namespace: &namespace selfhosted
 spec:
-  targetNamespace: selfhosted
+  targetNamespace: *namespace
   commonMetadata:
     labels:
-      app.kubernetes.io/name: *appname
+      app.kubernetes.io/name: *app
+  components:
+    - ../../../../flux/components/volsync
   interval: 30m
   timeout: 5m
   path: "./kubernetes/apps/selfhosted/searxng/app"
@@ -21,9 +23,12 @@ spec:
   wait: false
   dependsOn:
     - name: volsync
+      namespace: storage
     - name: dragonfly-cluster
+      namespace: database
     - name: external-secrets-stores
+      namespace: external-secrets
   postBuild:
     substitute:
-      APP: *appname
+      APP: *app
       VOLSYNC_CAPACITY: 2Gi

@@ -4,13 +4,15 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &appname obsidian-couchdb
-  namespace: flux-system
+  namespace: &namespace selfhosted
 spec:
-  targetNamespace: selfhosted
+  targetNamespace: *namespace
   commonMetadata:
     labels:
       app.kubernetes.io/name: *appname
   interval: 10m
+  components:
+    - ../../../../flux/components/volsync
   path: "./kubernetes/apps/selfhosted/obsidian-couchdb/app"
   prune: true
   sourceRef:
@@ -20,7 +22,9 @@ spec:
   wait: true
   dependsOn:
     - name: volsync
+      namespace: storage
     - name: external-secrets-stores
+      namespace: external-secrets
   postBuild:
     substitute:
       APP: *appname
