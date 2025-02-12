@@ -7,11 +7,16 @@ metadata:
   namespace: &namespace media
 spec:
   targetNamespace: *namespace
-  components:
-    - ../../../../flux/components/volsync
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  components:
+    - ../../../../flux/components/volsync
+  dependsOn:
+    - name: volsync
+      namespace: storage
+    - name: external-secrets-stores
+      namespace: external-secrets
   interval: 30m
   retryInterval: 1m
   timeout: 5m
@@ -22,11 +27,6 @@ spec:
     name: flux-system
     namespace: flux-system
   wait: false
-  dependsOn:
-    - name: volsync
-      namespace: storage
-    - name: external-secrets-stores
-      namespace: external-secrets
   postBuild:
     substitute:
       APP: *app
