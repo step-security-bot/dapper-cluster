@@ -16,3 +16,10 @@ subjects:
   - kind: ServiceAccount
     name: dapper-cluster-runner
     namespace: actions-runner-system
+---
+apiVersion: talos.dev/v1alpha1
+kind: ServiceAccount
+metadata:
+  name: home-ops-runner
+spec:
+  roles: ["os:admin"]

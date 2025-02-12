@@ -76,4 +76,4 @@ spec:
         volumes:
           - name: talos
             secret:
-              secretName: actions-runner-controller-secret
+              secretName: *name
