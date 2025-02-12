@@ -67,7 +67,6 @@ spec:
             uid: prometheus
             access: proxy
             url: http://prometheus-operated.observability.svc.cluster.local:9090
-            isDefault: true
           - name: Loki
             type: loki
             uid: loki
