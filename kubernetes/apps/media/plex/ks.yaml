@@ -32,7 +32,7 @@ spec:
     substitute:
       APP: *app
       GATUS_PATH: /web/index.html
-      DOMAIN: ${SECRET_DOMAIN_MEDIA}
+      GATUS_DOMAIN: ${SECRET_DOMAIN_MEDIA}
       VOLSYNC_CAPACITY: 5Gi
 
 ---
