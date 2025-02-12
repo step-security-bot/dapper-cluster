@@ -247,7 +247,7 @@ spec:
 
     sidecar:
       dashboards:
-        enabled: true
+        enabled: false
         searchNamespace: ALL
         label: grafana_dashboard
         folderAnnotation: grafana_folder
