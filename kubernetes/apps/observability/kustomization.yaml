@@ -11,9 +11,11 @@ components:
 resources:
   - ./blackbox-exporter/ks.yaml
   - ./exporters/dcgm-exporter/ks.yaml
+  - ./gatus/ks.yaml
   - ./grafana/ks.yaml
   - ./goldilocks/ks.yaml
   - ./promtail/ks.yaml
+  - ./kromgo/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
   - ./loki/ks.yaml
   - ./vpa/ks.yaml
