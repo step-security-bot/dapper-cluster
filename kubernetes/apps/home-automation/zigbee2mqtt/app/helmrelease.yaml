@@ -49,9 +49,6 @@ spec:
             env:
               TZ: ${TIME_ZONE}
               ZIGBEE2MQTT_DATA: /app/data #honestly not sure
-              ZIGBEE2MQTT_CONFIG_DEVICES: './devices.yaml'
-              ZIGBEE2MQTT_CONFIG_GROUPS: './groups.yaml'
-              #ZIGBEE2MQTT_CONFIG_HOMEASSISTANT_DISCOVERY_TOPIC: homeassistant
               ZIGBEE2MQTT_CONFIG_HOMEASSISTANT_STATUS_TOPIC: homeassistant/status
               ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_LEGACY_ENTITY_ATTRIBUTES: "false"
               ZIGBEE2MQTT_CONFIG_ADVANCED_HOMEASSISTANT_LEGACY_TRIGGERS: "false"
@@ -65,10 +62,11 @@ spec:
               ZIGBEE2MQTT_CONFIG_DEVICE_OPTIONS_LEGACY: "false"
               ZIGBEE2MQTT_CONFIG_DEVICE_OPTIONS_RETAIN: "true"
               ZIGBEE2MQTT_CONFIG_EXPERIMENTAL_NEW_API: "true"
-              ZIGBEE2MQTT_CONFIG_FRONTEND_URL: https://zigbee.${SECRET_DOMAIN}
+              ZIGBEE2MQTT_CONFIG_FRONTEND_URL: https://zigbee-garage.${SECRET_DOMAIN}
+
               # MQTT
               ZIGBEE2MQTT_CONFIG_MQTT_SERVER: mqtt://emqx-listeners.database.svc.cluster.local:1883
-              ZIGBEE2MQTT_CONFIG_MQTT_CLIENT_ID: zigbee2mqtt_2lSy3S7jnb
+              ZIGBEE2MQTT_CONFIG_MQTT_CLIENT_ID: zigbee2mqtt-garage_2lSy3S7jnb
               ZIGBEE2MQTT_CONFIG_MQTT_REJECT_UNAUTHORIZED: "true"
               ZIGBEE2MQTT_CONFIG_MQTT_INCLUDE_DEVICE_INFORMATION: "true"
               ZIGBEE2MQTT_CONFIG_MQTT_KEEPALIVE: 60
@@ -80,7 +78,7 @@ spec:
               ZIGBEE2MQTT_CONFIG_SERIAL_ADAPTER: zstack
               ZIGBEE2MQTT_CONFIG_SERIAL_BAUDRATE: 115200
               ZIGBEE2MQTT_CONFIG_SERIAL_DISABLE_LED: "false"
-              ZIGBEE2MQTT_CONFIG_SERIAL_PORT: tcp://192.168.1.5:6638
+              ZIGBEE2MQTT_CONFIG_SERIAL_PORT: tcp://192.168.1.9:6638
 
               # ADVANCED ZIGBEE SPECIFIC
               ZIGBEE2MQTT_CONFIG_CHANNEL: 20
