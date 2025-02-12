@@ -28,7 +28,7 @@ spec:
     - name: ollama
       namespace: selfhosted
     - name: volsync
-      namespace: volsync-system
+      namespace: storage
 
   values:
     annotations:
