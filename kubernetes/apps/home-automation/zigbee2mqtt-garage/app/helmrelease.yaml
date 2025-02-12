@@ -67,6 +67,7 @@ spec:
               # MQTT
               ZIGBEE2MQTT_CONFIG_MQTT_SERVER: mqtt://emqx-listeners.database.svc.cluster.local:1883
               ZIGBEE2MQTT_CONFIG_MQTT_CLIENT_ID: zigbee2mqtt-garage_2lSy3S7jnb
+              ZIGBEE2MQTT_CONFIG_MQTT_BASE_TOPIC: zigbee2mqtt-garage
               ZIGBEE2MQTT_CONFIG_MQTT_REJECT_UNAUTHORIZED: "true"
               ZIGBEE2MQTT_CONFIG_MQTT_INCLUDE_DEVICE_INFORMATION: "true"
               ZIGBEE2MQTT_CONFIG_MQTT_KEEPALIVE: 60
