@@ -1,30 +1,4 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: &app kube-prometheus-stack-crds
-  namespace: &namespace observability
-spec:
-  targetNamespace: *namespace
-  commonMetadata:
-    labels:
-      app.kubernetes.io/name: *app
-  dependsOn:
-    - name: external-secrets-stores
-      namespace: external-secrets
-    - name: csi-driver-nfs
-      namespace: storage
-  interval: 30m
-  path: ./kubernetes/apps/observability/kube-prometheus-stack/crds
-  prune: false # never should be deleted
-  sourceRef:
-    kind: GitRepository
-    name: flux-system
-    namespace: flux-system
-  timeout: 5m
-  wait: false
----
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
@@ -33,6 +7,8 @@ metadata:
   namespace: &namespace observability
 spec:
   targetNamespace: *namespace
+  components:
+    - ../../../../flux/components/gatus/guarded
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
@@ -48,3 +24,7 @@ spec:
     namespace: flux-system
   timeout: 5m
   wait: false
+  postBuild:
+    substitute:
+      APP: *app
+      GATUS_SUBDOMAIN: prometheus
