@@ -6,13 +6,13 @@ metadata:
   namespace: &namespace media
 spec:
   targetNamespace: *namespace
+  components:
+    - ../../../../flux/components/volsync
   dependsOn:
     - name: volsync
       namespace: storage
     - name: external-secrets-stores
       namespace: external-secrets
-  components:
-    - ../../../../flux/components/volsync
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
