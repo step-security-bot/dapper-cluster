@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/onedr0p/home-ops/main/docs/src/assets/logo.png" align="center" width="144px" height="144px"/>
+<img src="https://raw.githubusercontent.com/dapperdivers/dapper-cluster/main/docs/src/assets/logo.png" align="center" width="144px" height="144px"/>
 
 ### <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f680/512.gif" alt="🚀" width="16" height="16"> My Home Operations Repository <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f6a7/512.gif" alt="🚧" width="16" height="16">
 
@@ -14,7 +14,7 @@ _... managed with Flux, Renovate, and GitHub Actions_ <img src="https://fonts.gs
 [![Talos](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.chelonianlabs.com%2Ftalos_version&style=for-the-badge&logo=talos&logoColor=white&color=blue&label=%20)](https://talos.dev)&nbsp;&nbsp;
 [![Kubernetes](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.chelonianlabs.com%2Fkubernetes_version&style=for-the-badge&logo=kubernetes&logoColor=white&color=blue&label=%20)](https://kubernetes.io)&nbsp;&nbsp;
 [![Flux](https://img.shields.io/endpoint?url=https%3A%2F%2Fkromgo.chelonianlabs.com%2Fflux_version&style=for-the-badge&logo=flux&logoColor=white&color=blue&label=%20)](https://fluxcd.io)&nbsp;&nbsp;
-[![Renovate](https://img.shields.io/github/actions/workflow/status/onedr0p/home-ops/renovate.yaml?branch=main&label=&logo=renovatebot&style=for-the-badge&color=blue)](https://github.com/onedr0p/home-ops/actions/workflows/renovate.yaml)
+[![Renovate](https://img.shields.io/github/actions/workflow/status/dapperdivers/dapper-cluster/renovate.yaml?branch=main&label=&logo=renovatebot&style=for-the-badge&color=blue)](https://github.com/dapperdivers/dapper-cluster/actions/workflows/renovate.yaml)
 
 </div>
 
@@ -51,7 +51,7 @@ This is a mono repository for my home infrastructure and Kubernetes cluster. I t
 
 My Kubernetes cluster is deployed with [Talos](https://www.talos.dev). This is a semi-hyper-converged cluster, workloads and block storage are sharing the same available resources on my nodes while I have a separate server with ZFS for NFS/SMB shares, bulk file storage and backups.
 
-There is a template over at [onedr0p/cluster-template](https://github.com/onedr0p/cluster-template) if you want to try and follow along with some of the practices I use here.
+There is a template over at [dapperdivers/cluster-template](https://github.com/dapperdivers/cluster-template) if you want to try and follow along with some of the practices I use here.
 
 ### Core Components
 
@@ -105,7 +105,7 @@ graph TD
 <details>
   <summary>Click here to see my high-level network diagram</summary>
 
-  <img src="https://raw.githubusercontent.com/onedr0p/home-ops/main/docs/src/assets/network-topology.png" align="center" width="600px" alt="dns"/>
+  <img src="https://raw.githubusercontent.com/dapperdivers/dapper-cluster/main/docs/src/assets/network-topology.png" align="center" width="600px" alt="dns"/>
 </details>
 
 ---
@@ -140,7 +140,7 @@ In my cluster there are two instances of [ExternalDNS](https://github.com/kubern
 <details>
   <summary>Click here to see my server rack</summary>
 
-  <img src="https://raw.githubusercontent.com/onedr0p/home-ops/main/docs/src/assets/rack.png" align="center" width="200px" alt="dns"/>
+  <img src="https://raw.githubusercontent.com/dapperdivers/dapper-cluster/main/docs/src/assets/rack.png" align="center" width="200px" alt="dns"/>
 </details>
 
 | Device                      | Num | OS Disk Size | Data Disk Size                  | Ram  | OS            | Function                |
@@ -161,11 +161,11 @@ In my cluster there are two instances of [ExternalDNS](https://github.com/kubern
 
 <div align="center">
 
-<a href="https://star-history.com/#onedr0p/home-ops&Date">
+<a href="https://star-history.com/#dapperdivers/dapper-cluster&Date">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=onedr0p/home-ops&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=onedr0p/home-ops&type=Date" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=onedr0p/home-ops&type=Date" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=dapperdivers/dapper-cluster&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=dapperdivers/dapper-cluster&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=dapperdivers/dapper-cluster&type=Date" />
   </picture>
 </a>
 
