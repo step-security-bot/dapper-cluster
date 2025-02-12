@@ -10,7 +10,7 @@ instance:
   sync:
     kind: GitRepository
     url: "https://github.com/DapperDivers/dapper-cluster.git"
-    ref: "refs/heads/new-template"
+    ref: "refs/heads/main"
     path: kubernetes/flux/cluster
   commonMetadata:
     labels:
