@@ -3,6 +3,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  #- ./production.yaml
+  - ./production.yaml
+  - ./push-secrets-production.yaml
   - ./push-secrets-staging.yaml
   - ./staging.yaml
