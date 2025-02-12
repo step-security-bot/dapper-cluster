@@ -62,11 +62,11 @@ spec:
               ZIGBEE2MQTT_CONFIG_DEVICE_OPTIONS_LEGACY: "false"
               ZIGBEE2MQTT_CONFIG_DEVICE_OPTIONS_RETAIN: "true"
               ZIGBEE2MQTT_CONFIG_EXPERIMENTAL_NEW_API: "true"
-              ZIGBEE2MQTT_CONFIG_FRONTEND_URL: https://zigbee-garage.${SECRET_DOMAIN}
+              ZIGBEE2MQTT_CONFIG_FRONTEND_URL: https://zigbee  e.${SECRET_DOMAIN}
 
               # MQTT
               ZIGBEE2MQTT_CONFIG_MQTT_SERVER: mqtt://emqx-listeners.database.svc.cluster.local:1883
-              ZIGBEE2MQTT_CONFIG_MQTT_CLIENT_ID: zigbee2mqtt-garage_2lSy3S7jnb
+              ZIGBEE2MQTT_CONFIG_MQTT_CLIENT_ID: zigbee2mqtt_2lSy3S7jnb
               ZIGBEE2MQTT_CONFIG_MQTT_REJECT_UNAUTHORIZED: "true"
               ZIGBEE2MQTT_CONFIG_MQTT_INCLUDE_DEVICE_INFORMATION: "true"
               ZIGBEE2MQTT_CONFIG_MQTT_KEEPALIVE: 60
