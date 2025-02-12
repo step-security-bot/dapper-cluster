@@ -6,6 +6,8 @@ metadata:
   namespace: &namespace media
 spec:
   targetNamespace: *namespace
+  components:
+    - ../../../../flux/components/volsync
   dependsOn:
     - name: volsync
       namespace: storage
