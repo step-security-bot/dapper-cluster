@@ -99,6 +99,8 @@ spec:
             port: *port
     ingress:
       app:
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         className: external
         hosts:
           - host: &host status.${SECRET_DOMAIN}
