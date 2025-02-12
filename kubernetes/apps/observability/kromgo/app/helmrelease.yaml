@@ -85,6 +85,11 @@ spec:
                 service:
                   identifier: app
                   port: http
+        tls: &tls
+          - hosts:
+              - *host
+            secretName: "${SECRET_DOMAIN/./-}-tls"
+
     persistence:
       config-file:
         type: configMap
