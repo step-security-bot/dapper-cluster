@@ -6,6 +6,8 @@ metadata:
   name: &app echo-server
   namespace: &namespace default
 spec:
+  components:
+    - ../../../../flux/components/gatus/external
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app

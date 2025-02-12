@@ -8,6 +8,7 @@ metadata:
 spec:
   targetNamespace: *namespace
   components:
+    - ../../../../flux/components/gatus/external
     - ../../../../flux/components/volsync
   dependsOn:
     - name: volsync
