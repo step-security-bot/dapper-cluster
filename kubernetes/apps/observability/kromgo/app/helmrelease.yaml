@@ -77,6 +77,8 @@ spec:
             port: *healthPort
     ingress:
       app:
+        annotations:
+          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
         className: external
         hosts:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
@@ -85,7 +87,7 @@ spec:
                 service:
                   identifier: app
                   port: http
-        tls: &tls
+        tls:
           - hosts:
               - *host
             secretName: "${SECRET_DOMAIN/./-}-tls"
