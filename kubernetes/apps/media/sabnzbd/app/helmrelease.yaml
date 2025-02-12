@@ -118,7 +118,7 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: ${SECRET_DOMAIN_MEDIA/./-}-production-tls
+            secretName: ${SECRET_DOMAIN_MEDIA/./-}-tls
     persistence:
       config:
         existingClaim: sabnzbd

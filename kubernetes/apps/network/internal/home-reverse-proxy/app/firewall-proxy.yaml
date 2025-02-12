@@ -21,7 +21,7 @@ spec:
   tls:
     - hosts:
         - &host "firewall.${SECRET_DOMAIN}"
-      secretName: ${SECRET_DOMAIN/./-}-production-tls
+      secretName: ${SECRET_DOMAIN/./-}-tls
   rules:
     - host: *host
       http:

@@ -289,7 +289,7 @@ spec:
       hosts:
         - &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
       tls:
-        - secretName: ${SECRET_DOMAIN/./-}-production-tls
+        - secretName: ${SECRET_DOMAIN/./-}-tls
           hosts:
             - *host
     persistence:

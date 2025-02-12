@@ -84,7 +84,7 @@ spec:
         external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
       host: chat.${SECRET_DOMAIN}
       tls: true
-      existingSecret: ${SECRET_DOMAIN/./-}-production-tls
+      existingSecret: ${SECRET_DOMAIN/./-}-tls
     persistence:
       enabled: true
       existingClaim: open-webui

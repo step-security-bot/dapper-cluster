@@ -22,7 +22,7 @@ spec:
   tls:
     - hosts:
         - &host "circe.${SECRET_DOMAIN}"
-      secretName: ${SECRET_DOMAIN/./-}-production-tls
+      secretName: ${SECRET_DOMAIN/./-}-tls
   rules:
     - host: *host
       http:
@@ -58,7 +58,7 @@ spec:
   tls:
     - hosts:
         - &host "athena.${SECRET_DOMAIN}"
-      secretName: ${SECRET_DOMAIN/./-}-production-tls
+      secretName: ${SECRET_DOMAIN/./-}-tls
   rules:
     - host: *host
       http:

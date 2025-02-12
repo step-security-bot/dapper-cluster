@@ -113,7 +113,7 @@ spec:
         tls:
           - hosts:
               - *host
-            secretName: ${SECRET_DOMAIN/./-}-production-tls
+            secretName: ${SECRET_DOMAIN/./-}-tls
       code-server:
         annotations:
           external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
@@ -128,7 +128,7 @@ spec:
         tls:
           - hosts:
               - *code_host
-            secretName: ${SECRET_DOMAIN/./-}-production-tls
+            secretName: ${SECRET_DOMAIN/./-}-tls
     persistence:
       config:
         existingClaim: home-assistant

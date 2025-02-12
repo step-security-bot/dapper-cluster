@@ -20,7 +20,7 @@ spec:
   tls:
     - hosts:
         - &host "vault.${SECRET_DOMAIN_MEDIA}"
-      secretName: ${SECRET_DOMAIN_MEDIA/./-}-production-tls
+      secretName: ${SECRET_DOMAIN_MEDIA/./-}-tls
   rules:
     - host: *host
       http:

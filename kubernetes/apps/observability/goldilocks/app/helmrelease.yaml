@@ -53,7 +53,7 @@ spec:
               - path: /
                 type: ImplementationSpecific
         tls:
-          - secretName: ${SECRET_DOMAIN/./-}-production-tls
+          - secretName: ${SECRET_DOMAIN/./-}-tls
             hosts:
               - *host
       resources:

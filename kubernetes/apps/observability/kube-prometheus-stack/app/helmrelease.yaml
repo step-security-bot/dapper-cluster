@@ -44,7 +44,7 @@ spec:
         tls:
           - hosts:
               - alertmanager.${SECRET_DOMAIN}
-            secretName: ${SECRET_DOMAIN/./-}-production-tls
+            secretName: ${SECRET_DOMAIN/./-}-tls
         pathType: Prefix
       alertmanagerSpec:
         useExistingSecret: true
@@ -82,7 +82,7 @@ spec:
         tls:
           - hosts:
               - prometheus.${SECRET_DOMAIN}
-            secretName: ${SECRET_DOMAIN/./-}-production-tls
+            secretName: ${SECRET_DOMAIN/./-}-tls
         pathType: Prefix
       prometheusSpec:
         scrapeInterval: 1m # Must match interval in Grafana Helm chart
