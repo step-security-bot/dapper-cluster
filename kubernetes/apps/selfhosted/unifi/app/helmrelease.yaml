@@ -27,7 +27,7 @@ spec:
     keepHistory: false
   dependsOn:
     - name: volsync
-      namespace: volsync-system
+      namespace: storage
   values:
     controllers:
       unifi:

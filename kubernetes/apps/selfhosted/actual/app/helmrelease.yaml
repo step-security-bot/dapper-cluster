@@ -16,7 +16,7 @@ spec:
         namespace: flux-system
   dependsOn:
     - name: volsync
-      namespace: volsync-system
+      namespace: storage
   values:
     controllers:
       actual:
