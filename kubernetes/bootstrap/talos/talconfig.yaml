@@ -196,12 +196,13 @@ nodes:
       - "@./patches/storage/mayastor.yaml"
 # Global patches
 patches:
+  - "@./patches/global/cluster-discovery.yaml"
   - "@./patches/global/machine-files.yaml"
+  - "@./patches/global/machine-gh-actions.yaml"
   - "@./patches/global/machine-kubelet.yaml"
   - "@./patches/global/machine-network.yaml"
   - "@./patches/global/machine-sysctls.yaml"
   - "@./patches/global/machine-time.yaml"
-  - "@./patches/global/cluster-discovery.yaml"
   - "@./patches/global/openebs-local.yaml"
 
 # Controller patches
