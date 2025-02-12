@@ -9,6 +9,7 @@ on:
     paths:
       - .github/workflows/docs.yaml
       - docs/**
+      - README.md
 
 permissions:
   actions: write
@@ -27,7 +28,7 @@ jobs:
         uses: actions/create-github-app-token@v1
         id: app-token
         with:
-          app-id: "${{ secrets.DUNCE_BOT_APP_ID }}"
+          app-id: "${{ secrets.DUNCE_DUNCE_BOT_APP_ID }}"
           private-key: "${{ secrets.DUNCE_BOT_APP_PRIVATE_KEY }}"
 
       - name: Checkout
@@ -64,7 +65,7 @@ jobs:
         uses: actions/create-github-app-token@v1
         id: app-token
         with:
-          app-id: "${{ secrets.DUNCE_BOT_APP_ID }}"
+          app-id: "${{ secrets.DUNCE_DUNCE_BOT_APP_ID }}"
           private-key: "${{ secrets.DUNCE_BOT_APP_PRIVATE_KEY }}"
 
       - name: Deploy to GitHub Pages
