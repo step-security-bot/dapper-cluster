@@ -31,7 +31,7 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      GATUS_PATH: /web/index.html
+      GATUS_PATH: :32500/web/index.html
       GATUS_DOMAIN: ${SECRET_DOMAIN_MEDIA}
       VOLSYNC_CAPACITY: 5Gi
 
