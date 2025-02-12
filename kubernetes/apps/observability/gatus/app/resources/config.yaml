@@ -37,3 +37,13 @@ endpoints:
       - "[STATUS] == 404"
     alerts:
       - type: pushover
+  - name: turtleassmedia
+    group: external
+    url: 'https://plex.${SECRET_DOMAIN_MEDIA}'
+    interval: 1m
+    client:
+      dns-resolver: tcp://1.1.1.1:53
+    conditions:
+      - "[STATUS] == 404"
+    alerts:
+      - type: pushover
