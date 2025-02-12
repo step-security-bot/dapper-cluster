@@ -37,7 +37,7 @@ endpoints:
       - "[STATUS] == 404"
     alerts:
       - type: pushover
-  - name: turtleassmedia
+  - name: Plex
     group: external
     url: 'https://plex.${SECRET_DOMAIN_MEDIA}'
     interval: 1m
