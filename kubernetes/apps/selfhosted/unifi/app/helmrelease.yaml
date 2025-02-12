@@ -116,3 +116,7 @@ spec:
         existingClaim: unifi
         globalMounts:
           - path: /usr/lib/unifi/data
+      log:
+        type: emptyDir
+        globalMounts:
+          - path: /dev/log
