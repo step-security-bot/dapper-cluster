@@ -56,7 +56,7 @@ spec:
       namespace: cert-manager
     - name: infisical-secrets
       namespace: external-secrets
-  interval: 30m
+  interval: 5m
   path: ./kubernetes/apps/cert-manager/cert-manager/remotetls
   prune: true
   sourceRef:
@@ -64,7 +64,7 @@ spec:
     name: flux-system
     namespace: flux-system
   targetNamespace: *namespace
-  timeout: 5m
+  timeout: 2m
   wait: true
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
@@ -82,7 +82,7 @@ spec:
       namespace: cert-manager
     - name: infisical-secrets
       namespace: external-secrets
-  interval: 30m
+  interval: 15m
   path: ./kubernetes/apps/cert-manager/cert-manager/tls
   prune: true
   sourceRef:

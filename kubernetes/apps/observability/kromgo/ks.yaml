@@ -17,6 +17,7 @@ spec:
     substitute:
       APP: *app
       GATUS_PATH: /talos_version
+      GATUS_DOMAIN: ${SECRET_DOMAIN}
   prune: true
   sourceRef:
     kind: GitRepository

@@ -13,5 +13,7 @@ spec:
       static:
         - openmediavault-used.manor
         - athena.manor
+        - circe.manor
         - firewall.manor
         - zigbee-controller.manor
+        - zigbee-controller-garage.manor

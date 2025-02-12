@@ -10,6 +10,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   components:
+    - ../../../../flux/components/gatus/external
     - ../../../../flux/components/volsync
   dependsOn:
     - name: volsync
@@ -31,4 +32,6 @@ spec:
   postBuild:
     substitute:
       APP: *app
+      GATUS_SUBDOMAIN: vault
+      GATUS_DOMAIN: ${SECRET_DOMAIN}
       VOLSYNC_CAPACITY: 2Gi

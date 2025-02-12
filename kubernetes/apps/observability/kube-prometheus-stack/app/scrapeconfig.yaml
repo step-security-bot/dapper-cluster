@@ -25,6 +25,7 @@ spec:
   staticConfigs:
     - targets:
         - zigbee-controller.manor
+        - zigbee-controller-garage.manor
   metricsPath: /metrics
   relabelings:
     - action: replace

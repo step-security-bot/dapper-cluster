@@ -6,6 +6,8 @@ metadata:
   name: &app echo-server
   namespace: &namespace default
 spec:
+  components:
+    - ../../../../flux/components/gatus/external
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
@@ -19,3 +21,7 @@ spec:
   targetNamespace: *namespace
   timeout: 5m
   wait: false
+  postBuild:
+    substitute:
+      APP: *app
+      GATUS_DOMAIN: ${SECRET_DOMAIN}
