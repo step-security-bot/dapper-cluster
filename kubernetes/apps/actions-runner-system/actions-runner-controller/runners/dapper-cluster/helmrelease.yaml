@@ -42,6 +42,7 @@ spec:
       valuesKey: ACTION_RUNNER_CONTROLLER_GITHUB_PRIVATE_KEY
   values:
     githubConfigUrl: https://github.com/dapperdivers/dapper-cluster
+    nameOverride: *app
     minRunners: 1
     maxRunners: 6
     containerMode:
@@ -55,9 +56,3 @@ spec:
     controllerServiceAccount:
       name: actions-runner-controller
       namespace: actions-runner-system
-    template:
-      spec:
-        containers:
-          - name: runner
-            image: ghcr.io/onedr0p/actions-runner:2.322.0@sha256:34aa045b8b0b82469bcb5951e244fd2bd41b8abbd493f956092497fcdcd29209
-            command: ["/home/runner/run.sh"]
