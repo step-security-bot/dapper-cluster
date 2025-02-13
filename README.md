@@ -105,7 +105,37 @@ graph TD
 <details>
   <summary>Click here to see my high-level network diagram</summary>
 
-  <img src="https://raw.githubusercontent.com/dapperdivers/dapper-cluster/main/docs/src/assets/network-topology.png" align="center" width="600px" alt="dns"/>
+```mermaid
+graph TD
+    subgraph LAN [LAN - 192.168.1.1/24]
+        OPN[OPNsense Router]
+        SW[Aruba S2500-48p Switch]
+        PH1[Proxmox Host - Kubernetes]
+        PH2[Proxmox Host - NAS]
+    end
+
+    subgraph VLAN100 [SERVERS - 10.100.0.1/24]
+        K8S1[Talos VM 1]
+        K8S2[Talos VM 2]
+        K8S3[Talos VM 3]
+        K8S4[Talos VM 4]
+        K8S5[Talos VM 5]
+        K8S6[Talos VM 6]
+        K8S7[Talos VM 7]
+    end
+
+    OPN --- SW
+    SW --- PH1
+    SW --- PH2
+
+    PH1 --> K8S1
+    PH1 --> K8S2
+    PH1 --> K8S3
+    PH1 --> K8S4
+    PH1 --> K8S5
+    PH1 --> K8S6
+    PH1 --> K8S7
+```
 </details>
 
 ---
@@ -137,23 +167,16 @@ In my cluster there are two instances of [ExternalDNS](https://github.com/kubern
 
 ## <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/2699_fe0f/512.gif" alt="⚙" width="20" height="20"> Hardware
 
-<details>
-  <summary>Click here to see my server rack</summary>
+| Device                    | CPU                                              | RAM   | Storage                                          | Function            |
+|--------------------------|--------------------------------------------------|-------|--------------------------------------------------|---------------------|
+| Proxmox Host (Kubernetes)| 2x Intel Xeon E5-2697A v4 (64 cores @ 2.60GHz)  | 512GB | 1TB NVMe (host), 4x 3.84TB SSD (passthrough)    | Kubernetes Cluster  |
+| Proxmox Host (NAS)       | 2x Intel Xeon E5-2687W (32 cores @ 3.10GHz)     | 126GB | 2x 120GB SSD (boot), 800GB NVMe, Various HDDs   | NAS + Storage       |
+| OPNsense Router          | Intel i3-4130T (2 cores, 4 threads @ 2.90GHz)   | 16GB  | 120GB SSD                                       | Router              |
+| Aruba S2500-48p          | -                                                | -     | -                                               | PoE Switch          |
 
-  <img src="https://raw.githubusercontent.com/dapperdivers/dapper-cluster/main/docs/src/assets/rack.png" align="center" width="200px" alt="dns"/>
-</details>
-
-| Device                      | Num | OS Disk Size | Data Disk Size                  | Ram  | OS            | Function                |
-|-----------------------------|-----|--------------|---------------------------------|------|---------------|-------------------------|
-| ASUS NUC 14 Pro CU 5 125H   | 3   | 1TB SSD      | 1TB (local) / 800GB (rook-ceph) | 96GB | Talos         | Kubernetes              |
-| PowerEdge T340              | 1   | 1TB SSD      | 8x22TB ZFS (mirrored vdevs)     | 64GB | TrueNAS SCALE | NFS + Backup Server     |
-| PiKVM (RasPi 4)             | 1   | 64GB (SD)    | -                               | 4GB  | PiKVM         | KVM                     |
-| TESmart 8 Port KVM Switch   | 1   | -            | -                               | -    | -             | Network KVM (for PiKVM) |
-| UniFi UDMP Max              | 1   | -            | 2x4TB HDD                       | -    | -             | Router & NVR            |
-| UniFi US-16-XG              | 1   | -            | -                               | -    | -             | 10Gb Core Switch        |
-| UniFi USW-Enterprise-24-PoE | 1   | -            | -                               | -    | -             | 2.5Gb PoE Switch        |
-| UniFi USP PDU Pro           | 1   | -            | -                               | -    | -             | PDU                     |
-| APC SMT1500RM2U             | 1   | -            | -                               | -    | -             | UPS                     |
+Additional Hardware:
+- 4x Tesla P100 16GB GPUs (passthrough to Kubernetes host)
+- 7x Virtualized Talos VMs running on Kubernetes host
 
 ---
 
