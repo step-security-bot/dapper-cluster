@@ -43,7 +43,7 @@ spec:
   values:
     githubConfigUrl: https://github.com/dapperdivers/dapper-cluster
     minRunners: 1
-    maxRunners: 3
+    maxRunners: 6
     containerMode:
       type: kubernetes
       kubernetesModeWorkVolumeClaim:
@@ -61,19 +61,3 @@ spec:
           - name: runner
             image: ghcr.io/onedr0p/actions-runner:2.322.0@sha256:34aa045b8b0b82469bcb5951e244fd2bd41b8abbd493f956092497fcdcd29209
             command: ["/home/runner/run.sh"]
-            env:
-              - name: ACTIONS_RUNNER_REQUIRE_JOB_CONTAINER
-                value: "false"
-              - name: NODE
-                valueFrom:
-                  fieldRef:
-                    fieldPath: status.hostIP
-            volumeMounts:
-              - mountPath: /var/run/secrets/talos.dev
-                name: talos
-                readOnly: true
-        serviceAccountName: *name
-        volumes:
-          - name: talos
-            secret:
-              secretName: *name
