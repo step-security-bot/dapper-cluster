@@ -43,6 +43,7 @@ spec:
   values:
     githubConfigUrl: https://github.com/dapperdivers/dapper-cluster
     nameOverride: *app
+    runnerScaleSetName: *app
     minRunners: 1
     maxRunners: 6
     containerMode:
