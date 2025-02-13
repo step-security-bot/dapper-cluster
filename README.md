@@ -93,11 +93,26 @@ This is a high-level look how Flux deploys my applications with dependencies. In
 
 ```mermaid
 graph TD
-    A>Kustomization: openebs] -->|Creates| B[HelmRelease: openebs]
-    A>Kustomization: openebs] -->|Creates| C[HelmRelease: mayastor]
-    C>HelmRelease: mayastor] -->|Depends on| B>HelmRelease: openebs]
-    D>Kustomization: atuin] -->|Creates| E(HelmRelease: atuin)
-    E>HelmRelease: atuin] -->|Depends on| C>HelmRelease: mayastor]
+    %% Styling
+    classDef kustomization fill:#2f73d8,stroke:#fff,stroke-width:2px,color:#fff
+    classDef helmRelease fill:#389826,stroke:#fff,stroke-width:2px,color:#fff
+
+    %% Nodes
+    A>Kustomization: openebs]:::kustomization
+    B[HelmRelease: openebs]:::helmRelease
+    C[HelmRelease: mayastor]:::helmRelease
+    D>Kustomization: atuin]:::kustomization
+    E[HelmRelease: atuin]:::helmRelease
+
+    %% Relationships with styled edges
+    A -->|Creates| B
+    A -->|Creates| C
+    C -->|Depends on| B
+    D -->|Creates| E
+    E -->|Depends on| C
+
+    %% Link styling
+    linkStyle default stroke:#666,stroke-width:2px
 ```
 
 ### Networking
@@ -107,27 +122,34 @@ graph TD
 
 ```mermaid
 graph TD
+    %% Styling
+    classDef network fill:#2f73d8,stroke:#fff,stroke-width:2px,color:#fff
+    classDef hardware fill:#d83933,stroke:#fff,stroke-width:2px,color:#fff
+    classDef vm fill:#389826,stroke:#fff,stroke-width:2px,color:#fff
+
     subgraph LAN [LAN - 192.168.1.1/24]
-        OPN[OPNsense Router]
-        SW[Aruba S2500-48p Switch]
-        PH1[Proxmox Host - Kubernetes]
-        PH2[Proxmox Host - NAS]
+        OPN[OPNsense Router]:::hardware
+        SW[Aruba S2500-48p Switch]:::hardware
+        PH1[Proxmox Host - Kubernetes]:::hardware
+        PH2[Proxmox Host - NAS]:::hardware
     end
 
     subgraph VLAN100 [SERVERS - 10.100.0.1/24]
-        K8S1[Talos VM 1]
-        K8S2[Talos VM 2]
-        K8S3[Talos VM 3]
-        K8S4[Talos VM 4]
-        K8S5[Talos VM 5]
-        K8S6[Talos VM 6]
-        K8S7[Talos VM 7]
+        K8S1[Talos VM 1]:::vm
+        K8S2[Talos VM 2]:::vm
+        K8S3[Talos VM 3]:::vm
+        K8S4[Talos VM 4]:::vm
+        K8S5[Talos VM 5]:::vm
+        K8S6[Talos VM 6]:::vm
+        K8S7[Talos VM 7]:::vm
     end
 
+    %% Network connections with styled edges
     OPN --- SW
     SW --- PH1
     SW --- PH2
 
+    %% VM connections with styled edges
     PH1 --> K8S1
     PH1 --> K8S2
     PH1 --> K8S3
@@ -135,6 +157,13 @@ graph TD
     PH1 --> K8S5
     PH1 --> K8S6
     PH1 --> K8S7
+
+    %% Subgraph styling
+    style LAN fill:#f5f5f5,stroke:#666,stroke-width:2px
+    style VLAN100 fill:#f5f5f5,stroke:#666,stroke-width:2px
+
+    %% Link styling
+    linkStyle default stroke:#666,stroke-width:2px
 ```
 </details>
 
