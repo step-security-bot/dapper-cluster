@@ -82,6 +82,17 @@ spec:
       class: internal
       annotations:
         external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
+        nginx.ingress.kubernetes.io/server-snippet: |
+          location /{
+            # Add WebSocket support
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+
+            # Timeouts for WebSocket connections
+            proxy_read_timeout 60s;
+            proxy_send_timeout 60s;
+          }
       host: chat.${SECRET_DOMAIN}
       tls: true
       existingSecret: ${SECRET_DOMAIN/./-}-tls
