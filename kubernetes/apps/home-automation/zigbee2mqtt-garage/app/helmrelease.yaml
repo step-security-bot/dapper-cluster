@@ -100,8 +100,8 @@ spec:
               tag: 4.96.4@sha256:f93810f7f6636b3af3b1a750faf612349cddb89fbb6d28d69123a214fc75ee9e
             args: [
               "--auth", "none",
-              "--user-data-dir", "/config/.vscode",
-              "--extensions-dir", "/config/.vscode",
+              "--user-data-dir", "/app/data/.vscode",
+              "--extensions-dir", "/app/data/.vscode",
               "--port", "12321",
               "/app/data"
             ]
