@@ -88,10 +88,11 @@ spec:
     persistence:
       enabled: true
       existingClaim: open-webui
+    podSecurityContext:
+      supplementalGroups: [140]
     containerSecurityContext:
       runAsUser: 1000
       runAsGroup: 150
-      fsGroup: 140
       runAsNonRoot: true
       privileged: false
       allowPrivilegeEscalation: false
