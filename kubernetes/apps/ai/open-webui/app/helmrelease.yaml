@@ -91,6 +91,7 @@ spec:
     containerSecurityContext:
       runAsUser: 1000
       runAsGroup: 150
+      fsGroup: 140
       runAsNonRoot: true
       privileged: false
       allowPrivilegeEscalation: false
