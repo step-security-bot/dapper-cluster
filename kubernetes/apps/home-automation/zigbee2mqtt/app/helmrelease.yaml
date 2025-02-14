@@ -93,6 +93,17 @@ spec:
               limits:
                 memory: 1Gi
                 cpu: 1
+          code-server:
+            image:
+              repository: ghcr.io/coder/code-server
+              tag: 4.96.4@sha256:f93810f7f6636b3af3b1a750faf612349cddb89fbb6d28d69123a214fc75ee9e
+            args: [
+              "--auth", "none",
+              "--user-data-dir", "/config/.vscode",
+              "--extensions-dir", "/config/.vscode",
+              "--port", "12321",
+              "/app/data"
+            ]
     service:
       app:
         controller: zigbee2mqtt
@@ -102,6 +113,8 @@ spec:
             port: 8080
           metrict:
             port: 9000
+          code-server:
+            port: 12321
     ingress:
       app:
         annotations:
@@ -117,6 +130,21 @@ spec:
         tls:
           - hosts:
               - *host
+            secretName: ${SECRET_DOMAIN/./-}-tls
+      code-server:
+        annotations:
+          external-dns.alpha.kubernetes.io/target: internal.${SECRET_DOMAIN}
+        className: internal
+        hosts:
+          - host: &code_host zigbee-code.${SECRET_DOMAIN}
+            paths:
+              - path: /
+                service:
+                  identifier: app
+                  port: code-server
+        tls:
+          - hosts:
+              - *code_host
             secretName: ${SECRET_DOMAIN/./-}-tls
 
     persistence:
