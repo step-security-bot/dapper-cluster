@@ -45,6 +45,12 @@ spec:
               repository: ghcr.io/atuinsh/atuin
               tag: 18.4.0@sha256:8c6fa0aea944bf2a39665c9c69df1c2c0f9c05207bda5b942d450142285e3ee1
             env:
+              TZ: ${TIME_ZONE}
+              ATUIN_DB_URI:
+                valueFrom:
+                  secretKeyRef:
+                    name: atuin-db-secret
+                    key: ATUIN_DB_URI
               ATUIN_HOST: 0.0.0.0
               ATUIN_PORT: &port 80
               ATUIN_OPEN_REGISTRATION: "true"
