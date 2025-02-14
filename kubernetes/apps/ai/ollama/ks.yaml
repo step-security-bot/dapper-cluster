@@ -1,17 +1,25 @@
+---
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app open-webui
-  namespace: &namespace selfhosted
+  name: &app ollama
+  namespace: &namespace ai
 spec:
   targetNamespace: *namespace
-  dependsOn:
-    - name: volsync
-      namespace: storage
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
   components:
     - ../../../../flux/components/volsync
-  path: ./kubernetes/apps/selfhosted/open-webui/app
+  dependsOn:
+    - name: nvidia-device-plugin
+      namespace: kube-system
+    - name: volsync
+      namespace: storage
+    - name: external-secrets-stores
+      namespace: external-secrets
+  path: ./kubernetes/apps/ai/ollama/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -20,8 +28,9 @@ spec:
   wait: true
   interval: 30m
   retryInterval: 1m
-  timeout: 5m
+  timeout: 10m
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CAPACITY: 5Gi
+      VOLSYNC_CAPACITY: 100Gi
+      VOLSYNC_CACHE_CAPACITY: 10Gi

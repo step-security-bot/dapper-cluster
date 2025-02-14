@@ -14,7 +14,7 @@ spec:
       namespace: database
     - name: external-secrets-stores
       namespace: external-secrets
-  path: ./kubernetes/apps/media/atuin/app
+  path: ./kubernetes/apps/selfhosted/atuin/app
   prune: true
   sourceRef:
     kind: GitRepository

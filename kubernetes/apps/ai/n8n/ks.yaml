@@ -3,10 +3,11 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app n8n
-  namespace: &namespace selfhosted
+  namespace: &namespace ai
 spec:
   targetNamespace: *namespace
   components:
+    - ../../../../flux/components/gatus/internal
     - ../../../../flux/components/volsync
   dependsOn:
     - name: volsync
@@ -15,7 +16,7 @@ spec:
       namespace: database
     - name: external-secrets-stores
       namespace: external-secrets
-  path: ./kubernetes/apps/selfhosted/n8n/app
+  path: ./kubernetes/apps/ai/n8n/app
   prune: true
   sourceRef:
     kind: GitRepository
@@ -29,3 +30,5 @@ spec:
     substitute:
       APP: *app
       VOLSYNC_CAPACITY: 2Gi
+      GATUS_SUBDOMAIN: n8n
+      GATUS_DOMAIN: ${SECRET_DOMAIN}

@@ -26,7 +26,7 @@ spec:
     keepHistory: false
   dependsOn:
     - name: ollama
-      namespace: selfhosted
+      namespace: ai
     - name: volsync
       namespace: storage
 
@@ -37,7 +37,7 @@ spec:
       resources: {}
     ollama:
       enabled: false
-    ollamaUrls: ["http://ollama.selfhosted.svc.cluster.local:11434"]
+    ollamaUrls: ["http://ollama.ai.svc.cluster.local:11434"]
     pipelines:
       enabled: true
       persistence:
