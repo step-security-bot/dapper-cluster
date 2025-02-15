@@ -99,8 +99,8 @@ spec:
     persistence:
       config:
         enabled: true
-        globalMounts: /home/node/.n8n
         existingClaim: n8n
+        globalMounts: /home/node/.n8n
       files:
         enabled: true
         existingClaim: n8n-files
