@@ -37,6 +37,7 @@ spec:
               N8N_PORT: &port 80
               N8N_HOST: &host "n8n.${SECRET_DOMAIN}"
               WEBHOOK_URL: "https://n8n.${SECRET_DOMAIN}"
+              N8N_USER_FOLDER: /config
 
               # User management
               #EXTERNAL_HOOK_FILES: /home/node/.n8n/hooks.js
@@ -95,12 +96,10 @@ spec:
           - hosts:
               - *host
             secretName: ${SECRET_DOMAIN/./-}-tls
-
     persistence:
       config:
         enabled: true
         existingClaim: n8n
-        globalMounts: /home/node/.n8n
       files:
         enabled: true
         existingClaim: n8n-files
