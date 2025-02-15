@@ -112,6 +112,10 @@ spec:
       config:
         enabled: true
         existingClaim: n8n
+      cache:
+        type: emptyDir
+        globalMounts:
+          - path: /config/.cache
       files:
         enabled: true
         existingClaim: n8n-files
