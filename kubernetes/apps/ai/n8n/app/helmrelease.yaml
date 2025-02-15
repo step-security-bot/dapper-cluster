@@ -49,7 +49,7 @@ spec:
 
               # User management
               EXTERNAL_HOOK_FILES: /config/.n8n/hooks.js
-              N8N_FORWARD_AUTH_HEADER: Remote-Email
+              N8N_FORWARD_AUTH_HEADER: X-authentik-email
 
               # App Configuration
               N8N_PERSONALIZATION_ENABLED: false
