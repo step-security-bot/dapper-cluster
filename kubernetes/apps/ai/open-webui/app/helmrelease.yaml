@@ -48,8 +48,6 @@ spec:
       enabled: true
 
     extraEnvVars:
-      - name: OLLAMA_DEBUG
-        value: "1"
       - name: ENABLE_LOGIN_FORM
         value: "false"
       - name: OAUTH_PROVIDER_NAME
