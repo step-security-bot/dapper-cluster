@@ -37,7 +37,7 @@ spec:
               N8N_PORT: &port 80
               N8N_HOST: &host "n8n.${SECRET_DOMAIN}"
               WEBHOOK_URL: "https://n8n.${SECRET_DOMAIN}"
-              N8N_USER_FOLDER: /config
+              N8N_USER_FOLDER: /config/.n8n
 
               # User management
               EXTERNAL_HOOK_FILES: /config/.n8n/hooks.js
@@ -65,13 +65,17 @@ spec:
               #N8N_ENCRYPTION_KEY
               - secretRef:
                   name: n8n-secret
-        pod:
-          nodeSelector:
-            kubernetes.io/arch: amd64
-          securityContext:
-            runAsUser: 1000
-            runAsGroup: 150
-            fsGroupChangePolicy: "OnRootMismatch"
+    podSecurityContext:
+      supplementalGroups: [140]
+    containerSecurityContext:
+      runAsUser: 1000
+      runAsGroup: 150
+      runAsNonRoot: true
+      privileged: false
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: false
+      capabilities: { drop: ["ALL"] }
+      seccompProfile: { type: RuntimeDefault }
     service:
       app:
         controller: n8n
