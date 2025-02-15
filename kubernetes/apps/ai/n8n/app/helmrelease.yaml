@@ -39,7 +39,7 @@ spec:
               WEBHOOK_URL: "https://n8n.${SECRET_DOMAIN}"
 
               # User management
-              EXTERNAL_HOOK_FILES: /home/node/.n8n/hooks.js
+              #EXTERNAL_HOOK_FILES: /home/node/.n8n/hooks.js
               N8N_FORWARD_AUTH_HEADER: Remote-Email
 
               # App Configuration
