@@ -72,10 +72,7 @@ spec:
       readOnlyRootFilesystem: true
       capabilities: { drop: ["ALL"] }
     securityContext:
-      runAsNonRoot: true
-      runAsUser: 1000
-      runAsGroup: 150
-      fsGroup: 140
+      runAsNonRoot: false
       fsGroupChangePolicy: OnRootMismatch
       seccompProfile: { type: RuntimeDefault }
     volumes:
