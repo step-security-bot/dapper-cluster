@@ -17,6 +17,14 @@ spec:
         namespace: flux-system
 
   values:
+
+    resources:
+      requests:
+        cpu: 20m
+        memory: 128M
+      limits:
+        memory: 512M
+
     controllers:
       n8n:
         initContainers:
@@ -37,7 +45,7 @@ spec:
               N8N_PORT: &port 80
               N8N_HOST: &host "n8n.${SECRET_DOMAIN}"
               WEBHOOK_URL: "https://n8n.${SECRET_DOMAIN}"
-              N8N_USER_FOLDER: /config/.n8n
+              N8N_USER_FOLDER: /config
 
               # User management
               EXTERNAL_HOOK_FILES: /config/.n8n/hooks.js
@@ -109,10 +117,3 @@ spec:
         existingClaim: n8n-files
         globalMounts:
           - path: /files
-
-    resources:
-      requests:
-        cpu: 20m
-        memory: 128M
-      limits:
-        memory: 512M
