@@ -48,6 +48,7 @@ spec:
               N8N_HIRING_BANNER_ENABLED: false
               N8N_USER_MANAGEMENT_DISABLED: true
               N8N_TEMPLATES_ENABLED: false
+              N8N_PROXY_HOPS: "1"
 
               # Logging
               N8N_LOG_LEVEL: verbose
@@ -69,7 +70,6 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 150
-            fsGroup: 140
             fsGroupChangePolicy: "OnRootMismatch"
     service:
       app:
@@ -99,6 +99,7 @@ spec:
     persistence:
       config:
         enabled: true
+        globalMounts: /home/node/.n8n
         existingClaim: n8n
       files:
         enabled: true
