@@ -44,6 +44,8 @@ spec:
         existingClaim: open-webui-pipelines
     tika:
       enabled: true
+    websocket:
+      enabled: true
 
     extraEnvVars:
       - name: ENABLE_LOGIN_FORM
