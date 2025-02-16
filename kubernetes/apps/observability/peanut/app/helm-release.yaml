@@ -29,8 +29,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/brandawg93/peanut
-              tag: v5.3.0
+              repository: brandawg93/peanut
+              tag: 5.3.0
             securityContext:
               privileged: true
             resources:
