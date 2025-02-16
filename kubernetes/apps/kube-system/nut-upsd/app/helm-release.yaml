@@ -44,9 +44,9 @@ spec:
               DRIVER: "usbhid-ups"
               DESCRIPTION: "Smart-UPS 1500"
               SERIAL: "AS1324133052"
-            envFrom:
-              - secretRef:
-                  name: nut-upsd-secret
+            # envFrom:
+  #              - secretRef:
+   #               name: nut-upsd-secret
         pod:
           nodeSelector:
             ups.feature.node.kubernetes.io/apc: "true"
