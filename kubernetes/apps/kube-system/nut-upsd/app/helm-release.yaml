@@ -25,7 +25,7 @@ spec:
     keepHistory: false
   values:
     controllers:
-      nut:
+      nut-upsd:
         containers:
           app:
             image:
@@ -51,23 +51,11 @@ spec:
             ups.feature.node.kubernetes.io/apc: "true"
     service:
       app:
-        controller: nut
+        type: LoadBalancer
+        controller: *app
+        annotations:
+          lbipam.cilium.io/ips: &ip ${NUT_VIP_GATEWAY}
         ports:
           http:
             port: 3493
-    ingress:
-      app:
-        annotations:
-          external-dns.alpha.kubernetes.io/target: "internal.${SECRET_DOMAIN}"
-        className: internal
-        hosts:
-          - host: &host ups.${SECRET_DOMAIN}
-            paths:
-              - path: /
-                service:
-                  identifier: app
-                  port: http
-        tls:
-          - hosts:
-              - *host
-            secretName: ${SECRET_DOMAIN/./-}-tls
+            protocol: TCP
