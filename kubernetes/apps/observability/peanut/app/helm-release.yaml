@@ -45,9 +45,6 @@ spec:
             envFrom:
               - secretRef:
                   name: peanut-secret
-        pod:
-          nodeSelector:
-            ups.feature.node.kubernetes.io/apc: "true"
     service:
       app:
         controller: peanut
