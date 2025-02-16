@@ -1,4 +1,7 @@
 machine:
+  udev:
+    rules:
+       - KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTR{idVendor}=="051d", ATTR{idProduct}=="0003", MODE="0660" GROUP="nut"
   features:
     rbac: true
     stableHostname: true
