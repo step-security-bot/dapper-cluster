@@ -10,10 +10,10 @@ spec:
       rules:
         - alert: UPSOnBattery
           expr: |
-            (upsAdvBatteryRunTimeRemaining/60/100 <= 20 and upsBasicBatteryTimeOnBattery > 0)
+            (upsAdvBatteryRunTimeRemaining/60/100 <= 5 and upsBasicBatteryTimeOnBattery > 0)
           annotations:
             summary: >
-              ZPM {{$labels.instance}} is running on batteries and has less than 20 minutes of battery left
-          for: 5m
+              ZPM {{$labels.instance}} is running on batteries and has less than 5 minutes of battery left
+          for: 30s
           labels:
             severity: critical

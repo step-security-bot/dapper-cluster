@@ -30,14 +30,14 @@ spec:
     serviceMonitor:
       enabled: true
       params:
-        - name: apcups
-          module: ["apcups"]
-          target: 192.168.1.80
-          auth: ["public_v2"]
-        - name: dell
-          module: ["dell"]
-          target: 192.168.1.82
-          auth: ["public_v2"]
+        #- name: apcups
+        #  module: ["apcups"]
+        #  target:
+        #  auth: ["public_v2"]
+        #- name: dell
+        #  module: ["dell"]
+        #  target: 192.168.1.82
+        #  auth: ["public_v2"]
       path: /snmp
       scrapeTimeout: 10s
       relabelings:
