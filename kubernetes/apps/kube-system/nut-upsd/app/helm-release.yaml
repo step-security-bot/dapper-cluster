@@ -52,7 +52,7 @@ spec:
     service:
       app:
         type: LoadBalancer
-        controller: *app
+        controller: nut-upsd
         annotations:
           lbipam.cilium.io/ips: &ip ${NUT_VIP_GATEWAY}
         ports:
