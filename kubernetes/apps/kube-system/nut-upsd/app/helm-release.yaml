@@ -42,7 +42,8 @@ spec:
             env:
               TZ: ${TIME_ZONE}
               DRIVER: "usbhid-ups"
-              DESCRIPTION: "Main Cluster UPS"
+              DESCRIPTION: "Smart-UPS 1500"
+              SERIAL: "AS1324133052"
             envFrom:
               - secretRef:
                   name: nut-upsd-secret
