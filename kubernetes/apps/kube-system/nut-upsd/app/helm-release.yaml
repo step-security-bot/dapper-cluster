@@ -25,9 +25,9 @@ spec:
     keepHistory: false
   values:
     controllers:
-      main:
+      nut:
         containers:
-          main:
+          app:
             image:
               repository: docker.io/instantlinux/nut-upsd
               tag: 2.8.2-r0
@@ -50,8 +50,8 @@ spec:
           nodeSelector:
             ups.feature.node.kubernetes.io/apc: "true"
     service:
-      main:
-        controller: main
+      app:
+        controller: nut
         ports:
           http:
             port: 3493
