@@ -47,7 +47,7 @@ spec:
                   name: nut-upsd-secret
         pod:
           nodeSelector:
-            apc.feature.node.kubernetes.io/1500s: "true"
+            ups.feature.node.kubernetes.io/apc: "true"
     service:
       main:
         controller: main
