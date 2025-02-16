@@ -77,4 +77,4 @@ spec:
                 - nut-upsd.kube-system.svc.cluster.local:3493
             relabelings:
               - sourceLabels: [__param_target]
-                targetLabel: target
+                targetLabel: target #
