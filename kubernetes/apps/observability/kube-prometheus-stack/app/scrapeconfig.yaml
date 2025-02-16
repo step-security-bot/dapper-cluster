@@ -37,11 +37,11 @@ spec:
 apiVersion: monitoring.coreos.com/v1alpha1
 kind: ScrapeConfig
 metadata:
-  name: &name zigbee-controller
+  name: &name nut
 spec:
   staticConfigs:
     - targets:
-        - nut-upsd.kube-system.svc.cluster.local
+        - nut-upsd.kube-system.svc.cluster.local:3493
   metricsPath: /nut
   relabelings:
     - action: replace
