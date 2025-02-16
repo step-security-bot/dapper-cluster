@@ -12,7 +12,7 @@ spec:
       version: 3.7.1
       sourceRef:
         kind: HelmRepository
-        name: flux-system
+        name: bjw-s
         namespace: flux-system
   install:
     remediation:
@@ -40,6 +40,7 @@ spec:
               limits:
                 memory: 256Mi
             env:
+              TZ: ${TIME_ZONE}
               DRIVER: "usbhid-ups"
               DESCRIPTION: "Main Cluster UPS"
             envFrom:
