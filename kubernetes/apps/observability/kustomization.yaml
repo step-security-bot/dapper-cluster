@@ -12,6 +12,7 @@ resources:
   - ./gatus/ks.yaml
   - ./grafana/ks.yaml
   - ./goldilocks/ks.yaml
+  - ./peanut/ks.yaml
   - ./promtail/ks.yaml
   - ./kromgo/ks.yaml
   - ./kube-prometheus-stack/ks.yaml
