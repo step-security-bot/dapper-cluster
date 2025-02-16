@@ -95,11 +95,6 @@ spec:
               path: /var/lib/grafana/dashboards/default
     dashboards:
       default:
-        nut-exporter:
-          # renovate: depName="UPS Monitoring using DRuggeri/nut_exporter"
-          gnetId: 19308
-          revision: 3
-          datasource: Prometheus
         cert-manager:
           # renovate: depName="Cert-manager-Kubernetes"
           gnetId: 20842
