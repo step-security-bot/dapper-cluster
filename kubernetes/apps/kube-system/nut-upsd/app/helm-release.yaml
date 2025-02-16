@@ -57,5 +57,5 @@ spec:
           lbipam.cilium.io/ips: &ip ${NUT_VIP_GATEWAY}
         ports:
           http:
-            port: 3493
+            port: 3493 # redeploy
             protocol: TCP
