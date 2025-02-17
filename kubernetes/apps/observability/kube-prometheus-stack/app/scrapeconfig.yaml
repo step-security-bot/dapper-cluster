@@ -8,8 +8,6 @@ spec:
   staticConfigs:
     - targets:
       - openmediavault-used.manor:9100
-      - athena.manor:9221  # Proxmox VE node with PVE exporter.
-      - circe.manor:9221
   metricsPath: /metrics
   relabelings:
     - action: replace
