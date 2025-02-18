@@ -20,7 +20,7 @@ spec:
       namespace: network
     - name: external-secrets-stores
       namespace: external-secrets
-  path: ./kubernetes/apps/home-automation/home-assistant/app # redeploy
+  path: ./kubernetes/apps/home-automation/home-assistant/app
   prune: true
   sourceRef:
     kind: GitRepository
