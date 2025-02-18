@@ -87,4 +87,4 @@ spec:
       enabled: false
     prometheus:
       rules:
-        enabled: true # redeploy
+        enabled: true
