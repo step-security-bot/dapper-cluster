@@ -11,7 +11,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   components:
-    - ../../../../flux/components/volsync
+    - ../../../../flux/components/gatus/external
   interval: 30m
   timeout: 5m
   path: "./kubernetes/apps/selfhosted/resume/app"
@@ -27,4 +27,5 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CAPACITY: 1Gi
+      GATUS_SUBDOMAIN: resume
+      GATUS_DOMAIN: ${SECRET_DOMAIN_PERSONAL}
