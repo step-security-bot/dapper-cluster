@@ -25,7 +25,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/dapperdivers/developer-portfolio:sha-283c2fb2f72840bc53c100896955dae22e0709a1
+              repository: ghcr.io/dapperdivers/developer-portfolio
+              tag: sha-283c2fb2f72840bc53c100896955dae22e0709a1
             env:
               ALLOWED_DOMAINS: ${SECRET_DOMAIN_PERSONAL}
             securityContext:
