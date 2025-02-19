@@ -25,7 +25,9 @@ spec:
         containers:
           app:
             image:
-              repository: jdkelley/simple-http-server:latest
+              repository: ghcr.io/dapperdivers/developer-portfolio:sha-283c2fb2f72840bc53c100896955dae22e0709a1
+            env:
+              ALLOWED_DOMAINS: ${SECRET_DOMAIN_PERSONAL}
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
@@ -38,8 +40,8 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /
-                    port: 8000
+                    path: /healthz
+                    port: 3001
                   initialDelaySeconds: 0
                   periodSeconds: 10
                   timeoutSeconds: 1
@@ -56,7 +58,7 @@ spec:
         controller: *app
         ports:
           http:
-            port: 8000
+            port: 3001
     ingress:
       app:
         annotations:
