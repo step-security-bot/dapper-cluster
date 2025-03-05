@@ -11,3 +11,4 @@ parameters:
   repl: "1"
   thin: "true"
 provisioner: io.openebs.csi-mayastor
+allowVolumeExpansion: true
