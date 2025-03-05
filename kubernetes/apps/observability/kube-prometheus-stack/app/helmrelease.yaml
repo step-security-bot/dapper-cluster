@@ -108,7 +108,7 @@ spec:
               storageClassName: mayastor-single-replica
               resources:
                 requests:
-                  storage: 20Gi
+                  storage: 100Gi
     prometheus-node-exporter:
       fullnameOverride: node-exporter
       prometheus:
