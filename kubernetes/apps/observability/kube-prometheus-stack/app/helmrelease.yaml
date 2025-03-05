@@ -53,7 +53,7 @@ spec:
               storageClassName: mayastor-single-replica
               resources:
                 requests:
-                  storage: 1Gi
+                  storage: 2Gi
     kubeApiServer:
       serviceMonitor:
         selector:
