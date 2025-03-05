@@ -1,0 +1,121 @@
+# Dapper Cluster Project Intelligence
+
+This file captures important patterns, preferences, and project intelligence for the Dapper Cluster project.
+
+## Repository Structure
+
+- Kubernetes resources are organized in `kubernetes/` directory
+- Applications are categorized by function in `kubernetes/apps/[category]/`
+- Bootstrap configurations are in `kubernetes/bootstrap/`
+- Flux system configurations are in `kubernetes/flux/`
+- Documentation is maintained in `docs/` directory
+
+## Application Patterns
+
+- Applications follow a standard hierarchy:
+  - `kubernetes/apps/[category]/[application]/ks.yaml`
+  - `kubernetes/apps/[category]/[application]/app/kustomization.yaml`
+  - `kubernetes/apps/[category]/[application]/app/helmrelease.yaml`
+- Namespaces typically match the category name (e.g., home-automation, media)
+- HelmRelease names typically match the application name
+- Dependencies are managed through `dependsOn` fields in Flux resources
+
+## GitOps Workflow
+
+- All changes must be committed to the Git repository
+- Flux automatically reconciles cluster state with Git
+- Renovate automatically creates PRs for dependency updates
+- GitHub Actions workflows validate changes before they are applied
+- Manual reconciliation can be triggered with `task reconcile`
+
+## Networking
+
+- Two-tier ingress system:
+  - `external` class for public-facing services (synced to Cloudflare)
+  - `internal` class for local network services (synced to UniFi)
+- Applications expose services through Kubernetes Services and Ingress resources
+- Network segmentation with dedicated VLANs:
+  - LAN: 192.168.1.1/24
+  - SERVERS VLAN: 10.100.0.1/24
+
+## Storage
+
+- OpenEBS Mayastor provides high-performance block storage
+- PersistentVolumeClaims use specific StorageClasses based on performance needs
+- VolSync handles backup and replication of PVCs
+- Some applications mount NFS shares from the separate NAS system
+- Backup procedures are defined in the volsync taskfile
+
+## Security Practices
+
+- Never commit sensitive files
+- Use environment variables for secrets
+- Keep credentials out of logs and output
+- Use SOPS for encrypting secrets in the repository
+- External Secrets Operator integrates with Infisical
+- Authentication is centralized through Authentik
+- Network policies control pod-to-pod communication
+
+## Sensitive Files
+
+DO NOT read or modify:
+
+- .env files
+- **/config/secrets.**
+- **/*.pem
+- **/talsecret.sops.yaml
+- Any file containing API keys, tokens, or credentials
+- Files in `.private/` directory
+
+## Development Setup
+
+- Local tools are managed by mise
+- Use `mise install` to set up the development environment
+- Required tools are defined in `.mise.toml`
+- Python virtual environment is created automatically
+- Task runner provides standardized commands
+
+## Key Tools
+
+- **mise**: Tool version manager that configures the development environment
+- **task**: Task runner that provides standardized commands (see Taskfile.yaml)
+- **flux**: GitOps controller for Kubernetes
+- **talhelper**: Helper tool for managing Talos Linux configurations
+- **kubectl**: Kubernetes command-line tool
+- **helm/helmfile**: Kubernetes package managers
+- **sops/age**: Secret encryption tools
+- **pre-commit**: Git hooks for code quality
+
+## Common Tasks
+
+- `task reconcile`: Force Flux to pull in Git changes
+- `task kubernetes:apply`: Apply Kubernetes manifests
+- `task kubernetes:delete`: Delete Kubernetes resources
+- `task talos:apply`: Apply Talos configuration
+- `task talos:bootstrap`: Bootstrap Talos cluster
+- `task volsync:create-replication`: Create VolSync replication
+
+## Known Challenges
+
+- GPU resource allocation requires special configuration with node feature discovery
+- High memory workloads need careful distribution across nodes
+- Database services must be available before dependent applications
+- Authentication services must be available for secured ingresses
+- Talos must be updated before Kubernetes
+- Breaking changes in Helm charts require careful review
+
+## Observability
+
+- Prometheus collects metrics from all components
+- Grafana provides visualization through dashboards
+- Alertmanager routes alerts to Pushover
+- Loki aggregates logs from all applications
+- Gatus provides a public status page
+- Regular health checks monitor critical services
+
+## Documentation References
+
+- Memory Bank is the primary source of project context
+- `docs/` contains public documentation built with mdBook
+- Home Operations Discord provides community knowledge
+- kubesearch.dev offers application deployment examples
