@@ -83,6 +83,7 @@ spec:
             secretName: ${SECRET_DOMAIN/./-}-tls
         pathType: Prefix
       prometheusSpec:
+        replicas: 2
         scrapeInterval: 1m # Must match interval in Grafana Helm chart
         podMonitorSelectorNilUsesHelmValues: false
         probeSelectorNilUsesHelmValues: false
@@ -97,9 +98,6 @@ spec:
           - new-service-discovery-manager
         retention: 14d
         retentionSize: 70GB
-        resources:
-          requests:
-            cpu: 500m
         storageSpec:
           volumeClaimTemplate:
             spec:
