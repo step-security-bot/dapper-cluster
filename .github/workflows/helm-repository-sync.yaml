@@ -36,6 +36,10 @@ jobs:
         with:
           token: "${{ steps.app-token.outputs.token }}"
 
+      - name: Install brew
+        run: sudo apt install brew
+
+
       - name: Setup Homebrew
         uses: Homebrew/actions/setup-homebrew@master
 
